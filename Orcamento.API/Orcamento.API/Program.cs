@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orcamento.API.AppDbContextSQLite;
+using Orcamento.API.Dtos.Mappings;
 using Orcamento.API.Repositories;
 using Orcamento.API.Repositories.Interfaces;
 using Orcamento.API.Security;
@@ -110,7 +111,7 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-
+builder.Services.AddAutoMapper(typeof(GeneralDtoMappingProfile));
 
 var app = builder.Build();
 

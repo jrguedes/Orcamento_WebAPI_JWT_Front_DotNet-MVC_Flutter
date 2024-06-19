@@ -3,28 +3,34 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models = Orcamento.API.Models;
 using Orcamento.API.Repositories.Interfaces;
+using Orcamento.API.Dtos.RequestDto;
+using AutoMapper;
+using Orcamento.API.Dtos.ResponseDto;
 
 namespace Orcamento.API.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 [Route("api/[controller]")]
 public class OrcamentoController : ControllerBase
 {
+    private readonly IMapper _mapper;
     private readonly IOrcamentoRepository _repository;
 
-    public OrcamentoController(IOrcamentoRepository repository)
+    public OrcamentoController(IOrcamentoRepository repository, IMapper mapper)
     {
-        _repository = repository;
+        _mapper = mapper;
+        _repository = repository;        
     }
 
     [HttpPost]
-    [Authorize(Roles = "Gerente,Funcionario")]
-    public async Task<ActionResult> Post([FromBody] Models.Orcamento orcamento)
+    //[Authorize(Roles = "Gerente,Funcionario")]
+    public async Task<ActionResult> Post([FromBody] CreateOrcamentoRequest orcamento)
     {
         try
         {
-            var result = await _repository.InsertAsync(orcamento);
+            var orcamentoModel = _mapper.Map<Models.Orcamento>(orcamento);
+            var result = await _repository.InsertAsync(orcamentoModel);
             if (result != null)
             {
                 return Created(new Uri(Url.Link("GetOrcamentoById", new { id = result.Id })), result);
@@ -38,7 +44,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetOrcamentoById")]
-    [Authorize(Roles = "Gerente,Funcionario")]
+    //[Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Get(int id)
     {
         try
@@ -46,7 +52,8 @@ public class OrcamentoController : ControllerBase
             var orcamento = await _repository.GetAsync(id, "ItensOrcamento");
             if (orcamento != null)
             {
-                return Ok(orcamento);
+                var response = _mapper.Map<OrcamentoResponse>(orcamento);
+                return Ok(response);
             }
             return NotFound("Orçamento não encontrado");
         }
@@ -57,7 +64,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Gerente")]
+    //[Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Delete(int id)
     {
         try
@@ -71,15 +78,17 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpPut]
-    [Authorize(Roles = "Gerente,Funcionario")]
-    public async Task<ActionResult> Put([FromBody] Models.Orcamento orcamento)
+    //[Authorize(Roles = "Gerente,Funcionario")]
+    public async Task<ActionResult> Put([FromBody] UpdateOrcamentoRequest orcamento)
     {
         try
         {
-            var result = await _repository.UpdateAsync(orcamento);
+            var orcamentoModel = _mapper.Map<Models.Orcamento>(orcamento);
+            var result = await _repository.UpdateAsync(orcamentoModel);
             if (result != null)
             {
-                return Ok(result);
+                var response = _mapper.Map<OrcamentoResponse>(result);
+                return Ok(response);
             }
             return BadRequest();
         }
@@ -90,12 +99,14 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Gerente,Funcionario")]    
+    //[Authorize(Roles = "Gerente,Funcionario")]    
     public async Task<ActionResult> Get()
     {
         try
         {
-            return Ok(await _repository.GetAsync("ItensOrcamento"));
+            var result = await _repository.GetAsync("ItensOrcamento");
+            var response = _mapper.Map<IEnumerable<OrcamentoResponse>>(result);
+            return Ok(response);
         }
         catch (ArgumentException e)
         {
