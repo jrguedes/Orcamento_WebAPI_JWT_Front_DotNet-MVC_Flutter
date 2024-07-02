@@ -6,9 +6,9 @@ public class ApiExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {                        
-        context.Result = new Microsoft.AspNetCore.Mvc.ObjectResult("Entidade não processável! Ocorreu um problema ao tratar sua solicitação: Status Code 422")
+        context.Result = new Microsoft.AspNetCore.Mvc.ObjectResult("Ocorreu um problema ao tratar sua solicitação: Status Code 400")
         {
-            StatusCode = StatusCodes.Status422UnprocessableEntity,            
+            StatusCode = StatusCodes.Status400BadRequest,
         };
     }
 }

@@ -8,6 +8,6 @@ namespace Orcamento.API.Repositories.Interfaces;
 
 public interface IItemOrcamentoRepository : IRepository<ItemOrcamento>
 {
-    Task<IEnumerable<ItemOrcamento>> GetItensByOrcamentoAsync(int orcamentoId);
+    Task<IEnumerable<ItemOrcamento>> GetItensByOrcamentoAsync(int orcamentoId, CancellationToken cancellation);
 }
 

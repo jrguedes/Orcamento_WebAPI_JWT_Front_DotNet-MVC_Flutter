@@ -25,10 +25,13 @@ public class OrcamentoController : ControllerBase
 
     [HttpPost]
     //[Authorize(Roles = "Gerente,Funcionario")]
-    public async Task<ActionResult> Post([FromBody] CreateOrcamentoRequest orcamento)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult> Post([FromBody] CreateOrcamentoRequest orcamento, CancellationToken cancellation)
     {
         var orcamentoModel = _mapper.Map<Models.Orcamento>(orcamento);
-        var result = await _repository.InsertAsync(orcamentoModel);
+        var result = await _repository.InsertAsync(orcamentoModel, cancellation);
         if (result != null)
         {
             return Created(new Uri(Url.Link("GetOrcamentoById", new { id = result.Id })), result);
@@ -38,9 +41,13 @@ public class OrcamentoController : ControllerBase
 
     [HttpGet("{id}", Name = "GetOrcamentoById")]
     //[Authorize(Roles = "Gerente,Funcionario")]
-    public async Task<ActionResult> Get(int id)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Get(int id, CancellationToken cancellation)
     {
-        var orcamento = await _repository.GetAsync(id, "ItensOrcamento");
+        var orcamento = await _repository.GetAsync(id, cancellation, "ItensOrcamento");
         if (orcamento != null)
         {
             var response = _mapper.Map<OrcamentoResponse>(orcamento);
@@ -51,9 +58,13 @@ public class OrcamentoController : ControllerBase
 
     [HttpDelete("{id}")]
     //[Authorize(Roles = "Gerente")]
-    public async Task<ActionResult> Delete(int id)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Delete(int id, CancellationToken cancellation)
     {
-        var deleted = await _repository.DeleteAsync(id);
+        var deleted = await _repository.DeleteAsync(id, cancellation);
         if (!deleted)
         {
             return NotFound("Orçamento não encontrado");
@@ -63,10 +74,14 @@ public class OrcamentoController : ControllerBase
 
     [HttpPut]
     //[Authorize(Roles = "Gerente,Funcionario")]
-    public async Task<ActionResult> Put([FromBody] UpdateOrcamentoRequest orcamento)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Put([FromBody] UpdateOrcamentoRequest orcamento, CancellationToken cancellation)
     {
         var orcamentoModel = _mapper.Map<Models.Orcamento>(orcamento);
-        var result = await _repository.UpdateAsync(orcamentoModel);
+        var result = await _repository.UpdateAsync(orcamentoModel, cancellation);
         if (result != null)
         {
             var response = _mapper.Map<OrcamentoResponse>(result);
@@ -76,10 +91,13 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpGet]
-    //[Authorize(Roles = "Gerente,Funcionario")]    
-    public async Task<ActionResult> Get()
+    //[Authorize(Roles = "Gerente,Funcionario")]  
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult> Get(CancellationToken cancellation)
     {
-        var result = await _repository.GetAsync("ItensOrcamento");
+        var result = await _repository.GetAsync(cancellation, "ItensOrcamento");
         var response = _mapper.Map<IEnumerable<OrcamentoResponse>>(result);
         return Ok(response);
     }

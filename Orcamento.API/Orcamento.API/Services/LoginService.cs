@@ -26,11 +26,11 @@ public class LoginService : ILoginService
         _tokenConfiguration = tokenConfiguration;
     }
 
-    public async Task<object> SignIn(Login login)
+    public async Task<object> SignIn(Login login, CancellationToken cancellation)
     {
         if (login != null && !string.IsNullOrWhiteSpace(login.Email))
         {
-            var user = await _repository.SignIn(login);
+            var user = await _repository.SignIn(login, cancellation);
             if (user != null)
             {
                 var identity = new ClaimsIdentity(

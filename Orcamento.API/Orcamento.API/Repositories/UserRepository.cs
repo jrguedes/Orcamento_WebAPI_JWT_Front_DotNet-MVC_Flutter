@@ -12,11 +12,11 @@ public class UserRepository : RepositoryBase<User>, IUserRepository
         _dataset = _context.Set<User>();
     }
 
-    public async Task<User> SignIn(Login login)
+    public async Task<User> SignIn(Login login, CancellationToken cancellation)
     {
         try
         {
-            return await _dataset.SingleOrDefaultAsync(p => p.Email.Equals(login.Email) && p.Password.Equals(login.Password));
+            return await _dataset.SingleOrDefaultAsync(p => p.Email.Equals(login.Email) && p.Password.Equals(login.Password), cancellation);
         }
         catch (Exception ex)
         {

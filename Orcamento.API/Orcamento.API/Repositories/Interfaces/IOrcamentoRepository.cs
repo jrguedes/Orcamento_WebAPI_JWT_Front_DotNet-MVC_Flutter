@@ -8,6 +8,6 @@ namespace Orcamento.API.Repositories.Interfaces;
 
 public interface IOrcamentoRepository : IRepository<Models.Orcamento>
 {
-    Task<Models.Orcamento> GetOrcamentoComItensAsync(int id);
+    Task<Models.Orcamento> GetOrcamentoComItensAsync(int id, CancellationToken cancellation);
 }
 

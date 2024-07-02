@@ -16,11 +16,11 @@ public class ItemOrcamentoRepository : RepositoryBase<ItemOrcamento>, IItemOrcam
         _dataset = _context.Set<ItemOrcamento>();
     }
 
-    public async Task<IEnumerable<ItemOrcamento>> GetItensByOrcamentoAsync(int orcamentoId)
+    public async Task<IEnumerable<ItemOrcamento>> GetItensByOrcamentoAsync(int orcamentoId, CancellationToken cancellation)
     {
         try
         {
-            return await _dataset.Where(p => p.OrcamentoId == orcamentoId).Include(i => i.Orcamento).ToListAsync();
+            return await _dataset.Where(p => p.OrcamentoId == orcamentoId).Include(i => i.Orcamento).ToListAsync(cancellation);
         }
         catch (Exception ex)
         {

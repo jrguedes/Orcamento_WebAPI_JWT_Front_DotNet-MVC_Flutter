@@ -17,18 +17,18 @@ public class RepositoryBase<T> : IRepository<T> where T : ModelBase
         _dataset = _context.Set<T>();
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, CancellationToken cancellation)
     {
         try
         {
-            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
+            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id), cancellation);
             if (result == null)
             {
                 return false;
             }
 
             _dataset.Remove(result);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellation);
             return true;
         }
         catch (Exception ex)
@@ -37,11 +37,11 @@ public class RepositoryBase<T> : IRepository<T> where T : ModelBase
         }
     }
 
-    public async Task<bool> ExistsAsync(int id)
+    public async Task<bool> ExistsAsync(int id, CancellationToken cancellation)
     {
         try
         {
-            return await _dataset.AnyAsync(p => p.Id.Equals(id));
+            return await _dataset.AnyAsync(p => p.Id.Equals(id), cancellation);
         }
         catch (Exception ex)
         {
@@ -50,32 +50,15 @@ public class RepositoryBase<T> : IRepository<T> where T : ModelBase
 
     }
 
-    public async Task<T> GetAsync(int id, string include = null)
-    {
-        try
-        {
-            if (string.IsNullOrEmpty(include))
-            {
-                return await _dataset.Where(p => p.Id.Equals(id)).FirstOrDefaultAsync();
-            }
-            return await _dataset.Include(include).SingleOrDefaultAsync(p => p.Id.Equals(id));
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
-
-
-    public async Task<IEnumerable<T>> GetAsync(string include = null)
+    public async Task<T> GetAsync(int id, CancellationToken cancellation, string include = null)
     {
         try
         {
             if (string.IsNullOrEmpty(include))
             {
-                return await _dataset.ToListAsync();
+                return await _dataset.Where(p => p.Id.Equals(id)).FirstOrDefaultAsync(cancellation);
             }
-            return await _dataset.Include(include).ToListAsync();
+            return await _dataset.Include(include).SingleOrDefaultAsync(p => p.Id.Equals(id), cancellation);
         }
         catch (Exception ex)
         {
@@ -83,13 +66,30 @@ public class RepositoryBase<T> : IRepository<T> where T : ModelBase
         }
     }
 
-    public async Task<T> InsertAsync(T model)
+
+    public async Task<IEnumerable<T>> GetAsync(CancellationToken cancellation, string include = null)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(include))
+            {
+                return await _dataset.ToListAsync(cancellation);
+            }
+            return await _dataset.Include(include).ToListAsync(cancellation);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public async Task<T> InsertAsync(T model, CancellationToken cancellation)
     {
         try
         {
             _dataset.Add(model);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellation);
             return model;
         }
         catch (Exception ex)
@@ -98,17 +98,17 @@ public class RepositoryBase<T> : IRepository<T> where T : ModelBase
         }
     }
 
-    public async Task<T> UpdateAsync(T model)
+    public async Task<T> UpdateAsync(T model, CancellationToken cancellation)
     {
         try
         {
-            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(model.Id));
+            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(model.Id), cancellation);
             if (result == null)
             {
-                return  null;
+                return null;
             }
             _context.Entry(result).CurrentValues.SetValues(model);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellation);
             return model;
         }
         catch (Exception ex)

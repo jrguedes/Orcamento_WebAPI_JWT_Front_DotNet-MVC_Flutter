@@ -22,9 +22,9 @@ public class AccountController : ControllerBase
 
     [HttpPost("SignIn")]
     [AllowAnonymous]
-    public async Task<ActionResult> SignIn([FromBody] Login login, [FromServices] ILoginService service)
+    public async Task<ActionResult> SignIn([FromBody] Login login, [FromServices] ILoginService service, CancellationToken cancellation)
     {
-        var result = await service.SignIn(login);
+        var result = await service.SignIn(login, cancellation);
         var authenticated = result.GetType().GetProperty("authenticated").GetValue(result, null);
         if (result != null && authenticated != null && (bool)authenticated == true)
         {
@@ -36,9 +36,9 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult> Post([FromBody] User user)
+    public async Task<ActionResult> Post([FromBody] User user, CancellationToken cancellation)
     {
-        var result = await _repository.InsertAsync(user);
+        var result = await _repository.InsertAsync(user, cancellation);
         if (result != null)
         {
             result.Password = null;
@@ -49,9 +49,9 @@ public class AccountController : ControllerBase
 
     [HttpGet("{id}", Name = "GetUserById")]
     [Authorize(Roles = "Gerente,Funcionario")]
-    public async Task<ActionResult> Get(int id)
+    public async Task<ActionResult> Get(int id, CancellationToken cancellation)
     {
-        var user = await _repository.GetAsync(id);
+        var user = await _repository.GetAsync(id, cancellation);
         if (user != null)
         {
             return Ok(user);
@@ -61,9 +61,9 @@ public class AccountController : ControllerBase
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Gerente")]
-    public async Task<ActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(int id, CancellationToken cancellation)
     {
-        var deleted = await _repository.DeleteAsync(id);
+        var deleted = await _repository.DeleteAsync(id, cancellation);
         if (!deleted)
         {
             return NotFound("Usuario não encontrado");
@@ -73,9 +73,9 @@ public class AccountController : ControllerBase
 
     [HttpPut]
     [Authorize(Roles = "Gerente")]
-    public async Task<ActionResult> Put([FromBody] User user)
+    public async Task<ActionResult> Put([FromBody] User user, CancellationToken cancellation)
     {
-        var result = await _repository.UpdateAsync(user);
+        var result = await _repository.UpdateAsync(user, cancellation);
         if (result != null)
         {
             return Ok(result);
@@ -86,9 +86,9 @@ public class AccountController : ControllerBase
     [HttpGet]
     //[Authorize(Roles = "Gerente,Funcionario")]
     [AllowAnonymous]
-    public async Task<ActionResult> Get()
+    public async Task<ActionResult> Get(CancellationToken cancellation)
     {
-        return Ok(await _repository.GetAsync());
+        return Ok(await _repository.GetAsync(cancellation));
     }
 }
 

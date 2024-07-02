@@ -4,6 +4,6 @@ namespace Orcamento.API.Repositories.Interfaces;
 
 public interface IUserRepository : IRepository<User>
 {
-    Task<User> SignIn(Login login);
+    Task<User> SignIn(Login login, CancellationToken cancellation);
 }
 

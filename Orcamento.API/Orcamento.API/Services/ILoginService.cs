@@ -8,6 +8,6 @@ namespace Orcamento.API.Services;
 
 public interface ILoginService
 {
-    Task<object> SignIn(Login login);
+    Task<object> SignIn(Login login, CancellationToken cancellation);
 }
 
