@@ -24,20 +24,13 @@ public class AccountController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult> SignIn([FromBody] Login login, [FromServices] ILoginService service)
     {
-        try
+        var result = await service.SignIn(login);
+        var authenticated = result.GetType().GetProperty("authenticated").GetValue(result, null);
+        if (result != null && authenticated != null && (bool)authenticated == true)
         {
-            var result = await service.SignIn(login);
-            var authenticated = result.GetType().GetProperty("authenticated").GetValue(result, null);
-            if (result != null && authenticated != null && (bool)authenticated == true)
-            {
-                return Ok(result);
-            }
-            return NotFound(result);
+            return Ok(result);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return NotFound(result);
     }
 
 
@@ -45,72 +38,44 @@ public class AccountController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult> Post([FromBody] User user)
     {
-        try
+        var result = await _repository.InsertAsync(user);
+        if (result != null)
         {
-            var result = await _repository.InsertAsync(user);
-            if (result != null)
-            {
-                result.Password = null;
-                return Created(new Uri(Url.Link("GetUserById", new { id = result.Id })), result);
-            }
-            return BadRequest();
+            result.Password = null;
+            return Created(new Uri(Url.Link("GetUserById", new { id = result.Id })), result);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return BadRequest();
     }
 
     [HttpGet("{id}", Name = "GetUserById")]
     [Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Get(int id)
     {
-        try
+        var user = await _repository.GetAsync(id);
+        if (user != null)
         {
-            var user = await _repository.GetAsync(id);
-            if (user != null)
-            {
-                return Ok(user);
-            }
-            return NotFound("Usuário não encontrado");
+            return Ok(user);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return NotFound("Usuário não encontrado");
     }
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Delete(int id)
     {
-        try
-        {
-            return Ok(await _repository.DeleteAsync(id));
-        }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return Ok(await _repository.DeleteAsync(id));
     }
 
     [HttpPut]
     [Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Put([FromBody] User user)
     {
-        try
+        var result = await _repository.UpdateAsync(user);
+        if (result != null)
         {
-            var result = await _repository.UpdateAsync(user);
-            if (result != null)
-            {
-                return Ok(result);
-            }
-            return BadRequest();
+            return Ok(result);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return BadRequest();
     }
 
     [HttpGet]
@@ -118,14 +83,7 @@ public class AccountController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult> Get()
     {
-        try
-        {
-            return Ok(await _repository.GetAsync());
-        }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return Ok(await _repository.GetAsync());
     }
 }
 

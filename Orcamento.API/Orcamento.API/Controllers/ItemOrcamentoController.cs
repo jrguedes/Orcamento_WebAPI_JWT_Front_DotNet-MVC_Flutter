@@ -31,91 +31,57 @@ public class ItemOrcamentoController : ControllerBase
     [Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Post([FromBody] CreateItemOrcamentoRequest item)
     {
-        try
+        var itemModel = _mapper.Map<ItemOrcamento>(item);
+        var result = await _repository.InsertAsync(itemModel);
+        if (result != null)
         {
-            var itemModel = _mapper.Map<ItemOrcamento>(item);
-            var result = await _repository.InsertAsync(itemModel);
-            if (result != null)
-            {
-                return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
-            }
-            return BadRequest();
+            return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return BadRequest();
     }
 
     [HttpGet("{id}", Name = "GetById")]
     [Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Get(int id)
     {
-        try
+
+        var item = await _repository.GetAsync(id);
+        if (item != null)
         {
-            var item = await _repository.GetAsync(id);
-            if (item != null)
-            {
-                var response = _mapper.Map<ItemOrcamentoResponse>(item);
-                return Ok(response);
-            }
-            return NotFound("Item não encontrado");
+            var response = _mapper.Map<ItemOrcamentoResponse>(item);
+            return Ok(response);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return NotFound("Item não encontrado");
     }
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Delete(int id)
     {
-        try
-        {
-            return Ok(await _repository.DeleteAsync(id));
-        }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return Ok(await _repository.DeleteAsync(id));
     }
 
     [HttpPut]
     [Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Put([FromBody] UpdateItemOrcamentoRequest item)
     {
-        try
+        var itemModel = _mapper.Map<ItemOrcamento>(item);
+        var result = await _repository.UpdateAsync(itemModel);
+        if (result != null)
         {
-            var itemModel = _mapper.Map<ItemOrcamento>(item);
-            var result = await _repository.UpdateAsync(itemModel);
-            if (result != null)
-            {
-                var response = _mapper.Map<ItemOrcamentoResponse>(result);
-                return Ok(response);
-            }
-            return BadRequest();
+            var response = _mapper.Map<ItemOrcamentoResponse>(result);
+            return Ok(response);
         }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return BadRequest();
     }
 
     [HttpGet]
     [Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Get()
     {
-        try
-        {
-            var itensOrcamentos = await _repository.GetAsync();
-            var response = _mapper.Map<IEnumerable<ItemOrcamentoResponse>>(itensOrcamentos);
-            return Ok(response);
-        }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        var itensOrcamentos = await _repository.GetAsync();
+        var response = _mapper.Map<IEnumerable<ItemOrcamentoResponse>>(itensOrcamentos);
+        return Ok(response);
     }
 
     [HttpGet("orcamento/{id}")]
@@ -123,14 +89,7 @@ public class ItemOrcamentoController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult> GetByOrcamento(int id)
     {
-        try
-        {
-            return Ok(await _repository.GetItensByOrcamentoAsync(id));
-        }
-        catch (ArgumentException e)
-        {
-            return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-        }
+        return Ok(await _repository.GetItensByOrcamentoAsync(id));
     }
 }
 

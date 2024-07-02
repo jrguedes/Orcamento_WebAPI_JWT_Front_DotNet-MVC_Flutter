@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orcamento.API.AppDbContextSQLite;
 using Orcamento.API.Dtos.Mappings;
+using Orcamento.API.Filters;
 using Orcamento.API.Repositories;
 using Orcamento.API.Repositories.Interfaces;
 using Orcamento.API.Security;
@@ -54,7 +55,11 @@ builder.Services.AddAuthentication(authOptions =>
                 paramsValidation.ClockSkew = TimeSpan.Zero; //tolerancia
             });
 
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
+builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(ApiExceptionFilter));
+            }
+ ).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -83,7 +88,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 
 
-    
+
     //faz o botao de autenticacao aparecer
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -107,7 +112,7 @@ builder.Services.AddSwaggerGen(c =>
                         }
         }
     );
-    
+
 
 });
 
