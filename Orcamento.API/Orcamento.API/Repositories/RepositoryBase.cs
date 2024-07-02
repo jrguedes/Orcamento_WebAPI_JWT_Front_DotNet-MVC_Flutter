@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Orcamento.API.AppDbContextSQLite;
 using Orcamento.API.Models;
@@ -104,7 +105,7 @@ public class RepositoryBase<T> : IRepository<T> where T : ModelBase
             var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(model.Id));
             if (result == null)
             {
-                return null;
+                return  null;
             }
             _context.Entry(result).CurrentValues.SetValues(model);
             await _context.SaveChangesAsync();

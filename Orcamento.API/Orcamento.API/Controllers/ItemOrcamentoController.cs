@@ -58,7 +58,12 @@ public class ItemOrcamentoController : ControllerBase
     [Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Delete(int id)
     {
-        return Ok(await _repository.DeleteAsync(id));
+        var deleted = await _repository.DeleteAsync(id);
+        if (!deleted)
+        {
+            return NotFound("Item não encontrado");
+        }
+        return Ok(deleted);
     }
 
     [HttpPut]
@@ -72,7 +77,7 @@ public class ItemOrcamentoController : ControllerBase
             var response = _mapper.Map<ItemOrcamentoResponse>(result);
             return Ok(response);
         }
-        return BadRequest();
+        return NotFound("Item não encontrado");
     }
 
     [HttpGet]

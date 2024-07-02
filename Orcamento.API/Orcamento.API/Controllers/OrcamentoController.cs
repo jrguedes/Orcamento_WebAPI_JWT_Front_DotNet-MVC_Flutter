@@ -53,13 +53,18 @@ public class OrcamentoController : ControllerBase
     //[Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Delete(int id)
     {
-        return Ok(await _repository.DeleteAsync(id));
+        var deleted = await _repository.DeleteAsync(id);
+        if (!deleted)
+        {
+            return NotFound("Orçamento não encontrado");
+        }
+        return Ok(deleted);
     }
 
     [HttpPut]
     //[Authorize(Roles = "Gerente,Funcionario")]
     public async Task<ActionResult> Put([FromBody] UpdateOrcamentoRequest orcamento)
-    {        
+    {
         var orcamentoModel = _mapper.Map<Models.Orcamento>(orcamento);
         var result = await _repository.UpdateAsync(orcamentoModel);
         if (result != null)
@@ -67,7 +72,7 @@ public class OrcamentoController : ControllerBase
             var response = _mapper.Map<OrcamentoResponse>(result);
             return Ok(response);
         }
-        return BadRequest();
+        return NotFound("Orçamento não encontrado");
     }
 
     [HttpGet]

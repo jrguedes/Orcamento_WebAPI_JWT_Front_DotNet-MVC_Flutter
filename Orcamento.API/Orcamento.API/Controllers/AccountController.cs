@@ -63,7 +63,12 @@ public class AccountController : ControllerBase
     [Authorize(Roles = "Gerente")]
     public async Task<ActionResult> Delete(int id)
     {
-        return Ok(await _repository.DeleteAsync(id));
+        var deleted = await _repository.DeleteAsync(id);
+        if (!deleted)
+        {
+            return NotFound("Usuario não encontrado");
+        }
+        return Ok(deleted);
     }
 
     [HttpPut]
@@ -75,7 +80,7 @@ public class AccountController : ControllerBase
         {
             return Ok(result);
         }
-        return BadRequest();
+        return NotFound("Usuario não encontrado");
     }
 
     [HttpGet]
