@@ -18,6 +18,8 @@
 
     <link href="~/css/bootstrap-icons.css" rel="stylesheet">
     <link href="~/css/templatemo-topic-listing.css" rel="stylesheet">
+    <link href="~/css/site_table.css" rel="stylesheet">
+    
     <!--
 
 TemplateMo 590 topic listing
@@ -77,35 +79,15 @@ https://templatemo.com/tm-590-topic-listing
                         <ul class="navbar-nav ms-lg-5 me-lg-auto">
                             <li class="nav-item">                                
                                 <a class="nav-link click-scroll" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-
-                            <li class="nav-item">                                
-                                <a class="nav-link click-scroll" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+                            </li>                            
 
                             <li class="nav-item">
                                 <a class="nav-link click-scroll" asp-area="" asp-controller="Orcamento" asp-action="Index">Cadastro de Orçamentos</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_4">FAQs</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_5">Contact</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                                <ul class="dropdown-menu dropdown-menu-light"
-                                    aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                    <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
-                                </ul>
-                            </li>
+                                <a class="nav-link click-scroll" asp-area="" asp-controller="Orcamento" asp-action="List">Lista de Orçamentos</a>
+                            </li>                                                        
                         </ul>
 
                         <div class="d-none d-lg-block">
@@ -118,7 +100,7 @@ https://templatemo.com/tm-590-topic-listing
 
 
     </header>
-    <div class="container">
+    <div class="container" style="max-width: 1000px;">
         <main role="main" class="pb-3">
 
             @RenderBody()

@@ -8,4 +8,9 @@ public class OrcamentoController : Controller
     {        
         return View();
     }
+
+    public IActionResult List()
+    {        
+        return View("List");
+    }
 }
