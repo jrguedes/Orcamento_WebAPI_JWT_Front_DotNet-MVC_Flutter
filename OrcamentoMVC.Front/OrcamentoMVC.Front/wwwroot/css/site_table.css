@@ -5,13 +5,13 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.08);
 }
 .panel .panel-heading{
-    background: #535353;
+    background: #f0f8ff;
     padding: 15px;
     border-radius: 0;
 }
 .panel .panel-heading .btn{
     color: #fff;
-    background-color: #000;
+    background-color: #6f95ec;
     font-size: 14px;
     font-weight: 600;
     padding: 7px 15px;
@@ -41,7 +41,7 @@
 }
 .panel .panel-body .table thead tr th{
     color: #fff;
-    background: #8D8D8D;
+    background: #9cc5d3;
     font-size: 17px;
     font-weight: 700;
     padding: 12px;
@@ -77,8 +77,8 @@
 }
 .panel .panel-body .table tbody .action-list li a:hover{ box-shadow: 0 0 5px #ddd; }
 .panel .panel-footer{
-    color: #fff;
-    background: #535353;
+    color: #050505;
+    background: #f0f8ff;
     font-size: 16px;
     line-height: 33px;
     padding: 25px 15px;
