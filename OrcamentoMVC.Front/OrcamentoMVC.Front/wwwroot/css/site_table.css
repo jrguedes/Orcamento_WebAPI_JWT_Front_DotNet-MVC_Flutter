@@ -78,7 +78,7 @@
 .panel .panel-body .table tbody .action-list li a:hover{ box-shadow: 0 0 5px #ddd; }
 .panel .panel-footer{
     color: #050505;
-    background: #f0f8ff;
+    background: #9cc5d3;
     font-size: 16px;
     line-height: 33px;
     padding: 25px 15px;
@@ -103,7 +103,7 @@
     box-shadow: 0 0 5px rgba(0,0,0,0.4);
 }
 
-.flex-box {
+.flex-box-center {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,5 +111,9 @@
 
 .width-1000 {
   max-width: 1000px;
+ }
+
+ .logo_title_color{
+    color: #E2FAFF;
  }
   
