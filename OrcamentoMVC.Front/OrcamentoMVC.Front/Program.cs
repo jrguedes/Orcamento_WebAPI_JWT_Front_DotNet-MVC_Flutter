@@ -1,7 +1,16 @@
+using OrcamentoMVC.Front.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient("OrcamentoAPI", c =>
+{
+    c.BaseAddress = new Uri(builder.Configuration["ServiceUri:OrcamentoAPI"]);
+});
+
+builder.Services.AddScoped<IAuthentication, Authentication>();
 
 var app = builder.Build();
 
