@@ -7,9 +7,6 @@ namespace OrcamentoMVC.Front.Services;
 public class Authentication : IAuthentication
 {
     private readonly IHttpClientFactory _clientFactory;
-
-
-
     const string authAPIEndpoint = "/api/Account/SignIn/";
     private readonly JsonSerializerOptions _options;
     private TokenViewModel _userToken;
