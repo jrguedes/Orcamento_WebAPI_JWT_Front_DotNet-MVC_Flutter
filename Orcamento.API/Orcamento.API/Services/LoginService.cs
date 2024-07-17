@@ -43,7 +43,7 @@ public class LoginService : ILoginService
                     }
                 );
                 DateTime createDate = DateTime.UtcNow;
-                DateTime expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
+                DateTime expirationDate = createDate.AddSeconds(_tokenConfiguration.Seconds);
                 var handler = new JwtSecurityTokenHandler();
 
                 string token = CreateToken(identity, createDate, expirationDate, handler);

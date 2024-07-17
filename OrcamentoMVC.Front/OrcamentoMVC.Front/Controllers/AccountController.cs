@@ -37,7 +37,7 @@ public class AccountController : Controller
             return View(userVM);
         }
 
-        Response.Cookies.Append("X-Access-Token", result.Token, new CookieOptions()
+        Response.Cookies.Append("X-Access-Token", result.AccessToken, new CookieOptions()
         {
             Secure = true,
             HttpOnly = true,
