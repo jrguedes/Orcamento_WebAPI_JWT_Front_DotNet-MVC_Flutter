@@ -10,7 +10,7 @@ using Orcamento.API.Dtos.ResponseDto;
 namespace Orcamento.API.Controllers;
 
 [ApiController]
-//[Authorize]
+[Authorize]
 [Route("api/[controller]")]
 public class OrcamentoController : ControllerBase
 {
@@ -24,7 +24,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpPost]
-    //[Authorize(Roles = "Gerente,Funcionario")]
+    [Authorize(Roles = "Gerente,Funcionario")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -40,7 +40,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetOrcamentoById")]
-    //[Authorize(Roles = "Gerente,Funcionario")]
+    [Authorize(Roles = "Gerente,Funcionario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -57,7 +57,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    //[Authorize(Roles = "Gerente")]
+    [Authorize(Roles = "Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -73,7 +73,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpPut]
-    //[Authorize(Roles = "Gerente,Funcionario")]
+    [Authorize(Roles = "Gerente,Funcionario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -91,7 +91,7 @@ public class OrcamentoController : ControllerBase
     }
 
     [HttpGet]
-    //[Authorize(Roles = "Gerente,Funcionario")]  
+    [Authorize(Roles = "Gerente,Funcionario")]  
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
