@@ -82,8 +82,8 @@ public class LoginService : ILoginService
         return new
         {
             authenticated = true,
-            created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
-            expirationDate = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
+            created =   createDate,
+            expirationDate = expirationDate,
             accessToken = token,
             userName = user.Email,
             name = user.Name,
