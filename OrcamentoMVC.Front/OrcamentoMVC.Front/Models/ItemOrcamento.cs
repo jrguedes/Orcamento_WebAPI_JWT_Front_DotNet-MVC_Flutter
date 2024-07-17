@@ -7,5 +7,6 @@ public class ItemOrcamento
     public string Local { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
     public string ResponsavelOrcamento { get; set; } = string.Empty;
-    public decimal Valor { get; set; }    
+    public decimal Valor { get; set; }
+    public int OrcamentoId { get; set; }    
 }

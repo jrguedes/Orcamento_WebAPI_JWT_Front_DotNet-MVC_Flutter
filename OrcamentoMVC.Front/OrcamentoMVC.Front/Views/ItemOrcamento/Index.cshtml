@@ -15,12 +15,16 @@
             </div>
 
             <div class="col-lg-12 col-12">
-                <form action="#" method="post" class="custom-form contact-form" role="form">
+                <form asp-action="CreateItemOrcamento" method="post" class="custom-form contact-form" role="form">
+                    <div>
+                        <input type="hidden" name="OrcamentoId" id="OrcamentoId" class="form-control" 
+                            value="@Model.OrcamentoId">
+                    </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
-                                <input type="text" name="local" id="local" class="form-control" placeholder="Estabelecimento"
-                                    required="">
+                                <input type="text" name="local" id="local" class="form-control"
+                                    placeholder="Estabelecimento" required="">
 
                                 <label for="floatingInput">Estabelecimento</label>
                             </div>
@@ -37,8 +41,8 @@
 
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
-                                <input type="text" name="responsavelOrcamento" id="responsavelOrcamento" class="form-control" placeholder="Responsavel pelo orçamento"
-                                    required="">
+                                <input type="text" name="responsavelOrcamento" id="responsavelOrcamento"
+                                    class="form-control" placeholder="Responsavel pelo orçamento" required="">
 
                                 <label for="floatingInput">Responsavel pelo orçamento</label>
                             </div>
@@ -46,14 +50,14 @@
 
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
-                                <input type="text" name="valor" id="valor" class="form-control"
-                                    placeholder="Valor" required="">
+                                <input type="text" name="valor" id="valor" class="form-control" placeholder="Valor"
+                                    required="">
 
                                 <label for="floatingInput">Valor</label>
                             </div>
                         </div>
 
-                        <div class="col-lg-12 col-12">                            
+                        <div class="col-lg-12 col-12">
                             <div class="form-floating">
                                 <textarea class="form-control" id="descricao" name="descricao"
                                     placeholder="Descricao"></textarea>
@@ -67,7 +71,7 @@
                         </div>
                     </div>
                 </form>
-            </div>            
+            </div>
         </div>
     </div>
 </section>
