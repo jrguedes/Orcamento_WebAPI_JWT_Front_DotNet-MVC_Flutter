@@ -11,6 +11,7 @@ builder.Services.AddHttpClient("OrcamentoAPI", c =>
 });
 
 builder.Services.AddScoped<IAuthentication, Authentication>();
+builder.Services.AddScoped<IOrcamentoService, OrcamentoService>();
 
 var app = builder.Build();
 
