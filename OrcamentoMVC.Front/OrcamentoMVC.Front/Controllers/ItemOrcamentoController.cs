@@ -28,12 +28,7 @@ public class ItemOrcamentoController : Controller
             {            
                 return RedirectToAction("List", "Orcamento");
             }
-        }
-        else
-        {
-            //ViewBag.CategoriaId =
-            //new SelectList(await _categoriaService.GetCategorias(), "CategoriaId", "Nome");
-        }
+        }        
 
         return View("Index", itemOrcamento);
         //corrigir, está esperando VM
@@ -46,7 +41,4 @@ public class ItemOrcamentoController : Controller
             token = HttpContext.Request.Cookies["X-Access-Token"].ToString();
         return token;
     }
-
-
-
 }

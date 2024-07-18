@@ -32,18 +32,18 @@ public class OrcamentoController : Controller
                 return RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
             }
         }
-        else
-        {
-            //ViewBag.CategoriaId =
-            //new SelectList(await _categoriaService.GetCategorias(), "CategoriaId", "Nome");
-        }
-        
         return View(orcamento);
     }
 
-    public IActionResult List()
+    public async Task<IActionResult> List()
     {
-        return View("List");
+        var result = await _service.Get(GetJwtTokenFromCookies());
+
+        if (result != null)
+        {
+            return View(result);
+        }
+        return View(new List<Orcamento>());
     }
 
     private string GetJwtTokenFromCookies()

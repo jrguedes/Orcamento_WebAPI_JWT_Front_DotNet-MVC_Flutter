@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Orcamento>
+@{
     ViewData["Title"] = "Orçamentos";
 }
 
@@ -18,109 +19,36 @@
                 <div class="panel-body table-responsive">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Orçando</th>
-                                <th>Data</th>
-                                <th>Ação</th>
+                            <tr class="row">
+                                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Código</th>
+                                <th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">Orçando</th>
+                                <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3">Data</th>
+                                <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Orcamento Produto 1</td>
-                                <td>18/07/2024 11:43:05</td>
-                                <td>
-                                    <a asp-action="Update" asp-route-id="item.OrcamentoId" title="Editar"
-                                        class="btn btn-warning">
-                                        <span class="fas fa-edit"></span>
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="item.OrcamentoId" title="Deletar"
-                                        class="btn btn-danger">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                    <a asp-action="Details" asp-route-id="item.OrcamentoId" title="Detalhes"
-                                        class="btn btn-success">
-                                        <span class="fas fa-check"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Orcamento Produto 2</td>
-                                <td>18/07/2024 11:43:05</td>
-                                <td>
-                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
-                                        class="btn btn-warning">
-                                        <span class="fas fa-edit"></span>
-                                    </a>
-                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
-                                        class="btn btn-danger">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
-                                        class="btn btn-success">
-                                        <span class="fas fa-check"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Orcamento Produto 3</td>
-                                <td>18/07/2024 11:43:05</td>
-                                <td>
-                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
-                                        class="btn btn-warning">
-                                        <span class="fas fa-edit"></span>
-                                    </a>
-                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
-                                        class="btn btn-danger">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
-                                        class="btn btn-success">
-                                        <span class="fas fa-check"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Orcamento Produto 4</td>
-                                <td>18/07/2024 11:43:05</td>
-                                <td>
-                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
-                                        class="btn btn-warning">
-                                        <span class="fas fa-edit"></span>
-                                    </a>
-                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
-                                        class="btn btn-danger">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
-                                        class="btn btn-success">
-                                        <span class="fas fa-check"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Orcamento Produto 5</td>
-                                <td>18/07/2024 11:43:05</td>
-                                <td>
-                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
-                                        class="btn btn-warning">
-                                        <span class="fas fa-edit"></span>
-                                    </a>
-                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
-                                        class="btn btn-danger">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
-                                        class="btn btn-success">
-                                        <span class="fas fa-check"></span>
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach (var orcamento in Model)
+                            {
+                                <tr class="row"> 
+                                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">@orcamento.Id</td>
+                                    <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">@orcamento.Descricao</td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">@orcamento.Data.ToString("dd/MM/yyyy hh:mm:ss")</td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <a asp-action="Update" asp-route-id="@orcamento.Id" title="Editar"
+                                            class="btn btn-warning">
+                                            <span class="fas fa-edit"></span>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@orcamento.Id" title="Deletar"
+                                            class="btn btn-danger">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@orcamento.Id" title="Detalhes"
+                                            class="btn btn-success">
+                                            <span class="fas fa-check"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }                            
                         </tbody>
                     </table>
                 </div>
