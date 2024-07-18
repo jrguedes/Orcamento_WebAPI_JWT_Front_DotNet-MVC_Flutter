@@ -23,6 +23,7 @@ public class OrcamentoController : Controller
     {
         if (ModelState.IsValid)
         {
+            orcamento.Data = DateTime.UtcNow;
             var result = await _service.Create(orcamento, GetJwtTokenFromCookies());
 
             if (result != null)
