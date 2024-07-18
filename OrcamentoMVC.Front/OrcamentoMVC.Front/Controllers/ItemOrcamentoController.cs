@@ -14,9 +14,7 @@ public class ItemOrcamentoController : Controller
 
     public IActionResult Index(OrcamentoItemViewModel orcamentoItemVM)
     {
-        var vm = orcamentoItemVM;
-        vm.OrcamentoId = 10;
-        return View(vm);
+        return View(orcamentoItemVM);
     }
 
     [HttpPost]
@@ -27,10 +25,8 @@ public class ItemOrcamentoController : Controller
             var result = await _service.Create(itemOrcamento, GetJwtTokenFromCookies());
 
             if (result != null)
-            {
-                //var orcamentoVM = new OrcamentoItemViewModel() { OrcamentoId = result.Id, DescricaoOrcamento = result.Descricao };                
-                return View(result);
-                //retornar depois para a lista de orçamentos
+            {            
+                return RedirectToAction("List", "Orcamento");
             }
         }
         else
@@ -39,7 +35,8 @@ public class ItemOrcamentoController : Controller
             //new SelectList(await _categoriaService.GetCategorias(), "CategoriaId", "Nome");
         }
 
-        return View(itemOrcamento);
+        return View("Index", itemOrcamento);
+        //corrigir, está esperando VM
     }
 
     private string GetJwtTokenFromCookies()
