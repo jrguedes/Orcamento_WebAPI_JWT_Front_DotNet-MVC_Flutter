@@ -19,78 +19,107 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Action</th>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>View</th>
+                                <th>Código</th>
+                                <th>Orçando</th>
+                                <th>Data</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
-                                    <ul class="action-list">
-                                        <li><a href="#" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
-                                        </li>
-                                        <li><a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
                                 <td>1</td>
-                                <td>Vincent Williamson</td>
-                                <td>31</td>
-                                <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-search"></i></a></td>
+                                <td>Orcamento Produto 1</td>
+                                <td>18/07/2024 11:43:05</td>
+                                <td>
+                                    <a asp-action="Update" asp-route-id="item.OrcamentoId" title="Editar"
+                                        class="btn btn-warning">
+                                        <span class="fas fa-edit"></span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="item.OrcamentoId" title="Deletar"
+                                        class="btn btn-danger">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="item.OrcamentoId" title="Detalhes"
+                                        class="btn btn-success">
+                                        <span class="fas fa-check"></span>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <ul class="action-list">
-                                        <li><a href="#" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
-                                        </li>
-                                        <li><a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
                                 <td>2</td>
-                                <td>Taylor Reyes</td>
-                                <td>22</td>
-                                <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-search"></i></a></td>
+                                <td>Orcamento Produto 2</td>
+                                <td>18/07/2024 11:43:05</td>
+                                <td>
+                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
+                                        class="btn btn-warning">
+                                        <span class="fas fa-edit"></span>
+                                    </a>
+                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
+                                        class="btn btn-danger">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
+                                        class="btn btn-success">
+                                        <span class="fas fa-check"></span>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <ul class="action-list">
-                                        <li><a href="#" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
-                                        </li>
-                                        <li><a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
                                 <td>3</td>
-                                <td>Justin Block</td>
-                                <td>26</td>
-                                <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-search"></i></a></td>
+                                <td>Orcamento Produto 3</td>
+                                <td>18/07/2024 11:43:05</td>
+                                <td>
+                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
+                                        class="btn btn-warning">
+                                        <span class="fas fa-edit"></span>
+                                    </a>
+                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
+                                        class="btn btn-danger">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
+                                        class="btn btn-success">
+                                        <span class="fas fa-check"></span>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <ul class="action-list">
-                                        <li><a href="#" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
-                                        </li>
-                                        <li><a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
                                 <td>4</td>
-                                <td>Sean Guzman</td>
-                                <td>26</td>
-                                <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-search"></i></a></td>
+                                <td>Orcamento Produto 4</td>
+                                <td>18/07/2024 11:43:05</td>
+                                <td>
+                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
+                                        class="btn btn-warning">
+                                        <span class="fas fa-edit"></span>
+                                    </a>
+                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
+                                        class="btn btn-danger">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
+                                        class="btn btn-success">
+                                        <span class="fas fa-check"></span>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <ul class="action-list">
-                                        <li><a href="#" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
-                                        </li>
-                                        <li><a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
                                 <td>5</td>
-                                <td>Keith Carter</td>
-                                <td>24</td>
-                                <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-search"></i></a></td>
+                                <td>Orcamento Produto 5</td>
+                                <td>18/07/2024 11:43:05</td>
+                                <td>
+                                    <a asp-action="AtualizarProduto" asp-route-id="item.ProdutoId" title="Editar"
+                                        class="btn btn-warning">
+                                        <span class="fas fa-edit"></span>
+                                    </a>
+                                    <a asp-action="DeletarProduto" asp-route-id="item.ProdutoId" title="Deletar"
+                                        class="btn btn-danger">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    <a asp-action="DetalhesProduto" asp-route-id="item.ProdutoId" title="Detalhes"
+                                        class="btn btn-success">
+                                        <span class="fas fa-check"></span>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
