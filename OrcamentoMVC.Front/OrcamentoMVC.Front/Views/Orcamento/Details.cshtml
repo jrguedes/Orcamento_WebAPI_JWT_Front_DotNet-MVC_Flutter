@@ -10,14 +10,16 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-12 col-xs-12">
-                            <form asp-action="NewOrcamento" method="get" class="custom-form">
-                                <div class="col-lg-12 col-12 ms-auto">
-                                    <button type="submit" class="form-control">Adicionar novo orçamento</button>
-                                </div>
-                            </form>
-                            <div class="col-lg-12 col-12">
+                            <div class="col-lg-12 col-12 flex-box-center">
                                 <h4 class="mb-4 pb-2 descricao-color">@Model.Descricao </h4>
                             </div>
+                            <form asp-action="CreateNewItemOrcamento" asp-controller="ItemOrcamento" method="get" class="custom-form">                                                                
+                                <input type="hidden" class="form-control" name="idOrcamento" id="idOrcamento" placeholder="" value="@Model.Id">
+                                <input type="hidden" class="form-control" name="descricaoOrcamento" id="descricaoOrcamento" placeholder="" value="@Model.Descricao">
+                                <div class="col-lg-12 col-12 ms-auto">
+                                    <button type="submit" class="form-control">Novo item de orçamento</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -37,7 +39,8 @@
                                 <tr class="row">
                                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">@itemOrcamento.Id</td>
                                     <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">@itemOrcamento.Descricao</td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">@itemOrcamento.Valor.ToString("pt-BR")
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        @itemOrcamento.Valor.ToString("C")
                                     </td>
                                     <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <a asp-action="Update" asp-route-id="@itemOrcamento.Id" title="Editar"
@@ -47,10 +50,6 @@
                                         <a asp-action="Delete" asp-route-id="@itemOrcamento.Id" title="Deletar"
                                             class="btn btn-danger">
                                             <span class="fas fa-trash-alt"></span>
-                                        </a>
-                                        <a asp-action="Details" asp-route-id="@itemOrcamento.Id" title="Detalhes"
-                                            class="btn btn-success">
-                                            <span class="fas fa-newspaper"></span>
                                         </a>
                                     </td>
                                 </tr>

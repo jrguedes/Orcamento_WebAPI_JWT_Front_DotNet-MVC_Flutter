@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using OrcamentoMVC.Front.Services;
 
 namespace OrcamentoMVC.Front.Services;
 
@@ -42,8 +41,48 @@ public class ItemOrcamentoService : IItemOrcamentoService
         return itemOrcamentoVM;
     }
 
+    public async Task<ItemOrcamento> Get(int id, string token)
+    {
+        ItemOrcamento item;
+        var client = _clientFactory.CreateClient("OrcamentoAPI");
+        PutTokenInAuthorizationHeader(token, client);
+        using (var response = await client.GetAsync(orcamentoAPIEndpoint + id))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+                item = await JsonSerializer
+                              .DeserializeAsync<ItemOrcamento>
+                              (apiResponse, _options);
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        return item;
+    }
+
+    public async Task<bool> Delete(int id, string token)
+    {
+        var client = _clientFactory.CreateClient("OrcamentoAPI");
+        PutTokenInAuthorizationHeader(token, client);
+
+        using (var response = await client.DeleteAsync(orcamentoAPIEndpoint + id))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static void PutTokenInAuthorizationHeader(string token, HttpClient client)
     {
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
+
+
 }

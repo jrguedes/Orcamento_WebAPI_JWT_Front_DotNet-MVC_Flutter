@@ -24,7 +24,7 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
                                 <input type="text" name="local" id="local" class="form-control"
-                                    placeholder="Estabelecimento" required="">
+                                    placeholder="Estabelecimento" required="" value="@Model.ItemOrcamento.Local">
 
                                 <label for="floatingInput">Estabelecimento</label>
                             </div>
@@ -33,7 +33,7 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
                                 <input type="text" name="telefone" id="telefone" class="form-control"
-                                    placeholder="Telefone" required="">
+                                    placeholder="Telefone" required="" value="@Model.ItemOrcamento.Telefone">
 
                                 <label for="floatingInput">Telefone</label>
                             </div>
@@ -42,7 +42,7 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
                                 <input type="text" name="responsavelOrcamento" id="responsavelOrcamento"
-                                    class="form-control" placeholder="Responsavel pelo orçamento" required="">
+                                    class="form-control" placeholder="Responsavel pelo orçamento" required="" value="@Model.ItemOrcamento.ResponsavelOrcamento">
 
                                 <label for="floatingInput">Responsavel pelo orçamento</label>
                             </div>
@@ -51,7 +51,7 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-floating">
                                 <input type="text" name="valor" id="valor" class="form-control" placeholder="Valor"
-                                    required="">
+                                    required="" value="@Model.ItemOrcamento.Valor">
 
                                 <label for="floatingInput">Valor</label>
                             </div>
@@ -60,7 +60,7 @@
                         <div class="col-lg-12 col-12">
                             <div class="form-floating">
                                 <textarea class="form-control" id="descricao" name="descricao"
-                                    placeholder="Descricao"></textarea>
+                                    placeholder="Descricao">@Model.ItemOrcamento.Descricao</textarea>
 
                                 <label for="floatingTextarea">Observação</label>
                             </div>

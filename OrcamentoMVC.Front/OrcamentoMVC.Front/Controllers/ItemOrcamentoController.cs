@@ -25,13 +25,33 @@ public class ItemOrcamentoController : Controller
             var result = await _service.Create(itemOrcamento, GetJwtTokenFromCookies());
 
             if (result != null)
-            {            
+            {
                 return RedirectToAction("List", "Orcamento");
             }
-        }        
+        }
 
         return View("Index", itemOrcamento);
         //corrigir, está esperando VM
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var token = GetJwtTokenFromCookies();
+        var item = await _service.Get(id, token);
+        await _service.Delete(id, token);
+        return RedirectToAction("Details", "Orcamento", new { id = item.OrcamentoId });
+    }
+    
+    public async Task<IActionResult> CreateNewItemOrcamento(int idOrcamento, string descricaoOrcamento)
+    {        
+        var itemVM = new OrcamentoViewModel()
+        {
+            OrcamentoId = idOrcamento,
+            DescricaoOrcamento = descricaoOrcamento,
+            ItemOrcamento = new ItemOrcamento()
+        };
+
+        return RedirectToAction("Index", itemVM);
     }
 
     private string GetJwtTokenFromCookies()
