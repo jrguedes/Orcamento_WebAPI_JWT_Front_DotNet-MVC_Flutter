@@ -35,6 +35,17 @@ public class OrcamentoController : Controller
         return View(orcamento);
     }
 
+    public async Task<IActionResult> Delete(int id)
+    {
+        var deleted = await _service.Delete(id, GetJwtTokenFromCookies());        
+        return RedirectToAction("List", "Orcamento");
+    }
+
+    public  IActionResult NewOrcamento()
+    {        
+        return RedirectToAction("Index", "Orcamento");
+    }
+
     public async Task<IActionResult> List()
     {
         var result = await _service.Get(GetJwtTokenFromCookies());
