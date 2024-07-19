@@ -28,7 +28,7 @@ public class OrcamentoController : Controller
 
             if (result != null)
             {
-                var orcamentoVM = new OrcamentoItemViewModel() { OrcamentoId = result.Id, DescricaoOrcamento = result.Descricao };
+                var orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Id, DescricaoOrcamento = result.Descricao };
                 return RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
             }
         }
@@ -37,12 +37,20 @@ public class OrcamentoController : Controller
 
     public async Task<IActionResult> Delete(int id)
     {
-        var deleted = await _service.Delete(id, GetJwtTokenFromCookies());        
+        var deleted = await _service.Delete(id, GetJwtTokenFromCookies());
         return RedirectToAction("List", "Orcamento");
     }
 
-    public  IActionResult NewOrcamento()
-    {        
+    public async Task<IActionResult> Details(int id)
+    {
+        var orcamentoItensVM = await _service.Get(id, GetJwtTokenFromCookies());
+        if (orcamentoItensVM is null)
+            return View("Error");
+        return View(orcamentoItensVM);
+    }
+
+    public IActionResult NewOrcamento()
+    {
         return RedirectToAction("Index", "Orcamento");
     }
 

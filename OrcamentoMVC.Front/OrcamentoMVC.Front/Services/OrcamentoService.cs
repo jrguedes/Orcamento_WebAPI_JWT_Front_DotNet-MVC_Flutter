@@ -79,9 +79,9 @@ public class OrcamentoService : IOrcamentoService
         return orcamentosVM;
     }
 
-    public async Task<Orcamento> Get(int id, string token)
+    public async Task<OrcamentoItensViewModel> Get(int id, string token)
     {
-        Orcamento orcamentoVM;
+        OrcamentoItensViewModel orcamentoItensVM;
         var client = _clientFactory.CreateClient("OrcamentoAPI");
         PutTokenInAuthorizationHeader(token, client);
         using (var response = await client.GetAsync(orcamentoAPIEndpoint + id))
@@ -89,8 +89,8 @@ public class OrcamentoService : IOrcamentoService
             if (response.IsSuccessStatusCode)
             {
                 var apiResponse = await response.Content.ReadAsStreamAsync();
-                orcamentoVM = await JsonSerializer
-                              .DeserializeAsync<Orcamento>
+                orcamentoItensVM = await JsonSerializer
+                              .DeserializeAsync<OrcamentoItensViewModel>
                               (apiResponse, _options);
 
             }
@@ -99,7 +99,7 @@ public class OrcamentoService : IOrcamentoService
                 return null;
             }
         }
-        return orcamentoVM;
+        return orcamentoItensVM;
     }
 
     public async Task<bool> Update(int id, Orcamento orcamentoVM, string token)

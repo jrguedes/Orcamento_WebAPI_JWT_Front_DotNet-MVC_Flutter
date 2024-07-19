@@ -12,7 +12,7 @@ public class ItemOrcamentoController : Controller
         _service = service;
     }
 
-    public IActionResult Index(OrcamentoItemViewModel orcamentoItemVM)
+    public IActionResult Index(OrcamentoViewModel orcamentoItemVM)
     {
         return View(orcamentoItemVM);
     }
