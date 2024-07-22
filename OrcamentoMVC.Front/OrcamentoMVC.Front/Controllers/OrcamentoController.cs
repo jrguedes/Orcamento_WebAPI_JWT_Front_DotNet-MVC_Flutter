@@ -32,7 +32,7 @@ public class OrcamentoController : Controller
                 return RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
             }
         }
-        return View(orcamento);
+        return View("Index", orcamento);
     }
 
     public async Task<IActionResult> Delete(int id)

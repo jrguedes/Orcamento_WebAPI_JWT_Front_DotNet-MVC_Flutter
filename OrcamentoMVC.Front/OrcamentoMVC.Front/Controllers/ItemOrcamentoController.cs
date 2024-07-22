@@ -2,7 +2,7 @@
 using OrcamentoMVC.Front.Services;
 
 namespace OrcamentoMVC.Front;
-[Route("Orcamento/[controller]")]
+//[Route("[controller]")]
 public class ItemOrcamentoController : Controller
 {
     private readonly IItemOrcamentoService _service;
@@ -15,6 +15,11 @@ public class ItemOrcamentoController : Controller
     public IActionResult Index(OrcamentoViewModel orcamentoItemVM)
     {
         return View(orcamentoItemVM);
+    }
+
+    public string Data()
+    {
+        return DateTime.Now.ToString();
     }
 
 
@@ -46,8 +51,9 @@ public class ItemOrcamentoController : Controller
     }
     */
 
-    /*
-    [HttpPost()]
+
+    //    [HttpGet("{id}")]
+
     public async Task<IActionResult> CreateNewItemOrcamento(int idOrcamento, string descricaoOrcamento)
     {
         var itemVM = new OrcamentoViewModel()
@@ -57,9 +63,9 @@ public class ItemOrcamentoController : Controller
             ItemOrcamento = new ItemOrcamento()
         };
 
-        return RedirectToAction("Index", itemVM);
+        return View("Index", itemVM);
     }
-    */
+
     private string GetJwtTokenFromCookies()
     {
         string token = string.Empty;

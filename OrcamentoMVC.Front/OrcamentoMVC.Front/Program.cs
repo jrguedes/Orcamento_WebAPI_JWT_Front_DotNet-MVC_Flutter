@@ -31,8 +31,24 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+/*
+app.MapControllerRoute(
+    name: "details",
+    pattern: "Orcamento/{controller=Home}/{action=Index}/{id?}"
+);
+*/
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "details",
+    pattern: "Orcamento/{controller=Home}/{action=Index}/{idOrcamento?}/{descricaoOrcamento?}");
+
+
+
+
 
 app.Run();
