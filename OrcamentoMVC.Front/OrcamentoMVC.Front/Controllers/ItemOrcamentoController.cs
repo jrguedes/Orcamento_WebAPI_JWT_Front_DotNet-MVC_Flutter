@@ -2,7 +2,7 @@
 using OrcamentoMVC.Front.Services;
 
 namespace OrcamentoMVC.Front;
-//[Route("[controller]")]
+
 public class ItemOrcamentoController : Controller
 {
     private readonly IItemOrcamentoService _service;
@@ -52,8 +52,8 @@ public class ItemOrcamentoController : Controller
     */
 
 
-    //    [HttpGet("{id}")]
 
+    [HttpPost]
     public async Task<IActionResult> CreateNewItemOrcamento(int idOrcamento, string descricaoOrcamento)
     {
         var itemVM = new OrcamentoViewModel()
