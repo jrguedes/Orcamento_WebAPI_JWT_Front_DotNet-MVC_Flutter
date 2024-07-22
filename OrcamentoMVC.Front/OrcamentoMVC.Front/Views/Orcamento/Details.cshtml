@@ -13,7 +13,7 @@
                             <div class="col-lg-12 col-12 flex-box-center">
                                 <h4 class="mb-4 pb-2 descricao-color">@Model.Descricao </h4>
                             </div>
-                            <form asp-action="CreateNewItemOrcamento" asp-controller="ItemOrcamento" method="get" class="custom-form">                                                                
+                            <form asp-action="CreateNewItemOrcamento" asp-controller="ItemOrcamento" method="post" class="custom-form">                                                                
                                 <input type="hidden" class="form-control" name="idOrcamento" id="idOrcamento" placeholder="" value="@Model.Id">
                                 <input type="hidden" class="form-control" name="descricaoOrcamento" id="descricaoOrcamento" placeholder="" value="@Model.Descricao">
                                 <div class="col-lg-12 col-12 ms-auto">

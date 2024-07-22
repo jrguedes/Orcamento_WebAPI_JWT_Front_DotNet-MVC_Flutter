@@ -28,7 +28,7 @@ public class OrcamentoController : Controller
 
             if (result != null)
             {
-                var orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Id, DescricaoOrcamento = result.Descricao };
+                var orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Id, DescricaoOrcamento = result.Descricao, ItemOrcamento = new ItemOrcamento() };
                 return RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
             }
         }
