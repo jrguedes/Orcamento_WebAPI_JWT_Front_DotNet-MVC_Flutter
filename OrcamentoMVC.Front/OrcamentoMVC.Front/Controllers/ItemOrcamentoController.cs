@@ -17,12 +17,6 @@ public class ItemOrcamentoController : Controller
         return View(orcamentoItemVM);
     }
 
-    public string Data()
-    {
-        return DateTime.Now.ToString();
-    }
-
-
     [HttpPost]
     public async Task<IActionResult> CreateItemOrcamento(ItemOrcamento itemOrcamento)
     {
@@ -40,18 +34,14 @@ public class ItemOrcamentoController : Controller
         //corrigir, está esperando VM
     }
 
-
-    /*
     public async Task<IActionResult> Delete(int id)
     {
+                
         var token = GetJwtTokenFromCookies();
         var item = await _service.Get(id, token);
         await _service.Delete(id, token);
         return RedirectToAction("Details", "Orcamento", new { id = item.OrcamentoId });
     }
-    */
-
-
 
     [HttpPost]
     public async Task<IActionResult> CreateNewItemOrcamento(int idOrcamento, string descricaoOrcamento)

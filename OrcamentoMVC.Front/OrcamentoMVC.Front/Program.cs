@@ -45,7 +45,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "details",
-    pattern: "Orcamento/{controller=Home}/{action=Index}/{idOrcamento?}/{descricaoOrcamento?}");
+    pattern: "Orcamento/{controller=Home}/{action=Index}/{id?}/{descricao?}");
 
 
 
