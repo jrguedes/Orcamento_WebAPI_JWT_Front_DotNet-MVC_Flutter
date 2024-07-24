@@ -102,12 +102,12 @@ public class OrcamentoService : IOrcamentoService
         return orcamentoItensVM;
     }
 
-    public async Task<bool> Update(int id, Orcamento orcamentoVM, string token)
+    public async Task<bool> Update(Orcamento orcamento, string token)
     {
         var client = _clientFactory.CreateClient("OrcamentoAPI");
         PutTokenInAuthorizationHeader(token, client);
 
-        using (var response = await client.PutAsJsonAsync(orcamentoAPIEndpoint, orcamentoVM))
+        using (var response = await client.PutAsJsonAsync(orcamentoAPIEndpoint, orcamento))
         {
             if (response.IsSuccessStatusCode)
             {

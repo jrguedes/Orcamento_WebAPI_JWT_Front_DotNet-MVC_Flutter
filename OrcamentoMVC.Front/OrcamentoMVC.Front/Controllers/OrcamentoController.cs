@@ -13,18 +13,28 @@ public class OrcamentoController : Controller
         _service = service;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(Orcamento orcamento)
     {
-        return View();
+        return View(orcamento ?? new Orcamento());
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateOrcamento(Orcamento orcamento)
+    public async Task<IActionResult> CreateOrUpdateOrcamento(Orcamento orcamento)
     {
         if (ModelState.IsValid)
         {
+            Orcamento result = null;            
             orcamento.Data = DateTime.UtcNow;
-            var result = await _service.Create(orcamento, GetJwtTokenFromCookies());
+
+            if (orcamento.Id == 0)
+            {
+                result = await _service.Create(orcamento, GetJwtTokenFromCookies());
+            }
+            else
+            {
+                _ = await _service.Update(orcamento, GetJwtTokenFromCookies());
+                return RedirectToAction("Details", new { Id = orcamento.Id });
+            }
 
             if (result != null)
             {
@@ -37,7 +47,7 @@ public class OrcamentoController : Controller
 
     public async Task<IActionResult> Delete(int id)
     {
-        var deleted = await _service.Delete(id, GetJwtTokenFromCookies());
+        _ = await _service.Delete(id, GetJwtTokenFromCookies());
         return RedirectToAction("List", "Orcamento");
     }
 
@@ -47,6 +57,14 @@ public class OrcamentoController : Controller
         if (orcamentoItensVM is null)
             return View("Error");
         return View(orcamentoItensVM);
+    }
+
+    public async Task<IActionResult> Update(int id)
+    {
+        var orcamentoVM = await _service.Get(id, GetJwtTokenFromCookies());
+        if (orcamentoVM is null)
+            return View("Error");
+        return View(nameof(Index), new Orcamento() { Id = orcamentoVM.Id, Descricao = orcamentoVM.Descricao, Data = orcamentoVM.Data });
     }
 
     public IActionResult NewOrcamento()

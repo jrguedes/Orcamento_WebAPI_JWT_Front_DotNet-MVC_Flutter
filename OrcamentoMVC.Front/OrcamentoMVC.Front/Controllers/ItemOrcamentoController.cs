@@ -30,8 +30,7 @@ public class ItemOrcamentoController : Controller
             }
         }
 
-        return View("Index", itemOrcamento);
-        //corrigir, está esperando VM
+        return View("Index", itemOrcamento);        
     }
 
     public async Task<IActionResult> Delete(int id)

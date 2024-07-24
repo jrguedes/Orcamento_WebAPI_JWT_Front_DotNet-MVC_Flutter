@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Orcamento
+@{
     ViewData["Title"] = "Cadastro de Orçamento";
 }
 
@@ -11,18 +12,21 @@
             </div>
 
             <div class="col-lg-12 col-12">
-                <form asp-action="CreateOrcamento" method="post" class="custom-form contact-form" role="form">
+                <form asp-action="CreateOrUpdateOrcamento" method="post" class="custom-form contact-form" role="form">
                     <div class="row">
+                        <div>
+                            <input type="hidden" name="id" id="id" value="@Model.Id">
+                        </div>
                         <div class="col-lg-12 col-md-12 col-12">
                             <div class="form-floating">
                                 <input type="text" name="descricao" id="descricao" class="form-control" placeholder="O que você gostaria de orçar?"
-                                    required="">
+                                    required="" value="@Model.Descricao">
 
                                 <label for="floatingInput">O que você gostaria de orçar?</label>
                             </div>
                         </div>                        
                         <div class="col-lg-12 col-12 ms-auto">
-                            <button type="submit" class="form-control">Criar orçamento</button>
+                            <button type="submit" class="form-control"> @(Model.Id == 0 ? "Criar orçamento" : "Salvar alteração") </button>
                         </div>
 
                     </div>
