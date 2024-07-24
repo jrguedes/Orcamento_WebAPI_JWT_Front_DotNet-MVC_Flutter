@@ -1,37 +1,35 @@
 @model UserViewModel
 
+<div class="col-lg-12 col-md-12 col-12">
+    <h2>Log In</h2>
+</div>
 
-<h2>Log In</h2>
 
-<div class="row">
+<div class="row flex-box-center">
     <div class="col-md-10">
 
-        <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal">
-
-            <div asp-validation-summary="All" class="text-danger">
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Email" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+        <form asp-controller="Account" asp-action="Login" method="post" class="custom-form contact-form">
+            <div class="flex-box-center">
+                <div asp-validation-summary="All" class="text-danger">
                 </div>
-            </div>
 
-            <div class="form-group">
-
-                <label asp-for="Password" class="col-md-2 control-label"></label>
-
-                <div class="col-md-10">
-                    <input asp-for="Password" type="password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="col-lg-10 col-10 ms-auto">
+                    <div class="form-floating">
+                        <input asp-for="Email" class="form-control" placeholder="Email" required="" />
+                        <label for="floatingInput">Email</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10" style="padding-top: 10px">
-                    <button type="submit" class="btn btn-outline-dark">Log in</button>
+                <div class="col-lg-10 col-10 ms-auto">
+                    <div class="form-floating">
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Senha"
+                            required="" />
+                        <label for="floatingInput">Senha</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-10 col-10 ms-auto">
+                    <button type="submit" class="btn btn-outline-dark form-control">Log in</button>
                 </div>
             </div>
         </form>

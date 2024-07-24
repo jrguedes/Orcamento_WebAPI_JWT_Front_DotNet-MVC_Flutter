@@ -32,9 +32,12 @@
                         <thead>
                             <tr class="row">
                                 <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Código</th>
-                                <th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">Orçado</th>
-                                <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3">Valor</th>
-                                <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3">Ação</th>
+                                <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3">Orçado</th>
+                                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Local</th>
+                                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Telefone</th>
+                                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Responsável</th>
+                                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Valor</th>
+                                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,11 +45,14 @@
                             {
                                 <tr class="row">
                                     <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">@itemOrcamento.Id</td>
-                                    <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">@itemOrcamento.Descricao</td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">@itemOrcamento.Descricao</td>
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">@itemOrcamento.Local</td>
+                                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">@itemOrcamento.Telefone</td>
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">@itemOrcamento.ResponsavelOrcamento</td>
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                         @itemOrcamento.Valor.ToString("C")
                                     </td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                                         <a asp-action="Delete"
                                             asp-controller="ItemOrcamento"
                                             asp-route-id="@itemOrcamento.Id" title="Deletar" class="btn btn-danger">
