@@ -16,7 +16,7 @@ public class ItemOrcamentoService : IItemOrcamentoService
 
     const string orcamentoAPIEndpoint = "/api/ItemOrcamento/";
     private readonly JsonSerializerOptions _options;
-    public async Task<ItemOrcamento> Create(ItemOrcamento itemOrcamentoVM, string token)
+    public async Task<ServiceResponse<ItemOrcamento>> Create(ItemOrcamento itemOrcamentoVM, string token)
     {
         var client = _clientFactory.CreateClient("OrcamentoAPI");
         PutTokenInAuthorizationHeader(token, client);
@@ -33,17 +33,13 @@ public class ItemOrcamentoService : IItemOrcamentoService
                              .DeserializeAsync<ItemOrcamento>
                              (apiResponse, _options);
             }
-            else
-            {
-                return null;
-            }
-        }
-        return itemOrcamentoVM;
+            return new(itemOrcamentoVM, response.StatusCode, response.IsSuccessStatusCode);
+        }        
     }
 
-    public async Task<ItemOrcamento> Get(int id, string token)
+    public async Task<ServiceResponse<ItemOrcamento>> Get(int id, string token)
     {
-        ItemOrcamento item;
+        ItemOrcamento item = new();
         var client = _clientFactory.CreateClient("OrcamentoAPI");
         PutTokenInAuthorizationHeader(token, client);
         using (var response = await client.GetAsync(orcamentoAPIEndpoint + id))
@@ -56,15 +52,11 @@ public class ItemOrcamentoService : IItemOrcamentoService
                               (apiResponse, _options);
 
             }
-            else
-            {
-                return null;
-            }
+            return new(item, response.StatusCode, response.IsSuccessStatusCode);
         }
-        return item;
     }
 
-    public async Task<bool> Delete(int id, string token)
+    public async Task<ServiceResponse<bool>> Delete(int id, string token)
     {
         var client = _clientFactory.CreateClient("OrcamentoAPI");
         PutTokenInAuthorizationHeader(token, client);
@@ -73,10 +65,10 @@ public class ItemOrcamentoService : IItemOrcamentoService
         {
             if (response.IsSuccessStatusCode)
             {
-                return true;
+                return new(true, response.StatusCode, response.IsSuccessStatusCode);
             }
-        }
-        return false;
+            return new(false, response.StatusCode, response.IsSuccessStatusCode);
+        }        
     }
 
     private static void PutTokenInAuthorizationHeader(string token, HttpClient client)

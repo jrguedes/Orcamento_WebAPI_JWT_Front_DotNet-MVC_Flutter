@@ -24,48 +24,68 @@ public class OrcamentoController : Controller
     {
         if (ModelState.IsValid)
         {
-            Orcamento result = null;
+            ServiceResponse<Orcamento> result = null;
             orcamento.Data = DateTime.UtcNow;
 
             if (orcamento.Id == 0)
             {
                 result = await _service.Create(orcamento, GetJwtTokenFromCookies());
+                if (result.Response != null)
+                {
+                    var orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Response.Id, DescricaoOrcamento = result.Response.Descricao, ItemOrcamento = new ItemOrcamento() };
+                    var actionResultCreate = RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
+                    return ValidateAuthorization(result, actionResultCreate);
+                }
             }
             else
             {
-                _ = await _service.Update(orcamento, GetJwtTokenFromCookies());
-                return RedirectToAction("Details", new { Id = orcamento.Id });
-            }
-
-            if (result != null)
-            {
-                var orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Id, DescricaoOrcamento = result.Descricao, ItemOrcamento = new ItemOrcamento() };
-                return RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
+                var updated = await _service.Update(orcamento, GetJwtTokenFromCookies());
+                var actionResult = RedirectToAction("Details", new { Id = orcamento.Id });
+                return ValidateAuthorization(updated, actionResult);
             }
         }
+
+        //TODO VALIDAR
+        //return ValidateAuthorization(updated, View("Index", orcamento));
         return View("Index", orcamento);
     }
 
     public async Task<IActionResult> Delete(int id)
     {
-        _ = await _service.Delete(id, GetJwtTokenFromCookies());
-        return RedirectToAction("List", "Orcamento");
+        var result = await _service.Delete(id, GetJwtTokenFromCookies());
+
+        if (result.IsSuccessStatusCode)
+        {
+            return RedirectToAction("List", "Orcamento");
+        }
+
+        return ValidateAuthorization(result, View(false));
     }
 
     public async Task<IActionResult> Details(int id)
     {
-        var orcamentoItensVM = await _service.Get(id, GetJwtTokenFromCookies());
-        if (orcamentoItensVM is null)
+        var result = await _service.Get(id, GetJwtTokenFromCookies());
+        if (result.Response is null)
             return View("Error");
-        return View(orcamentoItensVM);
+
+        if (result.IsSuccessStatusCode)
+        {
+            return View(result.Response);
+        }
+
+        return ValidateAuthorization(result, View(result.Response));
     }
 
     public async Task<IActionResult> Update(int id)
     {
-        var orcamentoVM = await _service.Get(id, GetJwtTokenFromCookies());
-        if (orcamentoVM is null)
+        var result = await _service.Get(id, GetJwtTokenFromCookies());
+
+        if (result.Response is null)
             return View("Error");
-        return View(nameof(Index), new Orcamento() { Id = orcamentoVM.Id, Descricao = orcamentoVM.Descricao, Data = orcamentoVM.Data });
+
+        var actionResult = View(nameof(Index), new Orcamento() { Id = result.Response.Id, Descricao = result.Response.Descricao, Data = result.Response.Data });
+
+        return ValidateAuthorization(result, actionResult);
     }
 
     public IActionResult NewOrcamento()
@@ -81,10 +101,10 @@ public class OrcamentoController : Controller
         {
             return View(result.Response);
         }
-        return ValidateResult(result, View(new List<Orcamento>()));
+        return ValidateAuthorization(result, View(new List<Orcamento>()));
     }
 
-    private IActionResult ValidateResult(IServiceResponse serviceResult, IActionResult defaultActionResult)
+    private IActionResult ValidateAuthorization(IServiceResponse serviceResult, IActionResult defaultActionResult)
     {
         if (serviceResult.StatusCode == HttpStatusCode.Unauthorized)
         {
