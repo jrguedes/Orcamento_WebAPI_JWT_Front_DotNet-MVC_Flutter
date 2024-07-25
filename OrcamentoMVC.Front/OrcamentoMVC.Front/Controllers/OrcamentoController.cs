@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OrcamentoMVC.Front.Services;
 
 namespace OrcamentoMVC.Front;
@@ -23,7 +24,7 @@ public class OrcamentoController : Controller
     {
         if (ModelState.IsValid)
         {
-            Orcamento result = null;            
+            Orcamento result = null;
             orcamento.Data = DateTime.UtcNow;
 
             if (orcamento.Id == 0)
@@ -76,11 +77,20 @@ public class OrcamentoController : Controller
     {
         var result = await _service.Get(GetJwtTokenFromCookies());
 
-        if (result != null)
+        if (result.IsSuccessStatusCode)
         {
-            return View(result);
+            return View(result.Response);
         }
-        return View(new List<Orcamento>());
+        return ValidateResult(result, View(new List<Orcamento>()));
+    }
+
+    private IActionResult ValidateResult(IServiceResponse serviceResult, IActionResult defaultActionResult)
+    {
+        if (serviceResult.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+        return defaultActionResult;
     }
 
     private string GetJwtTokenFromCookies()

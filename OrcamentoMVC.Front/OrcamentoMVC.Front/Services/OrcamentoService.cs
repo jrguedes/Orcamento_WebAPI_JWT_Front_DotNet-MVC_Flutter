@@ -57,7 +57,7 @@ public class OrcamentoService : IOrcamentoService
         return false;
     }
 
-    public async Task<IEnumerable<Orcamento>> Get(string token)
+    public async Task<ServiceResponse<IEnumerable<Orcamento>>> Get(string token)
     {
         IEnumerable<Orcamento> orcamentosVM = new List<Orcamento>();
         var client = _clientFactory.CreateClient("OrcamentoAPI");
@@ -71,12 +71,8 @@ public class OrcamentoService : IOrcamentoService
                                .DeserializeAsync<IEnumerable<Orcamento>>
                                (apiResponse, _options);
             }
-            else
-            {
-                return null;
-            }
+            return new(orcamentosVM, response.StatusCode, response.IsSuccessStatusCode);
         }
-        return orcamentosVM;
     }
 
     public async Task<OrcamentoItensViewModel> Get(int id, string token)

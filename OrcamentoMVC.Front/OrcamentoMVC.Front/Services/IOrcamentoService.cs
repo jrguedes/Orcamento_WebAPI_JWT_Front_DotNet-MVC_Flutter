@@ -2,7 +2,7 @@
 
 public interface IOrcamentoService
 {
-    Task<IEnumerable<Orcamento>> Get(string token);
+    Task<ServiceResponse<IEnumerable<Orcamento>>> Get(string token);
     Task<OrcamentoItensViewModel> Get(int id, string token);
     Task<Orcamento> Create(Orcamento orcamento, string token);
     Task<bool> Update(Orcamento orcamento, string token);
