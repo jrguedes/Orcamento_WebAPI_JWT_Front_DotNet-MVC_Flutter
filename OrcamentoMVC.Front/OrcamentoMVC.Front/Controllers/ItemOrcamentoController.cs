@@ -19,14 +19,14 @@ public class ItemOrcamentoController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateItemOrcamento(OrcamentoViewModel orcamentoItemVM)
+    public async Task<IActionResult> CreateItemOrcamento(string descricaoOrcamento, ItemOrcamento itemOrcamento)
     {
         if (!ModelState.IsValid)
         {
-            return View(nameof(Index), orcamentoItemVM);
+            return View(nameof(Index), itemOrcamento);
         }
 
-        var result = await _service.Create(orcamentoItemVM.ItemOrcamento, GetJwtTokenFromCookies());
+        var result = await _service.Create(itemOrcamento, GetJwtTokenFromCookies());
         if (result.IsSuccessStatusCode)
         {
             if (result.Response != null)
@@ -34,6 +34,7 @@ public class ItemOrcamentoController : Controller
                 return RedirectToAction("Details", "Orcamento", new { id = result.Response.OrcamentoId });
             }
         }
+        var orcamentoItemVM = new OrcamentoViewModel() { OrcamentoId = itemOrcamento.OrcamentoId, DescricaoOrcamento = descricaoOrcamento, ItemOrcamento = itemOrcamento };
         return ValidateAuthorization(result, View("Index", orcamentoItemVM));
     }
 
