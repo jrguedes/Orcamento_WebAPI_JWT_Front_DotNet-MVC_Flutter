@@ -13,8 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />-->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />    
     <link rel="stylesheet" href="~/OrcamentoMVC.Front.styles.css" asp-append-version="true" />
 
     <link href="~/css/bootstrap-icons.css" rel="stylesheet">
@@ -28,10 +27,6 @@ TemplateMo 590 topic listing
 https://templatemo.com/tm-590-topic-listing
 
 -->
-
-
-
-
 
 </head>
 
@@ -65,16 +60,7 @@ https://templatemo.com/tm-590-topic-listing
                                 <a class="nav-link click-scroll" asp-area="" asp-controller="Home"
                                     asp-action="Index">Home</a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" asp-area="" asp-controller="Orcamento"
-                                    asp-action="Index">Cadastro de Orçamentos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" asp-area="" asp-controller="Orcamento"
-                                    asp-action="List">Lista de Orçamentos</a>
-                            </li>
+                            @await Component.InvokeAsync("PrivateMenu")
                         </ul>
 
                         @await Html.PartialAsync("_LoginPartial")

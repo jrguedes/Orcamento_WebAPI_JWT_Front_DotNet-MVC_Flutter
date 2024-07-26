@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Views/ItemOrcamento/" />
+    <Folder Include="Views/Shared/Components/PrivateMenu/" />
     <Folder Include="wwwroot/images/" />
   </ItemGroup>
 

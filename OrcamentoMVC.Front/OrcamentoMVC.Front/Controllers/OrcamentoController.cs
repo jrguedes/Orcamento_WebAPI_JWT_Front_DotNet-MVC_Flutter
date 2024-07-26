@@ -109,7 +109,7 @@ public class OrcamentoController : Controller
     private IActionResult ValidateAuthorization(IServiceResponse serviceResult, IActionResult defaultActionResult)
     {
         if (serviceResult.StatusCode == HttpStatusCode.Unauthorized)
-        {
+        {            
             return RedirectToAction("Login", "Account");
         }
         return defaultActionResult;
