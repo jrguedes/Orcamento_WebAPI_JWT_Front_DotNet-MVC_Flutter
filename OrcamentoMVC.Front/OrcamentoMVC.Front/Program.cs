@@ -10,9 +10,12 @@ builder.Services.AddHttpClient("OrcamentoAPI", c =>
     c.BaseAddress = new Uri(builder.Configuration["ServiceUri:OrcamentoAPI"]);
 });
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAccessTokenService, AccessTokenService>();
 builder.Services.AddScoped<IAuthentication, Authentication>();
 builder.Services.AddScoped<IOrcamentoService, OrcamentoService>();
 builder.Services.AddScoped<IItemOrcamentoService, ItemOrcamentoService>();
+
 
 var app = builder.Build();
 
@@ -30,14 +33,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
-/*
-app.MapControllerRoute(
-    name: "details",
-    pattern: "Orcamento/{controller=Home}/{action=Index}/{id?}"
-);
-*/
-
 
 app.MapControllerRoute(
     name: "default",

@@ -8,10 +8,12 @@ public class OrcamentoController : Controller
 {
 
     private readonly IOrcamentoService _service;
-
-    public OrcamentoController(IOrcamentoService service)
+    private readonly IAccessTokenService _tokenService;
+    
+    public OrcamentoController(IOrcamentoService service, IAccessTokenService tokenService)
     {
         _service = service;
+        _tokenService = tokenService;
     }
 
     public IActionResult Index(Orcamento orcamento)
@@ -32,7 +34,7 @@ public class OrcamentoController : Controller
 
         if (orcamento.Id == 0)
         {
-            result = await _service.Create(orcamento, GetJwtTokenFromCookies());
+            result = await _service.Create(orcamento, _tokenService.GetJwtTokenFromCookies());
             var orcamentoVM = new OrcamentoViewModel();
             var actionResultCreate = RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
             if (result.Response != null)
@@ -44,15 +46,15 @@ public class OrcamentoController : Controller
         }
         else
         {
-            var updated = await _service.Update(orcamento, GetJwtTokenFromCookies());
+            var updated = await _service.Update(orcamento, _tokenService.GetJwtTokenFromCookies());
             var actionResult = RedirectToAction("Details", new { orcamento.Id });
             return ValidateAuthorization(updated, actionResult);
-        }        
+        }
     }
 
     public async Task<IActionResult> Delete(int id)
     {
-        var result = await _service.Delete(id, GetJwtTokenFromCookies());
+        var result = await _service.Delete(id, _tokenService.GetJwtTokenFromCookies());
 
         if (result.IsSuccessStatusCode)
         {
@@ -64,7 +66,7 @@ public class OrcamentoController : Controller
 
     public async Task<IActionResult> Details(int id)
     {
-        var result = await _service.Get(id, GetJwtTokenFromCookies());
+        var result = await _service.Get(id, _tokenService.GetJwtTokenFromCookies());
         if (result.Response is null)
             return View("Error");
 
@@ -78,7 +80,7 @@ public class OrcamentoController : Controller
 
     public async Task<IActionResult> Update(int id)
     {
-        var result = await _service.Get(id, GetJwtTokenFromCookies());
+        var result = await _service.Get(id, _tokenService.GetJwtTokenFromCookies());
 
         if (result.Response is null)
             return View("Error");
@@ -95,7 +97,7 @@ public class OrcamentoController : Controller
 
     public async Task<IActionResult> List()
     {
-        var result = await _service.Get(GetJwtTokenFromCookies());
+        var result = await _service.Get(_tokenService.GetJwtTokenFromCookies());
 
         if (result.IsSuccessStatusCode)
         {
@@ -111,13 +113,5 @@ public class OrcamentoController : Controller
             return RedirectToAction("Login", "Account");
         }
         return defaultActionResult;
-    }
-
-    private string GetJwtTokenFromCookies()
-    {
-        string token = string.Empty;
-        if (HttpContext.Request.Cookies.ContainsKey("X-Access-Token"))
-            token = HttpContext.Request.Cookies["X-Access-Token"].ToString();
-        return token;
     }
 }

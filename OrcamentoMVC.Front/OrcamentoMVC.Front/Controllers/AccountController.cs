@@ -6,10 +6,12 @@ namespace OrcamentoMVC.Front;
 
 public class AccountController : Controller
 {
+    private readonly IAccessTokenService _tokenService;
     private readonly IAuthentication _authenticationService;
 
-    public AccountController(IAuthentication authenticationService)
+    public AccountController(IAuthentication authenticationService, IAccessTokenService tokenService)
     {
+        _tokenService = tokenService;
         _authenticationService = authenticationService;
     }
 
@@ -21,13 +23,13 @@ public class AccountController : Controller
 
     [HttpPost]
     public async Task<ActionResult> Login(UserViewModel userVM)
-    {        
+    {
         if (!ModelState.IsValid)
         {
             ModelState.AddModelError(string.Empty, "Login inválido!");
             return View(userVM);
         }
-     
+
         var result = await _authenticationService.AuthenticateUser(userVM);
 
 
@@ -37,12 +39,14 @@ public class AccountController : Controller
             return View(userVM);
         }
 
-        Response.Cookies.Append("X-Access-Token", result.AccessToken, new CookieOptions()
-        {
-            Secure = true,
-            HttpOnly = true,
-            SameSite = SameSiteMode.Strict
-        });
+        _tokenService.AddJwtTokenToCookies(result.AccessToken);
+
+        return Redirect("/");
+    }
+
+    public async Task<ActionResult> Logout()
+    {
+        _tokenService.DeleteJwtTokenFromCookies();
         return Redirect("/");
     }
 }

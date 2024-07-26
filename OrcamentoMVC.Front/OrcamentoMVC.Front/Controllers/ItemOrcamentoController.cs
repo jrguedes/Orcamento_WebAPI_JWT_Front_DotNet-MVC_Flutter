@@ -5,12 +5,14 @@ using OrcamentoMVC.Front.Services;
 namespace OrcamentoMVC.Front;
 
 public class ItemOrcamentoController : Controller
-{
+{    
     private readonly IItemOrcamentoService _service;
+    private readonly IAccessTokenService _tokenService;
 
-    public ItemOrcamentoController(IItemOrcamentoService service)
+    public ItemOrcamentoController(IItemOrcamentoService service, IAccessTokenService tokenService)
     {
-        _service = service;
+        _tokenService = tokenService;
+        _service = service;        
     }
 
     public IActionResult Index(OrcamentoViewModel orcamentoItemVM)
@@ -26,7 +28,7 @@ public class ItemOrcamentoController : Controller
             return View(nameof(Index), itemOrcamento);
         }
 
-        var result = await _service.Create(itemOrcamento, GetJwtTokenFromCookies());
+        var result = await _service.Create(itemOrcamento, _tokenService.GetJwtTokenFromCookies());
         if (result.IsSuccessStatusCode)
         {
             if (result.Response != null)
@@ -40,7 +42,7 @@ public class ItemOrcamentoController : Controller
 
     public async Task<IActionResult> Delete(int id)
     {
-        var token = GetJwtTokenFromCookies();
+        var token = _tokenService.GetJwtTokenFromCookies();
         var resultItem = await _service.Get(id, token);
         if (resultItem.IsSuccessStatusCode && resultItem.Response != null)
         {
@@ -75,13 +77,5 @@ public class ItemOrcamentoController : Controller
             return RedirectToAction("Login", "Account");
         }
         return defaultActionResult;
-    }
-
-    private string GetJwtTokenFromCookies()
-    {
-        string token = string.Empty;
-        if (HttpContext.Request.Cookies.ContainsKey("X-Access-Token"))
-            token = HttpContext.Request.Cookies["X-Access-Token"].ToString();
-        return token;
-    }
+    }    
 }
