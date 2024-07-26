@@ -22,32 +22,32 @@ public class OrcamentoController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateOrUpdateOrcamento(Orcamento orcamento)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            ServiceResponse<Orcamento> result = null;
-            orcamento.Data = DateTime.UtcNow;
-
-            if (orcamento.Id == 0)
-            {
-                result = await _service.Create(orcamento, GetJwtTokenFromCookies());
-                if (result.Response != null)
-                {
-                    var orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Response.Id, DescricaoOrcamento = result.Response.Descricao, ItemOrcamento = new ItemOrcamento() };
-                    var actionResultCreate = RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
-                    return ValidateAuthorization(result, actionResultCreate);
-                }
-            }
-            else
-            {
-                var updated = await _service.Update(orcamento, GetJwtTokenFromCookies());
-                var actionResult = RedirectToAction("Details", new { Id = orcamento.Id });
-                return ValidateAuthorization(updated, actionResult);
-            }
+            return View(nameof(Index), orcamento);
         }
 
-        //TODO VALIDAR
-        //return ValidateAuthorization(updated, View("Index", orcamento));
-        return View("Index", orcamento);
+        ServiceResponse<Orcamento> result = null;
+        orcamento.Data = DateTime.UtcNow;
+
+        if (orcamento.Id == 0)
+        {
+            result = await _service.Create(orcamento, GetJwtTokenFromCookies());
+            var orcamentoVM = new OrcamentoViewModel();
+            var actionResultCreate = RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
+            if (result.Response != null)
+            {
+                orcamentoVM = new OrcamentoViewModel() { OrcamentoId = result.Response.Id, DescricaoOrcamento = result.Response.Descricao, ItemOrcamento = new ItemOrcamento() };
+                actionResultCreate = RedirectToAction("ItemOrcamento", "Orcamento", orcamentoVM);
+            }
+            return ValidateAuthorization(result, actionResultCreate);
+        }
+        else
+        {
+            var updated = await _service.Update(orcamento, GetJwtTokenFromCookies());
+            var actionResult = RedirectToAction("Details", new { orcamento.Id });
+            return ValidateAuthorization(updated, actionResult);
+        }        
     }
 
     public async Task<IActionResult> Delete(int id)

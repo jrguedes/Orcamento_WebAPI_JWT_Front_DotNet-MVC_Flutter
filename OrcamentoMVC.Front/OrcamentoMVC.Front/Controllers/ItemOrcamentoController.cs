@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OrcamentoMVC.Front.Services;
 
 namespace OrcamentoMVC.Front;
@@ -18,28 +19,39 @@ public class ItemOrcamentoController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateItemOrcamento(ItemOrcamento itemOrcamento)
+    public async Task<IActionResult> CreateItemOrcamento(OrcamentoViewModel orcamentoItemVM)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            var result = await _service.Create(itemOrcamento, GetJwtTokenFromCookies());
-
-            if (result != null)
-            {
-                return RedirectToAction("Details", "Orcamento", new { id = result.OrcamentoId });
-            }
+            return View(nameof(Index), orcamentoItemVM);
         }
 
-        return View("Index", itemOrcamento);        
+        var result = await _service.Create(orcamentoItemVM.ItemOrcamento, GetJwtTokenFromCookies());
+        if (result.IsSuccessStatusCode)
+        {
+            if (result.Response != null)
+            {
+                return RedirectToAction("Details", "Orcamento", new { id = result.Response.OrcamentoId });
+            }
+        }
+        return ValidateAuthorization(result, View("Index", orcamentoItemVM));
     }
 
     public async Task<IActionResult> Delete(int id)
     {
-                
         var token = GetJwtTokenFromCookies();
-        var item = await _service.Get(id, token);
-        await _service.Delete(id, token);
-        return RedirectToAction("Details", "Orcamento", new { id = item.OrcamentoId });
+        var resultItem = await _service.Get(id, token);
+        if (resultItem.IsSuccessStatusCode && resultItem.Response != null)
+        {
+            var actionResult = RedirectToAction("Details", "Orcamento", new { id = resultItem.Response.OrcamentoId });
+            var resultDelete = await _service.Delete(id, token);
+            if (resultDelete.IsSuccessStatusCode)
+            {
+                return actionResult;
+            }
+            return ValidateAuthorization(resultDelete, View("Index", actionResult));
+        }
+        return ValidateAuthorization(resultItem, RedirectToAction("Index", "Home"));
     }
 
     [HttpPost]
@@ -53,6 +65,15 @@ public class ItemOrcamentoController : Controller
         };
 
         return View("Index", itemVM);
+    }
+
+    private IActionResult ValidateAuthorization(IServiceResponse serviceResult, IActionResult defaultActionResult)
+    {
+        if (serviceResult.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+        return defaultActionResult;
     }
 
     private string GetJwtTokenFromCookies()
