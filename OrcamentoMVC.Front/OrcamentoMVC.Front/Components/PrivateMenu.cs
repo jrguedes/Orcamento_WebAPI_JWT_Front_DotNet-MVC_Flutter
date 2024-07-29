@@ -16,7 +16,11 @@ public class PrivateMenu : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {        
         var token = _tokenService.GetJwtTokenFromCookies();
-        var isValidToken = await _tokenService.ValidateToken(token);        
+        var isValidToken = await _tokenService.ValidateToken(token);
+        if (!isValidToken)
+        {
+            _tokenService.DeleteJwtTokenFromCookies();
+        }
         return View(new AuthenticationViewModel(isValidToken));
     }
 }
