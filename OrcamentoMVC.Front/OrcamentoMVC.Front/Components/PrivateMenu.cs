@@ -13,11 +13,10 @@ public class PrivateMenu : ViewComponent
         _tokenService = tokenService;
     }
 
-    public IViewComponentResult Invoke()
+    public async Task<IViewComponentResult> InvokeAsync()
     {        
         var token = _tokenService.GetJwtTokenFromCookies();
-        _tokenService.ValidateToken(token);
-        Task.Run(() => task);
+        var isValidToken = await _tokenService.ValidateToken(token);        
         return View(new AuthenticationViewModel(isValidToken));
     }
 }
