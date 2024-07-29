@@ -90,5 +90,11 @@ public class AccountController : ControllerBase
     {
         return Ok(await _repository.GetAsync(cancellation));
     }
+
+    [HttpGet("Token")]    
+    public async Task<ActionResult<bool>> ValidateToken(CancellationToken cancellation)
+    {
+        return Ok(true);
+    }
 }
 

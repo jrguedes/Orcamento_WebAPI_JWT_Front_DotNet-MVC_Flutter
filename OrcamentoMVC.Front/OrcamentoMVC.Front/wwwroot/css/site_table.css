@@ -120,4 +120,8 @@
  .descricao-color{
     color:#42aeae
  }
+
+ nav {
+    min-width: 992px;
+ }
   

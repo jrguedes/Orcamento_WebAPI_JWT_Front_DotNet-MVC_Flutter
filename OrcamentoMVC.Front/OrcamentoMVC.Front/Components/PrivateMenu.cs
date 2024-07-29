@@ -14,9 +14,10 @@ public class PrivateMenu : ViewComponent
     }
 
     public IViewComponentResult Invoke()
-    {
-        //TODO verificar se há token valido para o usuário e caso nao haja enviar como falso.
-        //talvez seja necessario remover token caso receba como resposta CodState = 401
-        return View(new AuthenticationViewModel(true));
+    {        
+        var token = _tokenService.GetJwtTokenFromCookies();
+        _tokenService.ValidateToken(token);
+        Task.Run(() => task);
+        return View(new AuthenticationViewModel(isValidToken));
     }
 }

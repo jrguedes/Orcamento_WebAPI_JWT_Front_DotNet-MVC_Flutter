@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace OrcamentoMVC.Front.Services;
 
-public class ItemOrcamentoService : IItemOrcamentoService
+public sealed class ItemOrcamentoService : DefaultService, IItemOrcamentoService
 {
     private readonly IHttpClientFactory _clientFactory;
 
@@ -70,11 +70,4 @@ public class ItemOrcamentoService : IItemOrcamentoService
             return new(false, response.StatusCode, response.IsSuccessStatusCode);
         }        
     }
-
-    private static void PutTokenInAuthorizationHeader(string token, HttpClient client)
-    {
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-    }
-
-
 }

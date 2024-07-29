@@ -17,13 +17,14 @@ public class AccountController : Controller
 
     [HttpGet]
     public ActionResult Login()
-    {
+    {        
         return View();
     }
 
     [HttpPost]
     public async Task<ActionResult> Login(UserViewModel userVM)
     {
+        _tokenService.DeleteJwtTokenFromCookies();
         if (!ModelState.IsValid)
         {
             ModelState.AddModelError(string.Empty, "Login inválido!");

@@ -4,7 +4,7 @@ using OrcamentoMVC.Front.Models;
 
 namespace OrcamentoMVC.Front.Services;
 
-public class Authentication : IAuthentication
+public sealed class Authentication : IAuthentication
 {
     private readonly IHttpClientFactory _clientFactory;
     const string authAPIEndpoint = "/api/Account/SignIn/";

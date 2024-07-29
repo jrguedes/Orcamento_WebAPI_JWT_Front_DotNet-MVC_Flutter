@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace OrcamentoMVC.Front.Services;
 
-public class OrcamentoService : IOrcamentoService
+public sealed class OrcamentoService : DefaultService, IOrcamentoService
 {
     private readonly IHttpClientFactory _clientFactory;
     const string orcamentoAPIEndpoint = "/api/Orcamento/";
@@ -109,8 +109,4 @@ public class OrcamentoService : IOrcamentoService
         }
     }
 
-    private static void PutTokenInAuthorizationHeader(string token, HttpClient client)
-    {
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-    }
 }
