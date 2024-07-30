@@ -12,9 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />    
     <link rel="stylesheet" href="~/OrcamentoMVC.Front.styles.css" asp-append-version="true" />
+        
 
     <link href="~/css/bootstrap-icons.css" rel="stylesheet">
     <link href="~/css/templatemo-topic-listing.css" rel="stylesheet">
@@ -53,33 +55,26 @@ https://templatemo.com/tm-590-topic-listing
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-
-                    @await Component.InvokeAsync("PrivateMenu")
-                    
-
-
+                    @await Component.InvokeAsync("PrivateMenu")                    
                 </div>
             </nav>
         </section>
-
-
     </header>
-    <div class="container width-1000">
+    <div class="container width-1000 main-area">
         <main role="main" class="pb-3">
-
             @RenderBody()
-
         </main>
     </div>
-    <footer class="border-top footer text-muted">
+    <footer class="border-top text-muted site-footer">
         <div class="container flex-box-center">
             &copy; 2024 - OrcamentoMVC.Front - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>    
     <script src="~/js/site.js" asp-append-version="true"></script>
+        
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

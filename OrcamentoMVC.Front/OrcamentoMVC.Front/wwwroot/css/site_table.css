@@ -113,6 +113,10 @@
   max-width: 1000px;
  }
 
+ .main-area{
+    min-height: 700px;
+ }
+
  .logo_title_color{
     color: #E2FAFF;
  }
