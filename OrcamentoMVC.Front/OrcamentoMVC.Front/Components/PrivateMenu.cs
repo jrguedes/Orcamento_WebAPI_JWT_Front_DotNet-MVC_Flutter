@@ -20,7 +20,7 @@ public class PrivateMenu : ViewComponent
         if (!isValidToken)
         {
             _tokenService.DeleteJwtTokenFromCookies();
-        }
+        }        
         return View(new AuthenticationViewModel(isValidToken));
     }
 }

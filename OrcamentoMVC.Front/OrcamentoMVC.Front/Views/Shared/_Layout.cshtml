@@ -54,18 +54,11 @@ https://templatemo.com/tm-590-topic-listing
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" asp-area="" asp-controller="Home"
-                                    asp-action="Index">Home</a>
-                            </li>
-                            @await Component.InvokeAsync("PrivateMenu")
-                        </ul>
 
-                        @await Html.PartialAsync("_LoginPartial")
+                    @await Component.InvokeAsync("PrivateMenu")
+                    
 
-                    </div>
+
                 </div>
             </nav>
         </section>

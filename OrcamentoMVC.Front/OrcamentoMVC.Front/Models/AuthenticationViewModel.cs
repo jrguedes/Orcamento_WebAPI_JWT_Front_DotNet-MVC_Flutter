@@ -2,10 +2,10 @@
 
 public class AuthenticationViewModel
 {
-    public bool UserHasPermission { get; init; }
+    public bool UserAuthenticated { get; init; } = false;
 
-    public AuthenticationViewModel(bool userHasPermission)
+    public AuthenticationViewModel(bool userAuthenticated = false)
     {
-        UserHasPermission = userHasPermission;
+        UserAuthenticated = userAuthenticated;
     }
 }
