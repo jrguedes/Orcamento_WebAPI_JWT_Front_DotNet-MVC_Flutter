@@ -22,11 +22,11 @@ Sendo assim, depois de efeturar um restore nos dois projetos, para executar o Or
 Alguns Endpoints foram deixados desprotegidos para fins didáticos e para que seja possível ter acesso à listagem via Swagger. Como por exemplo, é possível retornar a lista de usuários do sistema via Swagger e pegar suas credencias para fazer um post no método de autenticação no controller Account e pegar o token JWT para inserir a chave de autenticação no próprio Swagger e assim ter acesso aos Endpoints protegidos. Caso contrário será retornado 401.
 
 ### Usuários padrão do sistema:
-## Login: **gerente@gerente.com**
-## senha: **1234**
+### Login:# **gerente@gerente.com**
+### senha:# **1234**
 
-## Login: **funcionario@funcionario.com**
-## senha: **1234**
+### Login:# **funcionario@funcionario.com**
+### senha:# **1234**
 
 
 ### 📋 Pré-requisitos
@@ -36,11 +36,11 @@ DotNet 8 e Flutter versão 3.22.2
 
 ## 🛠️ Construído com as tecnologias
 
-## Sistema Operacional: **MacOS Sonoma versão 14.5**
-## IDE: **VSCode 1.91.1**
-## Backend: **WebAPI do Dotnet na versão 8 + Atenticação JWT, AutoMapper e SQLite para Banco de Dados**
-## Frontend Web: **ASP Net MVC com HttpClient para consumir os Endpoints**
-## Frontend Mobile: **Flutter versão 3.22.2**
+### Sistema Operacional:# **MacOS Sonoma versão 14.5**
+### IDE:# **VSCode 1.91.1**
+### Backend:# **WebAPI do Dotnet na versão 8 + Atenticação JWT, AutoMapper e SQLite para Banco de Dados**
+### Frontend Web:# **ASP Net MVC com HttpClient para consumir os Endpoints**
+### Frontend Mobile:# **Flutter versão 3.22.2**
 
 * [Dotnet 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - WebAPI do Dotnet na versão 6 + Autenticação JWT
 * [Flutter](https://flutter.dev/) - Flutter - Desenvolvimento Mobile
