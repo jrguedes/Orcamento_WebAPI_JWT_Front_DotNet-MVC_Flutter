@@ -1,37 +1,43 @@
 @model UserViewModel
 
-<div class="col-lg-12 col-md-12 col-12">
-    <h2>Log In</h2>
+<div class="col-lg-12 col-md-12 col-12" style="height: 80px;">
+    <h2 style="color: #406a6d;">Log In</h2>
 </div>
 
+<div class="row">
+    <div class="col-lg-2 col-md-2 col-2">
+        <img src="/images/2606581_5917.png" width="200" height="250" alt="">
+    </div>
 
-<div class="row flex-box-center">
     <div class="col-md-10">
+        <div class="col-md-10">
 
-        <form asp-controller="Account" asp-action="Login" method="post" class="custom-form contact-form">
-            <div class="flex-box-center">
-                <div asp-validation-summary="All" class="text-danger">
-                </div>
+            <form asp-controller="Account" asp-action="Login" method="post" class="custom-form contact-form">
+                <div class="flex-box-center">
+                    <div asp-validation-summary="All" class="text-danger">
+                    </div>
 
-                <div class="col-lg-10 col-10 ms-auto">
-                    <div class="form-floating">
-                        <input asp-for="Email" class="form-control" placeholder="Email" required="" />
-                        <label for="floatingInput">Email</label>
+                    <div class="col-lg-10 col-10 ms-auto">
+                        <div class="form-floating">
+                            <input asp-for="Email" class="form-control" placeholder="Email" required="" />
+                            <label for="floatingInput">Email</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-10 col-10 ms-auto">
+                        <div class="form-floating">
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Senha"
+                                required="" />
+                            <label for="floatingInput">Senha</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-10 col-10 ms-auto">
+                        <button type="submit" class="btn btn-outline-dark form-control">Log in</button>
                     </div>
                 </div>
-
-                <div class="col-lg-10 col-10 ms-auto">
-                    <div class="form-floating">
-                        <input asp-for="Password" type="password" class="form-control" placeholder="Senha"
-                            required="" />
-                        <label for="floatingInput">Senha</label>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 col-10 ms-auto">
-                    <button type="submit" class="btn btn-outline-dark form-control">Log in</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
+
