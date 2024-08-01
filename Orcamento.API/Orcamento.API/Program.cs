@@ -50,7 +50,7 @@ builder.Services.AddAuthentication(authOptions =>
                 paramsValidation.ValidIssuer = tokenConfiguration.Issuer;
                 paramsValidation.ValidateIssuerSigningKey = true;
                 paramsValidation.ValidateLifetime = true;
-                paramsValidation.ClockSkew = TimeSpan.Zero; //tolerancia
+                paramsValidation.ClockSkew = TimeSpan.Zero;
             });
 
 builder.Services.AddControllers(options =>
@@ -110,8 +110,6 @@ builder.Services.AddSwaggerGen(c =>
                         }
         }
     );
-
-
 });
 
 builder.Services.AddAutoMapper(typeof(GeneralDtoMappingProfile));
