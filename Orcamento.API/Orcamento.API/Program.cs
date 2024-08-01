@@ -1,7 +1,5 @@
-﻿using System.Security.Cryptography;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orcamento.API.AppDbContextSQLite;
 using Orcamento.API.Dtos.Mappings;

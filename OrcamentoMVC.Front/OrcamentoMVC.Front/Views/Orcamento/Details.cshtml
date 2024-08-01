@@ -10,8 +10,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-12 col-xs-12">
+                            <div class="col-lg-12 col-12">
+                                <a class="btn btn-sm" asp-action="List" asp-controller="Orcamento">Voltar</a>
+                            </div>
                             <div class="col-lg-12 col-12 flex-box-center">
-                                <h4 class="mb-4 pb-2 descricao-color">@Model.Descricao </h4>
+                                <h3 class="mb-4 pb-2 descricao-color">@Model.Descricao </h3>
                             </div>
                             <form asp-action="CreateNewItemOrcamento" asp-controller="ItemOrcamento" method="post"
                                 class="custom-form">
