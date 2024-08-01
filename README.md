@@ -22,11 +22,11 @@ Sendo assim, depois de efeturar um restore nos dois projetos, para executar o Or
 Alguns Endpoints foram deixados desprotegidos para fins didáticos e para que seja possível ter acesso à listagem via Swagger. Como por exemplo, é possível retornar a lista de usuários do sistema via Swagger e pegar suas credencias para fazer um post no método de autenticação no controller Account e pegar o token JWT para inserir a chave de autenticação no próprio Swagger e assim ter acesso aos Endpoints protegidos. Caso contrário será retornado 401.
 
 ### Usuários padrão do sistema:
-### Login:# **gerente@gerente.com**
-### senha:# **1234**
+### Login:### **gerente@gerente.com**
+### senha: **1234**
 
-### Login:# **funcionario@funcionario.com**
-### senha:# **1234**
+### Login: **funcionario@funcionario.com**
+### senha: **1234**
 
 
 ### 📋 Pré-requisitos
