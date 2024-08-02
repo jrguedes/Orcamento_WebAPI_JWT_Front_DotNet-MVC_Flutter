@@ -7,7 +7,7 @@ class LancamentosState extends ValueNotifier<ListState<OrcamentoModel>> {
   late final OrcamentoService _service = OrcamentoService();
   LancamentosState() : super(InitialListState<OrcamentoModel>());
 
-  Future<void> loadDatasLancamento(int ano, int mes) async {
+  Future<void> loadOrcamentos() async {
     value = LoadingListState();
     try {
       final list = await _service.getOrcamentos();
