@@ -1,6 +1,6 @@
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 
-class OrcamentoService {
+class OrcamentoAPIService {
   Future<List<OrcamentoModel>> getOrcamentos() async {
     var orcamentos = List<OrcamentoModel>.generate(
       5,

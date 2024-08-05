@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
               width: 120,
               fit: BoxFit.cover,
               image: AssetImage(
-                'lib/app/assets/images/IASD_logo.png',
+                'lib/app/assets/images/2606581_5917_ouro.png',
               )),
           const SizedBox(height: 15),
           Container(

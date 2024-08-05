@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'data/enums/theme_type.dart';
 import 'pages/main_page.dart';
 import 'pages/splash/splash_page.dart';
+import 'services/themes/theme_service.dart';
 
 class OrcApp extends StatelessWidget {
   @override
@@ -15,7 +17,7 @@ class OrcApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'OrçApp',
-            //theme: ThemeService.getTheme(ThemeType.defaultTheme),
+            theme: ThemeService.getTheme(ThemeType.defaultTheme),
             initialRoute: '/',
             routes: {
               '/': (_) => MainPage(title: 'OrçApp'),

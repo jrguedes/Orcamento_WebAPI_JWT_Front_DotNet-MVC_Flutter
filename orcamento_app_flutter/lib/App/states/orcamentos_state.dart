@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
-import 'package:orcamento_app_flutter/App/services/orcamento_service.dart';
+import 'package:orcamento_app_flutter/App/services/api/orcamento_api_service.dart';
 import 'generic_states/list_state.dart';
 
 class LancamentosState extends ValueNotifier<ListState<OrcamentoModel>> {
-  late final OrcamentoService _service = OrcamentoService();
+  late final OrcamentoAPIService _service = OrcamentoAPIService();
   LancamentosState() : super(InitialListState<OrcamentoModel>());
 
   Future<void> loadOrcamentos() async {
