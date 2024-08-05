@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/orcamentos_page.dart';
 
 import '../controllers/home/home_controller.dart';
 import '../services/service_manager.dart';
@@ -31,7 +32,8 @@ class _MainPageState extends State<MainPage> {
           children: [
             HomePage(title: 'Home'),
             const Center(child: Text('Tela 2')),
-            const Center(child: Text('Tela 3')),
+            //const Center(child: Text('Tela 3')),
+            OrcamentosPage(),
             const Center(child: Text('Tela 4')),
           ],
         );
