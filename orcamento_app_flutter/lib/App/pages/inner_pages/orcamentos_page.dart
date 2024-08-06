@@ -18,6 +18,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
   @override
   void initState() {
     super.initState();
+    _orcamentoController.getAccounts();
     _orcamentoController.orcamentosState.loadOrcamentos();
   }
 

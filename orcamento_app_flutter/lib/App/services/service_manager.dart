@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:orcamento_app_flutter/App/services/certificates/certificate_service.dart';
 import '../controllers/home/home_controller.dart';
 import '../controllers/orcamento/orcamento_controller.dart';
 
@@ -10,6 +11,6 @@ class ServiceManager {
   ServiceManager();
 
   Future<void> initializeServices() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await CertificateService().initService();
   }
 }
