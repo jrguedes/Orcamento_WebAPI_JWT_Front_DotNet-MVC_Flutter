@@ -25,8 +25,8 @@ class TokenModel {
     final result = <String, dynamic>{};
 
     result.addAll({'authenticated': authenticated});
-    result.addAll({'created': created.millisecondsSinceEpoch});
-    result.addAll({'expirationDate': expirationDate.millisecondsSinceEpoch});
+    result.addAll({'created': created.toIso8601String()});
+    result.addAll({'expirationDate': expirationDate.toIso8601String()});
     result.addAll({'accessToken': accessToken});
     result.addAll({'userName': userName});
     result.addAll({'name': name});
@@ -39,8 +39,8 @@ class TokenModel {
   factory TokenModel.fromMap(Map<String, dynamic> map) {
     return TokenModel(
       authenticated: map['authenticated'] ?? false,
-      created: DateTime.fromMillisecondsSinceEpoch(map['created']),
-      expirationDate: DateTime.fromMillisecondsSinceEpoch(map['expirationDate']),
+      created: DateTime.parse(map['created']),
+      expirationDate: DateTime.parse(map['expirationDate']),
       accessToken: map['accessToken'] ?? '',
       userName: map['userName'] ?? '',
       name: map['name'] ?? '',
