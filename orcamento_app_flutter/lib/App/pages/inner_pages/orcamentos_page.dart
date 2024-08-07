@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import '../../services/service_manager.dart';
@@ -14,12 +15,14 @@ class OrcamentosPage extends StatefulWidget {
 
 class _OrcamentosPageState extends State<OrcamentosPage> {
   late final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
+  late final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
 
   @override
   void initState() {
     super.initState();
-    _orcamentoController.getAccounts();
+    //_orcamentoController.getAccounts();
     _orcamentoController.orcamentosState.loadOrcamentos();
+    _accountController.signIn();
   }
 
   @override
