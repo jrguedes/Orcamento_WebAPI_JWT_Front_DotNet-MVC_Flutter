@@ -5,10 +5,6 @@ import 'package:orcamento_app_flutter/App/services/api/account_api_service.dart'
 class AccountController {
   final AccountAPIService _service = AccountAPIService();
 
-  Future<void> getAccounts() async {
-    var users = await _service.getAccounts();
-  }
-
   Future<TokenModel?> signIn({required String email, required String password}) async {
     var tokenModel = await _service.signIn(LoginModel(email: email, password: password));
     return tokenModel;

@@ -24,7 +24,7 @@ class OrcamentoModel {
 
     result.addAll({'id': id});
     result.addAll({'descricao': descricao});
-    result.addAll({'data': data.millisecondsSinceEpoch});
+    result.addAll({'data': data.toIso8601String()});
 
     return result;
   }
@@ -33,7 +33,7 @@ class OrcamentoModel {
     return OrcamentoModel(
       id: map['id']?.toInt() ?? 0,
       descricao: map['descricao'] ?? '',
-      data: DateTime.fromMillisecondsSinceEpoch(map['data']),
+      data: DateTime.parse(map['data']),
     );
   }
 

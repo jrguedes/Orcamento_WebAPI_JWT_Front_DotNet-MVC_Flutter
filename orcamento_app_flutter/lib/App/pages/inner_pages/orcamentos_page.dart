@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
@@ -20,9 +21,11 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
   @override
   void initState() {
     super.initState();
-    //_orcamentoController.getAccounts();
+
     _orcamentoController.orcamentosState.loadOrcamentos();
-    _accountController.signIn(email: 'gerente@gerente.com', password: '1234');
+    _accountController
+        .signIn(email: 'gerente@gerente.com', password: '1234')
+        .then((onValue) async => {await _orcamentoController.getOrcamentos()});
   }
 
   @override
@@ -69,7 +72,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     valueListenable: _orcamentoController.orcamentosState,
                     builder: (context, value, child) {
                       if (value is LoadingListState) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(child: CupertinoActivityIndicator());
                       }
 
                       if (value is ErrorListState) {

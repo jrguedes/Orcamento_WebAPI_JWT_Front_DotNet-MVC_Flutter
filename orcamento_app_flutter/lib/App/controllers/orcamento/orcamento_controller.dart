@@ -5,7 +5,8 @@ class OrcamentoController {
   final OrcamentosState orcamentosState = OrcamentosState();
   final OrcamentoAPIService _service = OrcamentoAPIService();
 
-  Future<void> getAccounts() async {
-    var users = await _service.getAccounts();
+  Future<void> getOrcamentos() async {
+    var orcamentos = await _service.getOrcamentos();
+    return;
   }
 }
