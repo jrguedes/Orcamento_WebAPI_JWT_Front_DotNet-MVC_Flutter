@@ -22,7 +22,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
     super.initState();
     //_orcamentoController.getAccounts();
     _orcamentoController.orcamentosState.loadOrcamentos();
-    _accountController.signIn(email: 'gerente@gerente.com', senha: '1234');
+    _accountController.signIn(email: 'gerente@gerente.com', password: '1234');
   }
 
   @override
