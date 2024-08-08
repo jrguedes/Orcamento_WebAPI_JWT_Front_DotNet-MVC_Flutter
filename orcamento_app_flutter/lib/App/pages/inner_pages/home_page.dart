@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/login_form.dart';
+import 'package:orcamento_app_flutter/App/pages/widgets/credits_widget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key, required this.title}) : super(key: key);
@@ -52,13 +54,8 @@ class _HomePageState extends State<HomePage> {
                   widget.title,
                   //style:  Theme.of(context).textTheme.headline4,
                 ),
-                const Text(
-                  'Developed by: Júnior Guedes',
-                  style: const TextStyle(
-                    color: Colors.black87,
-                    fontSize: 10,
-                  ),
-                ),
+                LoginForm(),
+                CreditsWidget(),
               ],
             ),
           ),
