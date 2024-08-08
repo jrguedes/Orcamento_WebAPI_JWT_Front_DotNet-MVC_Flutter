@@ -8,4 +8,8 @@ abstract class APIService {
   APIService({required String baseResourcePath}) {
     this.baseResourcePath = apiRootPath + baseResourcePath;
   }
+
+  Map<String, dynamic> putTokenInAuthorizationHeader(String accessToken) {
+    return {'Authorization': 'Bearer $accessToken'};
+  }
 }

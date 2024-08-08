@@ -4,7 +4,7 @@ import 'package:orcamento_app_flutter/App/services/api/api_service.dart';
 import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 
 class OrcamentoAPIService extends APIService {
-  OrcamentoAPIService() : super(baseResourcePath: 'Orcamento/');
+  OrcamentoAPIService() : super(baseResourcePath: 'Orcamentos/');
 
   Future<List<OrcamentoModel>> getOrcamentos() async {
     List<OrcamentoModel> orcamentos = [];
@@ -20,7 +20,7 @@ class OrcamentoAPIService extends APIService {
       var response = await dio.get<List>(
         '${baseResourcePath}',
         options: Options(
-          headers: {'Authorization': 'Bearer ${tokenInfo.accessToken}'},
+          headers: putTokenInAuthorizationHeader(tokenInfo.accessToken),
         ),
       );
 
