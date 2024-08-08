@@ -14,7 +14,7 @@ public sealed class ItemOrcamentoService : DefaultService, IItemOrcamentoService
         _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
-    const string orcamentoAPIEndpoint = "/api/ItemOrcamento/";
+    const string orcamentoAPIEndpoint = "/api/ItensOrcamento/";
     private readonly JsonSerializerOptions _options;
     public async Task<ServiceResponse<ItemOrcamento>> Create(ItemOrcamento itemOrcamentoVM, string token)
     {

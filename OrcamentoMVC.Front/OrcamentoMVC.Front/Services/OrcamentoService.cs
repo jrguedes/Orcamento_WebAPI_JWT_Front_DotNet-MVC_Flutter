@@ -8,7 +8,7 @@ namespace OrcamentoMVC.Front.Services;
 public sealed class OrcamentoService : DefaultService, IOrcamentoService
 {
     private readonly IHttpClientFactory _clientFactory;
-    const string orcamentoAPIEndpoint = "/api/Orcamento/";
+    const string orcamentoAPIEndpoint = "/api/Orcamentos/";
     private readonly JsonSerializerOptions _options;
 
     public OrcamentoService(IHttpClientFactory clientFactory)
