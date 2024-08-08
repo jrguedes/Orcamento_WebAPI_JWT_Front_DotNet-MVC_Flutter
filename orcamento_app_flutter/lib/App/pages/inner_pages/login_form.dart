@@ -38,7 +38,13 @@ class _LoginFormState extends State<LoginForm> {
                 onChanged: (value) => {},
               ),
               const SizedBox(height: 15),
-              AnimatedLoginButton()
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: 45),
+                  AnimatedLoginButton(),
+                ],
+              )
             ],
           ),
         ),

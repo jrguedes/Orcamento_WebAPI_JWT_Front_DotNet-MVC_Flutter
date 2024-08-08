@@ -18,13 +18,13 @@ class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
         });
       },
       child: AnimatedContainer(
-        width: selected ? 300 : 50,
+        width: selected ? 50 : 350,
         height: 50,
         decoration: BoxDecoration(
-          color: selected ? const Color.fromARGB(255, 123, 86, 196) : Colors.blue,
-          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(255, 123, 86, 196),
+          borderRadius: BorderRadius.circular(selected ? 25 : 10),
         ),
-        alignment: selected ? Alignment.center : AlignmentDirectional.topCenter,
+        alignment: Alignment.center,
         duration: const Duration(seconds: 1),
         curve: Curves.fastOutSlowIn,
         child: const FlutterLogo(size: 30),
