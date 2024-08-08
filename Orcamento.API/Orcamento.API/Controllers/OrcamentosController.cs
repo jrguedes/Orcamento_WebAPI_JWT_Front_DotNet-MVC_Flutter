@@ -1,7 +1,5 @@
-using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models = Orcamento.API.Models;
 using Orcamento.API.Repositories.Interfaces;
 using Orcamento.API.Dtos.RequestDto;
 using AutoMapper;
@@ -12,12 +10,12 @@ namespace Orcamento.API.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
-public class OrcamentoController : ControllerBase
+public class OrcamentosController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly IOrcamentoRepository _repository;
 
-    public OrcamentoController(IOrcamentoRepository repository, IMapper mapper)
+    public OrcamentosController(IOrcamentoRepository repository, IMapper mapper)
     {
         _mapper = mapper;
         _repository = repository;

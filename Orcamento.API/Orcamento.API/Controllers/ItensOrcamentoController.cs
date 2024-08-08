@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +12,12 @@ namespace Orcamento.API.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
-public class ItemOrcamentoController : ControllerBase
+public class ItensOrcamentoController : ControllerBase
 {
     private readonly IItemOrcamentoRepository _repository;
     private readonly IMapper _mapper;
 
-    public ItemOrcamentoController(IItemOrcamentoRepository repository, IMapper mapper)
+    public ItensOrcamentoController(IItemOrcamentoRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
