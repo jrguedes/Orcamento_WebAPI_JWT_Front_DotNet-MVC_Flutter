@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String) onChanged;
   final TextInputType keyboardType;
   final String? errorText;
+  final TextEditingController textEditingController;
 
   CustomTextField(
       {super.key,
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
       required this.obscure,
       required this.hintText,
       required this.onChanged,
+      required this.textEditingController,
       this.errorText,
       this.keyboardType = TextInputType.text});
 
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
       child: TextField(
         keyboardType: keyboardType,
+        controller: textEditingController,
         onChanged: onChanged,
         style: const TextStyle(color: Colors.grey, fontSize: 16),
         obscureText: obscure,
