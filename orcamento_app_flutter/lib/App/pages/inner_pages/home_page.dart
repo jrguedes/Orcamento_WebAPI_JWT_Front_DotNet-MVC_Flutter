@@ -3,7 +3,8 @@ import 'package:orcamento_app_flutter/App/pages/inner_pages/login_form.dart';
 import 'package:orcamento_app_flutter/App/pages/widgets/credits_widget.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, required this.title}) : super(key: key);
+  final bool userLogged;
+  HomePage({Key? key, required this.title, required this.userLogged}) : super(key: key);
 
   final String title;
 
@@ -54,8 +55,8 @@ class _HomePageState extends State<HomePage> {
                   widget.title,
                   //style:  Theme.of(context).textTheme.headline4,
                 ),
-                LoginForm(),
-                CreditsWidget(),
+                widget.userLogged ? Container() : const LoginForm(),
+                const CreditsWidget(),
               ],
             ),
           ),

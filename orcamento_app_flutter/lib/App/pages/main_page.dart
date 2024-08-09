@@ -29,56 +29,93 @@ class _MainPageState extends State<MainPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-        return PageView(
-          pageSnapping: false,
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            HomePage(title: 'Home'),
-            const Center(child: Text('Tela 2')),
-            //const Center(child: Text('Tela 3')),
-            OrcamentosPage(),
-            const Center(child: Text('Tela 4')),
-          ],
-        );
+        return ValueListenableBuilder(
+            valueListenable: _accountController.signInState,
+            builder: (context, tokenInfoState, child) {
+              return _buildPageView(tokenInfoState);
+            });
       }),
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: _homeController.indexPageState,
         builder: (context, index, child) {
           return ValueListenableBuilder(
               valueListenable: _accountController.signInState,
-              builder: (context, tokenInfo, child) {
-                return _buildConvexAppBar(context, index, tokenInfo);
+              builder: (context, tokenInfoState, child) {
+                return _buildConvexAppBar(context, index, tokenInfoState);
               });
         },
       ),
     );
   }
 
-  ConvexAppBar _buildConvexAppBar(BuildContext context, int index, ObjectState<TokenModel?> state) {
+  PageView _buildPageView(ObjectState<TokenModel?> state) {
+    if (state is LoadingObjectState) {
+      return PageView(
+        pageSnapping: false,
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          HomePage(title: 'Home', userLogged: false),
+        ],
+      );
+    }
+
+    if (state is SuccessObjectState<TokenModel?>) {
+      var tokenInfo = state.value;
+      return PageView(
+        pageSnapping: false,
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          HomePage(title: 'Home', userLogged: true),
+          const Center(child: Text('Tela 2')),
+          OrcamentosPage(),
+          const Center(child: Text('Tela 4')),
+        ],
+      );
+    }
+    return PageView(
+      pageSnapping: false,
+      controller: _pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        HomePage(title: 'Home', userLogged: false),
+      ],
+    );
+  }
+
+  ConvexAppBar _buildConvexAppBar(BuildContext context, int index, state) {
     if (state is LoadingObjectState) {
       return ConvexAppBar(
         backgroundColor: Theme.of(context).secondaryHeaderColor,
-        items: [
+        items: const [
+          TabItem(icon: Icons.home, title: 'Home'),
+        ],
+        initialActiveIndex: 0,
+        onTap: _homeController.convexAppBarTap,
+      );
+    }
+    if (state is SuccessObjectState<TokenModel?>) {
+      var tokenInfo = state.value;
+      return ConvexAppBar(
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        items: const [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.map, title: 'Orçamentos'),
           TabItem(icon: Icons.message, title: 'Lista'),
           TabItem(icon: Icons.add, title: 'Add'),
         ],
-        initialActiveIndex: index, //optional, default as 0
+        initialActiveIndex: 0, //index,
         onTap: _homeController.convexAppBarTap,
       );
     }
 
     return ConvexAppBar(
       backgroundColor: Theme.of(context).secondaryHeaderColor,
-      items: [
+      items: const [
         TabItem(icon: Icons.home, title: 'Home'),
-        TabItem(icon: Icons.map, title: 'Orçamentos'),
-        TabItem(icon: Icons.message, title: 'Lista'),
-        TabItem(icon: Icons.add, title: 'Add'),
       ],
-      initialActiveIndex: index, //optional, default as 0
+      initialActiveIndex: 0,
       onTap: _homeController.convexAppBarTap,
     );
   }

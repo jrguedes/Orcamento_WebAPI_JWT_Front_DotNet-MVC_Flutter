@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
+import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 import '../../services/service_manager.dart';
 import '../../states/generic_states/list_state.dart';
 import '../widgets/custom_cupertino_activity_indicator.dart';
@@ -24,9 +25,6 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
     super.initState();
 
     _orcamentoController.orcamentosState.loadOrcamentos();
-    _accountController
-        .signIn(email: 'gerente@gerente.com', password: '1234')
-        .then((onValue) async => {await _orcamentoController.getOrcamentos()});
   }
 
   @override
