@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
+import 'package:orcamento_app_flutter/App/pages/widgets/custom_cupertino_activity_indicator.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/value_state.dart';
 
 class AnimatedLoginButton extends StatefulWidget {
@@ -42,7 +43,9 @@ class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
               alignment: Alignment.center,
               duration: const Duration(seconds: 1),
               curve: Curves.fastOutSlowIn,
-              child: widget.buttonTappedState.value ? const CupertinoActivityIndicator() : const FlutterLogo(size: 30),
+              child: widget.buttonTappedState.value
+                  ? const CustomCupertinoActivityIndicator(color: CupertinoColors.activeOrange, radius: 20)
+                  : const FlutterLogo(size: 30),
             );
           }),
     );

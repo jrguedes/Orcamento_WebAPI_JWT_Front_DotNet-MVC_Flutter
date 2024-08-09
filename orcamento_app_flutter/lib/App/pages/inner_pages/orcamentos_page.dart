@@ -6,6 +6,7 @@ import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_contro
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import '../../services/service_manager.dart';
 import '../../states/generic_states/list_state.dart';
+import '../widgets/custom_cupertino_activity_indicator.dart';
 
 class OrcamentosPage extends StatefulWidget {
   const OrcamentosPage({Key? key}) : super(key: key);
@@ -72,7 +73,11 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     valueListenable: _orcamentoController.orcamentosState,
                     builder: (context, value, child) {
                       if (value is LoadingListState) {
-                        return const Center(child: CupertinoActivityIndicator());
+                        return const Center(
+                            child: CustomCupertinoActivityIndicator(
+                          color: CupertinoColors.activeOrange,
+                          radius: 20,
+                        ));
                       }
 
                       if (value is ErrorListState) {
