@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/login_form.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/welcome_page.dart';
 import 'package:orcamento_app_flutter/App/pages/widgets/credits_widget.dart';
 
 class HomePage extends StatefulWidget {
   final bool userLogged;
-  HomePage({Key? key, required this.title, required this.userLogged}) : super(key: key);
+  final TokenModel? jwtTokenInfo;
+  HomePage({
+    Key? key,
+    this.jwtTokenInfo,
+    required this.title,
+    required this.userLogged,
+  }) : super(key: key);
 
   final String title;
 
@@ -55,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                   widget.title,
                   //style:  Theme.of(context).textTheme.headline4,
                 ),
-                widget.userLogged ? Container() : const LoginForm(),
+                widget.userLogged ? WelcomePage(jwtTokenInfo: widget.jwtTokenInfo!) : const LoginForm(),
                 const CreditsWidget(),
               ],
             ),

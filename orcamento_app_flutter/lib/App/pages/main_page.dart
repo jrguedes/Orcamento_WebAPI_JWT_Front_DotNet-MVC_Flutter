@@ -60,16 +60,17 @@ class _MainPageState extends State<MainPage> {
       );
     }
 
-    if (state is SuccessObjectState<TokenModel?>) {
-      var tokenInfo = state.value;
+    if (state is SuccessObjectState<TokenModel?> && state.value != null) {
+      var jwtTokenInfo = state.value;
+
       return PageView(
         pageSnapping: false,
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomePage(title: 'Home', userLogged: true),
+          HomePage(title: 'Home', userLogged: true, jwtTokenInfo: jwtTokenInfo),
           const Center(child: Text('Tela 2')),
-          OrcamentosPage(),
+          const OrcamentosPage(),
           const Center(child: Text('Tela 4')),
         ],
       );
@@ -95,8 +96,7 @@ class _MainPageState extends State<MainPage> {
         onTap: _homeController.convexAppBarTap,
       );
     }
-    if (state is SuccessObjectState<TokenModel?>) {
-      var tokenInfo = state.value;
+    if (state is SuccessObjectState<TokenModel?> && state.value != null) {
       return ConvexAppBar(
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [

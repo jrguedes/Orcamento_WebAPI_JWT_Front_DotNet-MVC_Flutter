@@ -21,5 +21,7 @@ class AccountController {
 
   Future<void> logout() async {
     await _service.logout();
+    buttonTappedState.value = false;
+    signInState.value = InitialObjectState(null);
   }
 }
