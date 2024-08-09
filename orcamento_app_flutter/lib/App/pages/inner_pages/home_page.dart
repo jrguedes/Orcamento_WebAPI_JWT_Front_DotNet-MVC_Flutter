@@ -7,9 +7,11 @@ import 'package:orcamento_app_flutter/App/pages/widgets/credits_widget.dart';
 class HomePage extends StatefulWidget {
   final bool userLogged;
   final TokenModel? jwtTokenInfo;
+  final String? erroMessage;
   HomePage({
     Key? key,
     this.jwtTokenInfo,
+    this.erroMessage,
     required this.title,
     required this.userLogged,
   }) : super(key: key);
@@ -64,6 +66,14 @@ class _HomePageState extends State<HomePage> {
                   //style:  Theme.of(context).textTheme.headline4,
                 ),
                 widget.userLogged ? WelcomePage(jwtTokenInfo: widget.jwtTokenInfo!) : const LoginForm(),
+                widget.erroMessage != null
+                    ? Container(
+                        child: Text(
+                          widget.erroMessage!,
+                          style: TextStyle(color: Colors.red[300]),
+                        ),
+                      )
+                    : Container(),
                 const CreditsWidget(),
               ],
             ),

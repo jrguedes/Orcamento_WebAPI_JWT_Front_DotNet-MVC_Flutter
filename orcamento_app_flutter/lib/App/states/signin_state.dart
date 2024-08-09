@@ -13,7 +13,11 @@ class SignInState extends ValueNotifier<ObjectState<TokenModel?>> {
     value = LoadingObjectState();
     try {
       final jwtTokenInfo = await _service.signIn(login);
-      value = SuccessObjectState<TokenModel?>(jwtTokenInfo);
+      if (jwtTokenInfo == null) {
+        value = ErrorObjectState('Usuário ou senha inválidos!');
+      } else {
+        value = SuccessObjectState<TokenModel?>(jwtTokenInfo);
+      }
     } catch (e) {
       value = ErrorObjectState('Há um problema de conexão com a API');
     }

@@ -75,6 +75,18 @@ class _MainPageState extends State<MainPage> {
         ],
       );
     }
+
+    if (state is ErrorObjectState) {
+      return PageView(
+        pageSnapping: false,
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          HomePage(title: 'Home', userLogged: false, erroMessage: (state as ErrorObjectState).message),
+        ],
+      );
+    }
+
     return PageView(
       pageSnapping: false,
       controller: _pageController,

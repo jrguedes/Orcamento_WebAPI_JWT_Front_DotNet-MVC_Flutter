@@ -58,7 +58,7 @@ class _LoginFormState extends State<LoginForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(width: 45),
+                  const SizedBox(width: 45),
                   AnimatedLoginButton(
                     onTap: _buttonTapped,
                     buttonTappedState: _accountController.buttonTappedState,

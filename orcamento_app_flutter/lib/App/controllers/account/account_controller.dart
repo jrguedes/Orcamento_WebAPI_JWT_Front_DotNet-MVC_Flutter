@@ -14,7 +14,8 @@ class AccountController {
     buttonTappedState.value = true;
 
     await signInState.signIn(LoginModel(email: email, password: password));
-    if (signInState.value == null) {
+
+    if (signInState.value is ErrorObjectState) {
       buttonTappedState.value = false;
     }
   }
