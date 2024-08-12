@@ -37,35 +37,6 @@ class OrcamentoAPIService extends APIService {
     return orcamentoModel;
   }
 
-  Future<ItemOrcamentoModel?> postItemOrcamento(ItemOrcamentoModel itemOrcamento) async {
-    ItemOrcamentoModel? itemModel;
-    try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
-
-      if (tokenInfo == null) {
-        return null;
-      }
-      //fazer a verificação do token no ok do AccountController na API
-
-      var response = await dio.post(
-        '${baseResourcePath}',
-        data: itemOrcamento.toJson(),
-        options: Options(
-          headers: putTokenInAuthorizationHeader(tokenInfo.accessToken),
-        ),
-      );
-
-      if (response.data != null) {
-        itemModel = ItemOrcamentoModel.fromMap(response.data);
-      }
-    } on DioException catch (e) {
-      print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
-    } catch (e) {
-      rethrow;
-    }
-    return itemModel;
-  }
-
   Future<List<OrcamentoModel>> getOrcamentos() async {
     List<OrcamentoModel> orcamentos = [];
     try {
