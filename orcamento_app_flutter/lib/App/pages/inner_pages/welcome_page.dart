@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 
@@ -23,6 +24,7 @@ class WelcomePage extends StatelessWidget {
             Text(
               'Bem vindo ${jwtTokenInfo.name}! \n \n Função: ${jwtTokenInfo.role}',
               textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 20),
             CupertinoButton(

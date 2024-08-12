@@ -7,7 +7,7 @@ import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_item_orcame
 import '../../controllers/account/account_controller.dart';
 import '../../services/service_manager.dart';
 
-import '../widgets/custom_text_field.dart';
+import '../widgets/custom_text_form_field.dart';
 
 class CadastroOrcamento extends StatefulWidget {
   const CadastroOrcamento({super.key});
@@ -17,8 +17,7 @@ class CadastroOrcamento extends StatefulWidget {
 }
 
 class _CadastroOrcamentoState extends State<CadastroOrcamento> {
-  final TextEditingController _emailController = TextEditingController(text: '');
-  final TextEditingController _passwordController = TextEditingController(text: '');
+  final TextEditingController _orcamentoEdtController = TextEditingController(text: '');
   final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
   final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
 
@@ -27,31 +26,25 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
     Size size = MediaQuery.of(context).size;
     Theme.of(context).textTheme.headlineMedium;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      height: size.height / 2.5,
-      child: Center(
+      padding: const EdgeInsets.only(top: 150, left: 15, right: 15),
+      child: Container(
         child: Form(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Cadastro de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
+              Text('Orçamento', style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 30),
-              CustomTextField(
-                keyboardType: TextInputType.emailAddress,
-                icon: Icons.attach_money,
-                obscure: false,
-                hintText: 'O que você gostaria de orçar?',
-                textEditingController: _emailController,
-                onChanged: (value) => {},
-              ),
-              const SizedBox(height: 15),
-              const SizedBox(height: 15),
+              CustomTextFormField(
+                  controller: _orcamentoEdtController,
+                  labelText: 'O que você gostaria de orçar?',
+                  hintText: 'O que você gostaria de orçar?',
+                  icon: const Icon(Icons.attach_money_outlined)),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(width: 45),
                   CupertinoButton.filled(
-                    onPressed: () => _homeController.convexAppBarTap(4), //_showDialog(context),
+                    onPressed: () => _homeController.convexAppBarTap(4),
                     child: const Text('Salvar'),
                   ),
                 ],
@@ -61,24 +54,5 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
         ),
       ),
     );
-  }
-
-  Future<dynamic> _showDialog(BuildContext context) {
-    return showDialog(
-        useSafeArea: true,
-        context: context,
-        builder: (context) => AlertDialog(
-              insetPadding: EdgeInsets.zero,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-              title: Center(
-                child: Text(
-                  'Item Orçamento',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-              contentPadding: const EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 12),
-              content: CadastroItemOrcamento(),
-            ));
   }
 }
