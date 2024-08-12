@@ -1,6 +1,7 @@
 import 'package:orcamento_app_flutter/App/models/login_model.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/account_api_service.dart';
+import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/value_state.dart';
 import 'package:orcamento_app_flutter/App/states/signin_state.dart';
@@ -10,10 +11,27 @@ class AccountController {
   final ValueState<bool> buttonTappedState = ValueState(false);
   final SignInState signInState = SignInState();
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn({String? email, String? password}) async {
     buttonTappedState.value = true;
 
-    await signInState.signIn(LoginModel(email: email, password: password));
+    String userEmail = '';
+    String userPassword = '';
+
+    var jwtTokenInfo = await CacheService.getJWTTokenInfo();
+
+    //PROVISORIO
+    //depois verificar se o token é valido
+    if (jwtTokenInfo != null) {
+      signInState.value = SuccessObjectState<TokenModel>(jwtTokenInfo);
+      return;
+    }
+
+    if (email != null && password != null) {
+      userEmail = email;
+      userPassword = password;
+    }
+
+    await signInState.signIn(LoginModel(email: userEmail, password: userPassword));
 
     if (signInState.value is ErrorObjectState) {
       buttonTappedState.value = false;

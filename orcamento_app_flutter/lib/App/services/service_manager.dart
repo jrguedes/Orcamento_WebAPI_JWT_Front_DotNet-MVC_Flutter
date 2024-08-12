@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
-import 'package:orcamento_app_flutter/App/services/api/account_api_service.dart';
 import 'package:orcamento_app_flutter/App/services/certificates/certificate_service.dart';
 import '../controllers/home/home_controller.dart';
 import '../controllers/orcamento/orcamento_controller.dart';
@@ -15,5 +14,6 @@ class ServiceManager {
 
   Future<void> initializeServices() async {
     await CertificateService().initService();
+    await accountController.signIn();
   }
 }

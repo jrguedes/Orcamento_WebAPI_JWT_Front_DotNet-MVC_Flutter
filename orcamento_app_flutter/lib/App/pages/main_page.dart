@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_orcamento.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/orcamentos_page.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dart';
 
@@ -71,7 +72,7 @@ class _MainPageState extends State<MainPage> {
           HomePage(title: 'Home', userLogged: true, jwtTokenInfo: jwtTokenInfo),
           const Center(child: Text('Tela 2')),
           const OrcamentosPage(),
-          const Center(child: Text('Tela 4')),
+          const CadastroOrcamento(),
         ],
       );
     }
