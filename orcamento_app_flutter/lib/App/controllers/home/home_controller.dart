@@ -28,7 +28,7 @@ class HomeController {
 
   void convexAppBarTap(int index) {
     animateToPage(index, curve: Curves.easeOutSine, duration: const Duration(microseconds: 500));
-    if (index <= 3) {
+    if (index <= 4) {
       _indexPage.value = index;
     }
   }

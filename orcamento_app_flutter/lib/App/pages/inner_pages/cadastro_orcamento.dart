@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_item_orcamento_modal.dart';
+import 'package:orcamento_app_flutter/App/controllers/home/home_controller.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_item_orcamento.dart';
 
 import '../../controllers/account/account_controller.dart';
 import '../../services/service_manager.dart';
-import '../widgets/animated_login_button.dart';
+
 import '../widgets/custom_text_field.dart';
 
 class CadastroOrcamento extends StatefulWidget {
@@ -19,6 +20,7 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
   final TextEditingController _emailController = TextEditingController(text: '');
   final TextEditingController _passwordController = TextEditingController(text: '');
   final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
+  final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
                 children: [
                   const SizedBox(width: 45),
                   CupertinoButton.filled(
-                    onPressed: () => _showDialog(context),
+                    onPressed: () => _homeController.convexAppBarTap(4), //_showDialog(context),
                     child: const Text('Salvar'),
                   ),
                 ],
@@ -76,7 +78,7 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
                 ),
               ),
               contentPadding: const EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 12),
-              content: CadastroItemOrcamentoModal(),
+              content: CadastroItemOrcamento(),
             ));
   }
 }
