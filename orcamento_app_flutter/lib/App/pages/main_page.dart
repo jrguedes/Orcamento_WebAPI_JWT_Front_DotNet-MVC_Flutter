@@ -8,6 +8,7 @@ import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dar
 
 import '../controllers/account/account_controller.dart';
 import '../controllers/home/home_controller.dart';
+import '../controllers/orcamento/orcamento_controller.dart';
 import '../services/service_manager.dart';
 import 'inner_pages/cadastro_item_orcamento.dart';
 import 'inner_pages/home_page.dart';
@@ -25,6 +26,7 @@ class _MainPageState extends State<MainPage> {
   final PageController _pageController = GetIt.I.get<ServiceManager>().pageController;
   final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
   final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
+  final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class _MainPageState extends State<MainPage> {
           const Center(child: Text('Tela 2')),
           const OrcamentosPage(),
           const CadastroOrcamento(),
-          CadastroItemOrcamento(),
+          CadastroItemOrcamento(orcamentoModel: _orcamentoController.orcamentoModel),
         ],
       );
     }

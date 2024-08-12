@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../controllers/home/home_controller.dart';
+import '../../controllers/orcamento/orcamento_controller.dart';
+import '../../models/orcamento_model.dart';
 import '../../services/service_manager.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class CadastroItemOrcamento extends StatelessWidget {
-  CadastroItemOrcamento({super.key});
+  CadastroItemOrcamento({super.key, required this.orcamentoModel});
+
+  final OrcamentoModel? orcamentoModel;
   final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
+  final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
+
   final TextEditingController _estabelecimentoEdtController = TextEditingController(text: '');
   final TextEditingController _telefoneEdtController = TextEditingController(text: '');
   final TextEditingController _responsavelEdtController = TextEditingController(text: '');
@@ -22,6 +28,9 @@ class CadastroItemOrcamento extends StatelessWidget {
       child: Column(
         children: [
           Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
+          orcamentoModel != null
+              ? Text(orcamentoModel!.descricao, style: Theme.of(context).textTheme.headlineSmall)
+              : Container(),
           const SizedBox(height: 30),
           CustomTextFormField(
             labelText: 'Estabelecimento',
@@ -56,7 +65,15 @@ class CadastroItemOrcamento extends StatelessWidget {
           const SizedBox(height: 30),
           CupertinoButton.filled(
             child: const Text('Adicionar'),
-            onPressed: () => _homeController.convexAppBarTap(3),
+            onPressed: () async {
+              await _orcamentoController.saveItemOrcamento(
+                  _estabelecimentoEdtController.text,
+                  _telefoneEdtController.text,
+                  _responsavelEdtController.text,
+                  double.parse(_valorEdtController.text),
+                  _descricaoEdtController.text);
+              _homeController.convexAppBarTap(3);
+            },
           ),
         ],
       ),
