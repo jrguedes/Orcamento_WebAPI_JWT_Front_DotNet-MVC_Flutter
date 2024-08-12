@@ -27,30 +27,29 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
     Theme.of(context).textTheme.headlineMedium;
     return Container(
       padding: const EdgeInsets.only(top: 150, left: 15, right: 15),
-      child: Container(
-        child: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Orçamento', style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: 30),
-              CustomTextFormField(
-                  controller: _orcamentoEdtController,
-                  labelText: 'O que você gostaria de orçar?',
-                  hintText: 'O que você gostaria de orçar?',
-                  icon: const Icon(Icons.attach_money_outlined)),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CupertinoButton.filled(
-                    onPressed: () => _homeController.convexAppBarTap(4),
-                    child: const Text('Salvar'),
-                  ),
-                ],
-              )
-            ],
-          ),
+      child: Form(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Orçamento', style: Theme.of(context).textTheme.headlineMedium),
+            const SizedBox(height: 30),
+            CustomTextFormField(
+              labelText: 'O que você gostaria de orçar?',
+              hintText: 'O que você gostaria de orçar?',
+              controller: _orcamentoEdtController,
+              icon: const Icon(Icons.attach_money_outlined),
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoButton.filled(
+                  onPressed: () => _homeController.convexAppBarTap(4),
+                  child: const Text('Salvar'),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
