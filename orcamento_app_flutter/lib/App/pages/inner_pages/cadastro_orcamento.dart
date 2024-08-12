@@ -5,6 +5,7 @@ import 'package:orcamento_app_flutter/App/controllers/home/home_controller.dart'
 import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_item_orcamento.dart';
 
 import '../../controllers/account/account_controller.dart';
+import '../../controllers/orcamento/orcamento_controller.dart';
 import '../../services/service_manager.dart';
 
 import '../widgets/custom_text_form_field.dart';
@@ -18,12 +19,12 @@ class CadastroOrcamento extends StatefulWidget {
 
 class _CadastroOrcamentoState extends State<CadastroOrcamento> {
   final TextEditingController _orcamentoEdtController = TextEditingController(text: '');
-  final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
+
+  final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
   final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     Theme.of(context).textTheme.headlineMedium;
     return Container(
       padding: const EdgeInsets.only(top: 150, left: 15, right: 15),
@@ -44,7 +45,10 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CupertinoButton.filled(
-                  onPressed: () => _homeController.convexAppBarTap(4),
+                  onPressed: () async {
+                    await _orcamentoController.saveOrcamento(_orcamentoEdtController.text);
+                    _homeController.convexAppBarTap(4);
+                  },
                   child: const Text('Salvar'),
                 ),
               ],

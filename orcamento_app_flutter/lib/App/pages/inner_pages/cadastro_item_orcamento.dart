@@ -17,8 +17,6 @@ class CadastroItemOrcamento extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
     return Container(
       padding: const EdgeInsets.only(top: 150, left: 15, right: 15),
       child: Column(

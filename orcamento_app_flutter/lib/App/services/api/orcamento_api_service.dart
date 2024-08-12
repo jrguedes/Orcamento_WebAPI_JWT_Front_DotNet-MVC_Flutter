@@ -6,6 +6,35 @@ import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 class OrcamentoAPIService extends APIService {
   OrcamentoAPIService() : super(baseResourcePath: 'Orcamentos/');
 
+  Future<OrcamentoModel?> postOrcamento(OrcamentoModel orcamento) async {
+    OrcamentoModel? orcamentoModel;
+    try {
+      var tokenInfo = await CacheService.getJWTTokenInfo();
+
+      if (tokenInfo == null) {
+        return null;
+      }
+      //fazer a verificação do token no ok do AccountController na API
+
+      var response = await dio.post(
+        '${baseResourcePath}',
+        data: orcamento.toJson(),
+        options: Options(
+          headers: putTokenInAuthorizationHeader(tokenInfo.accessToken),
+        ),
+      );
+
+      if (response.data != null) {
+        orcamentoModel = OrcamentoModel.fromMap(response.data);
+      }
+    } on DioException catch (e) {
+      print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
+    } catch (e) {
+      rethrow;
+    }
+    return orcamentoModel;
+  }
+
   Future<List<OrcamentoModel>> getOrcamentos() async {
     List<OrcamentoModel> orcamentos = [];
     try {
