@@ -5,14 +5,14 @@ import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dar
 
 import '../services/api/account_api_service.dart';
 
-class SignInState extends ValueNotifier<ObjectState<TokenModel?>> {
-  late final AccountAPIService _service = AccountAPIService();
-  SignInState() : super(InitialObjectState<TokenModel?>(null));
+class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
+  final AccountAPIService service;
+  SignInStore(this.service) : super(InitialObjectState<TokenModel?>(null));
 
   Future<void> signIn(LoginModel login) async {
     value = LoadingObjectState();
     try {
-      final jwtTokenInfo = await _service.signIn(login);
+      final jwtTokenInfo = await service.signIn(login);
       if (jwtTokenInfo == null) {
         value = ErrorObjectState('Usuário ou senha inválidos!');
       } else {

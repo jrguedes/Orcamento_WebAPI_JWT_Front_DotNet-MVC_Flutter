@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 import '../../controllers/home/home_controller.dart';
 import '../../controllers/orcamento/orcamento_controller.dart';

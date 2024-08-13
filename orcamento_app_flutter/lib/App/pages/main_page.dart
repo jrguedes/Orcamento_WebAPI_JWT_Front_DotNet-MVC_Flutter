@@ -29,6 +29,12 @@ class _MainPageState extends State<MainPage> {
   final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
