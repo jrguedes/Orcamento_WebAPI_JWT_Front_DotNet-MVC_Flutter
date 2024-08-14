@@ -7,7 +7,7 @@ import 'package:orcamento_app_flutter/App/states/generic_states/value_state.dart
 import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
 
 class AccountController {
-  final AccountAPIService service;
+  final AccountApiService service;
   final ValueState<bool> buttonTappedState = ValueState(false);
   final SignInStore signInStore;
 

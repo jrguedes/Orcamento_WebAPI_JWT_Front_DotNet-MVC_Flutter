@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/home/home_controller.dart';
-import '../../controllers/orcamento/orcamento_controller.dart';
+import '../../controllers/bottom_bar/bottom_bar_controller.dart';
+import '../../controllers/item_orcamento/item_orcamento_controller.dart';
 import '../../models/orcamento_model.dart';
-import '../../services/service_manager.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class CadastroItemOrcamento extends StatelessWidget {
@@ -14,7 +12,7 @@ class CadastroItemOrcamento extends StatelessWidget {
 
   final OrcamentoModel? orcamentoModel;
   late final BottomBarController _bottomBar;
-  final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
+  late final ItemOrcamentoController _controller;
 
   final TextEditingController _estabelecimentoEdtController = TextEditingController(text: '');
   final TextEditingController _telefoneEdtController = TextEditingController(text: '');
@@ -25,6 +23,8 @@ class CadastroItemOrcamento extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _bottomBar = context.read();
+    _controller = context.read();
+
     return Container(
       padding: const EdgeInsets.only(top: 150, left: 15, right: 15),
       child: Column(
@@ -68,12 +68,8 @@ class CadastroItemOrcamento extends StatelessWidget {
           CupertinoButton.filled(
             child: const Text('Adicionar'),
             onPressed: () async {
-              await _orcamentoController.saveItemOrcamento(
-                  _estabelecimentoEdtController.text,
-                  _telefoneEdtController.text,
-                  _responsavelEdtController.text,
-                  double.parse(_valorEdtController.text),
-                  _descricaoEdtController.text);
+              await _controller.saveItemOrcamento(_estabelecimentoEdtController.text, _telefoneEdtController.text,
+                  _responsavelEdtController.text, double.parse(_valorEdtController.text), _descricaoEdtController.text);
               _bottomBar.convexAppBarTap(3);
             },
           ),

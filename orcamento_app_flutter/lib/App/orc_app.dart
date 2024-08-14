@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
 import 'controllers/account/account_controller.dart';
 import 'controllers/home/home_controller.dart';
+import 'controllers/item_orcamento/item_orcamento_controller.dart';
 import 'controllers/orcamento/orcamento_controller.dart';
 import 'services/api/orcamento_api_service.dart';
 import 'services/service_manager.dart';
@@ -21,8 +22,8 @@ class OrcApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<ServiceManager>(create: (context) => ServiceManager(context.read())),
-        Provider<AccountAPIService>(create: (_) => AccountAPIService()),
-        Provider<OrcamentoAPIService>(create: (_) => OrcamentoAPIService()),
+        Provider<AccountApiService>(create: (_) => AccountApiService()),
+        Provider<OrcamentoApiService>(create: (_) => OrcamentoApiService()),
         Provider<ItemOrcamentoApiService>(create: (_) => ItemOrcamentoApiService()),
         ChangeNotifierProvider(create: (context) => SignInStore(context.read())),
         ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
@@ -30,7 +31,8 @@ class OrcApp extends StatelessWidget {
         Provider<PageController>(create: (_) => PageController(initialPage: 0)),
         Provider<HomeController>(create: (_) => HomeController()),
         Provider<BottomBarController>(create: (context) => BottomBarController(context.read().animateToPage)),
-        Provider<OrcamentoController>(create: (_) => OrcamentoController()),
+        Provider<OrcamentoController>(create: (context) => OrcamentoController(context.read())),
+        Provider<ItemOrcamentoController>(create: (context) => ItemOrcamentoController(context.read())),
       ],
       child: FutureBuilder(
           future: context.read<ServiceManager>().initializeServices(),

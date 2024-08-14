@@ -4,7 +4,7 @@ import 'package:orcamento_app_flutter/App/services/api/orcamento_api_service.dar
 import '../states/generic_states/list_state.dart';
 
 class OrcamentosStore extends ValueNotifier<ListState<OrcamentoModel>> {
-  final OrcamentoAPIService service;
+  final OrcamentoApiService service;
   OrcamentosStore(this.service) : super(InitialListState<OrcamentoModel>());
 
   Future<void> loadOrcamentos() async {

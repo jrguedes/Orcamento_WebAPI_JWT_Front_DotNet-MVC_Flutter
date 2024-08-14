@@ -6,7 +6,7 @@ import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dar
 import '../services/api/account_api_service.dart';
 
 class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
-  final AccountAPIService service;
+  final AccountApiService service;
   SignInStore(this.service) : super(InitialObjectState<TokenModel?>(null));
 
   Future<void> signIn(LoginModel login) async {

@@ -3,10 +3,8 @@ import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/api_service.dart';
 import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 
-import '../../models/item_orcamento_model.dart';
-
-class OrcamentoAPIService extends APIService {
-  OrcamentoAPIService() : super(baseResourcePath: 'Orcamentos/');
+class OrcamentoApiService extends APIService {
+  OrcamentoApiService() : super(baseResourcePath: 'Orcamentos/');
 
   Future<OrcamentoModel?> postOrcamento(OrcamentoModel orcamento) async {
     OrcamentoModel? orcamentoModel;

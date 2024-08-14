@@ -5,8 +5,8 @@ import '../../models/login_model.dart';
 import '../../models/token_model.dart';
 import '../cache/cache_service.dart';
 
-class AccountAPIService extends APIService {
-  AccountAPIService() : super(baseResourcePath: 'Account/');
+class AccountApiService extends APIService {
+  AccountApiService() : super(baseResourcePath: 'Account/');
 
   Future<TokenModel?> signIn(LoginModel login) async {
     TokenModel? tokenModel;

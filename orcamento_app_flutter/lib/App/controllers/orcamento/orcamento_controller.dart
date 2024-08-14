@@ -1,14 +1,11 @@
-import 'package:orcamento_app_flutter/App/models/item_orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/orcamento_api_service.dart';
-import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
-
-import '../../services/api/item_orcamento_api_service.dart';
 
 class OrcamentoController {
-  final OrcamentoAPIService _service;
-  final ItemOrcamentoApiService _itemService = ItemOrcamentoApiService();
+  final OrcamentoApiService service;
   OrcamentoModel? orcamentoModel;
+
+  OrcamentoController(this.service);
 
 /*
   final ValueNotifier<ObjectState<OrcamentoModel?>> orcamentoState =
@@ -16,7 +13,7 @@ class OrcamentoController {
 */
 
   Future<void> getOrcamentos() async {
-    var orcamentos = await _service.getOrcamentos();
+    var orcamentos = await service.getOrcamentos();
     return;
   }
 
@@ -41,24 +38,6 @@ class OrcamentoController {
   Future<void> saveOrcamento(String descricaoOrcamento) async {
     orcamentoModel = null;
     var orcamento = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
-    orcamentoModel = await _service.postOrcamento(orcamento);
-  }
-
-  Future<void> saveItemOrcamento(
-      String estabelecimento, String telefone, String responsavel, double valor, String descricao) async {
-    ItemOrcamentoModel? itemOrcamento;
-    if (orcamentoModel != null) {
-      itemOrcamento = ItemOrcamentoModel(
-        id: 0,
-        estabelecimento: estabelecimento,
-        telefone: telefone,
-        responsavel: responsavel,
-        valor: valor,
-        descricao: descricao,
-        orcamentoId: orcamentoModel!.id,
-      );
-
-      await _itemService.postItemOrcamento(itemOrcamento);
-    }
+    orcamentoModel = await service.postOrcamento(orcamento);
   }
 }
