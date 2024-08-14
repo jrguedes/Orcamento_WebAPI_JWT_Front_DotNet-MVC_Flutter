@@ -11,7 +11,7 @@ class CreditsWidget extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         width: double.infinity,
         child: const Text(
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.left,
           'Developed by: Júnior Guedes',
           style: const TextStyle(
             color: Colors.black87,

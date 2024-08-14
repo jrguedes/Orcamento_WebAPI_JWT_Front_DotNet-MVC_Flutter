@@ -64,17 +64,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   PageView _buildPageView(ObjectState<TokenModel?> state) {
-    if (state is LoadingObjectState) {
-      return PageView(
-        pageSnapping: false,
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          HomePage(title: 'Home', userLogged: false),
-        ],
-      );
-    }
-
     if (state is SuccessObjectState<TokenModel?> && state.value != null) {
       var jwtTokenInfo = state.value;
 
