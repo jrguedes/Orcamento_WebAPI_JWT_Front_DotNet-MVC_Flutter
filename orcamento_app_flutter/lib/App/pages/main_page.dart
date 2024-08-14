@@ -8,7 +8,6 @@ import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dar
 import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/home/home_controller.dart';
 import '../controllers/orcamento/orcamento_controller.dart';
 import 'inner_pages/cadastro_item_orcamento.dart';
 import 'inner_pages/home_page.dart';
@@ -117,6 +116,7 @@ class _MainPageState extends State<MainPage> {
   ConvexAppBar _buildConvexAppBar(BuildContext context, int index, state) {
     if (state is LoadingObjectState) {
       return ConvexAppBar(
+        style: TabStyle.fixedCircle,
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
@@ -134,12 +134,13 @@ class _MainPageState extends State<MainPage> {
           TabItem(icon: Icons.message, title: 'Lista'),
           TabItem(icon: Icons.add, title: 'Add'),
         ],
-        initialActiveIndex: 0, //index,
+        initialActiveIndex: index,
         onTap: _bottomBar.convexAppBarTap,
       );
     }
 
     return ConvexAppBar(
+      style: TabStyle.fixedCircle,
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       items: const [
         TabItem(icon: Icons.home, title: 'Home'),

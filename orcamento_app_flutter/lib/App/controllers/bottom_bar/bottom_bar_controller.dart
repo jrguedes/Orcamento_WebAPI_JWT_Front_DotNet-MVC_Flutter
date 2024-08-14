@@ -5,7 +5,7 @@ typedef TAnimateToPage = Function(int page, {required Duration duration, require
 
 class BottomBarController {
   final TAnimateToPage animateToPage;
-  final ValueNotifier<int> _indexPage = ValueNotifier(3);
+  final ValueNotifier<int> _indexPage = ValueNotifier(0);
   ValueNotifier<int> get indexPageState => _indexPage;
 
   BottomBarController(this.animateToPage);
