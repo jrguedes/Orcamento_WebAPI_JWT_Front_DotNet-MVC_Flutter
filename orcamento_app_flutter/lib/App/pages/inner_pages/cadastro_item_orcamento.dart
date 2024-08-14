@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../../controllers/home/home_controller.dart';
 import '../../controllers/orcamento/orcamento_controller.dart';
@@ -11,7 +13,7 @@ class CadastroItemOrcamento extends StatelessWidget {
   CadastroItemOrcamento({super.key, required this.orcamentoModel});
 
   final OrcamentoModel? orcamentoModel;
-  final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
+  late final BottomBarController _bottomBar;
   final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
 
   final TextEditingController _estabelecimentoEdtController = TextEditingController(text: '');
@@ -22,6 +24,7 @@ class CadastroItemOrcamento extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _bottomBar = context.read();
     return Container(
       padding: const EdgeInsets.only(top: 150, left: 15, right: 15),
       child: Column(
@@ -71,7 +74,7 @@ class CadastroItemOrcamento extends StatelessWidget {
                   _responsavelEdtController.text,
                   double.parse(_valorEdtController.text),
                   _descricaoEdtController.text);
-              _homeController.convexAppBarTap(3);
+              _bottomBar.convexAppBarTap(3);
             },
           ),
         ],

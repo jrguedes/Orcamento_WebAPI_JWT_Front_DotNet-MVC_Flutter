@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
 import 'controllers/account/account_controller.dart';
 import 'controllers/home/home_controller.dart';
 import 'controllers/orcamento/orcamento_controller.dart';
@@ -27,7 +28,8 @@ class OrcApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
         Provider<AccountController>(create: (context) => AccountController(context.read(), context.read())),
         Provider<PageController>(create: (_) => PageController(initialPage: 0)),
-        Provider<HomeController>(create: (context) => HomeController(context.read().animateToPage)),
+        Provider<HomeController>(create: (_) => HomeController()),
+        Provider<BottomBarController>(create: (context) => BottomBarController(context.read().animateToPage)),
         Provider<OrcamentoController>(create: (_) => OrcamentoController()),
       ],
       child: FutureBuilder(

@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_orcamento.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/orcamentos_page.dart';
@@ -24,7 +25,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late final PageController _pageController;
   late final SignInStore _signInStore;
-  late final HomeController _homeController;
+  late final BottomBarController _bottomBar;
 
   //REFATORAR
   late final OrcamentoController _orcamentoController;
@@ -36,7 +37,7 @@ class _MainPageState extends State<MainPage> {
 
     _pageController = context.read();
     _signInStore = context.read();
-    _homeController = context.read();
+    _bottomBar = context.read();
     _orcamentoController = context.read();
   }
 
@@ -51,7 +52,7 @@ class _MainPageState extends State<MainPage> {
             });
       }),
       bottomNavigationBar: ValueListenableBuilder<int>(
-        valueListenable: _homeController.indexPageState,
+        valueListenable: _bottomBar.indexPageState,
         builder: (context, index, child) {
           return ValueListenableBuilder(
               valueListenable: _signInStore,
@@ -121,7 +122,7 @@ class _MainPageState extends State<MainPage> {
           TabItem(icon: Icons.home, title: 'Home'),
         ],
         initialActiveIndex: 0,
-        onTap: _homeController.convexAppBarTap,
+        onTap: _bottomBar.convexAppBarTap,
       );
     }
     if (state is SuccessObjectState<TokenModel?> && state.value != null) {
@@ -134,7 +135,7 @@ class _MainPageState extends State<MainPage> {
           TabItem(icon: Icons.add, title: 'Add'),
         ],
         initialActiveIndex: 0, //index,
-        onTap: _homeController.convexAppBarTap,
+        onTap: _bottomBar.convexAppBarTap,
       );
     }
 
@@ -144,7 +145,7 @@ class _MainPageState extends State<MainPage> {
         TabItem(icon: Icons.home, title: 'Home'),
       ],
       initialActiveIndex: 0,
-      onTap: _homeController.convexAppBarTap,
+      onTap: _bottomBar.convexAppBarTap,
     );
   }
 }

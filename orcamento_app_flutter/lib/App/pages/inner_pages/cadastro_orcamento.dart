@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:orcamento_app_flutter/App/controllers/home/home_controller.dart';
-import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_item_orcamento.dart';
-
-import '../../controllers/account/account_controller.dart';
+import 'package:provider/provider.dart';
+import '../../controllers/bottom_bar/bottom_bar_controller.dart';
 import '../../controllers/orcamento/orcamento_controller.dart';
-import '../../services/service_manager.dart';
-
 import '../widgets/custom_text_form_field.dart';
 
 class CadastroOrcamento extends StatefulWidget {
@@ -20,8 +15,16 @@ class CadastroOrcamento extends StatefulWidget {
 class _CadastroOrcamentoState extends State<CadastroOrcamento> {
   final TextEditingController _orcamentoEdtController = TextEditingController(text: '');
 
-  final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
-  final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
+  late final OrcamentoController _orcamentoController;
+  late final BottomBarController _bottomBar;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _orcamentoController = context.read();
+    _bottomBar = context.read();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
                 CupertinoButton.filled(
                   onPressed: () async {
                     await _orcamentoController.saveOrcamento(_orcamentoEdtController.text);
-                    _homeController.convexAppBarTap(4);
+                    _bottomBar.convexAppBarTap(4);
                   },
                   child: const Text('Salvar'),
                 ),
