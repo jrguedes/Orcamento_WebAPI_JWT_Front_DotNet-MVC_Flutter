@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:orcamento_app_flutter/App/pages/widgets/animated_login_button.dart';
-import 'package:orcamento_app_flutter/App/pages/widgets/custom_text_field.dart';
-import 'package:orcamento_app_flutter/App/services/api/account_api_service.dart';
-import 'package:orcamento_app_flutter/App/services/service_manager.dart';
-import 'package:orcamento_app_flutter/App/states/generic_states/list_state.dart';
-
+import 'package:provider/provider.dart';
 import '../../controllers/account/account_controller.dart';
+import '../widgets/animated_login_button.dart';
+import '../widgets/custom_text_field.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -18,12 +14,13 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController _emailController = TextEditingController(text: '');
   final TextEditingController _passwordController = TextEditingController(text: '');
-  final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
+  late final AccountController _accountController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _accountController = context.read();
   }
 
   @override

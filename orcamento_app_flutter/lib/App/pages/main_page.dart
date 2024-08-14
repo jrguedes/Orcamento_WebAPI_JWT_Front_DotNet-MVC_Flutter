@@ -1,15 +1,14 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_orcamento.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/orcamentos_page.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dart';
+import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
+import 'package:provider/provider.dart';
 
-import '../controllers/account/account_controller.dart';
 import '../controllers/home/home_controller.dart';
 import '../controllers/orcamento/orcamento_controller.dart';
-import '../services/service_manager.dart';
 import 'inner_pages/cadastro_item_orcamento.dart';
 import 'inner_pages/home_page.dart';
 
@@ -23,24 +22,30 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final PageController _pageController = GetIt.I.get<ServiceManager>().pageController;
-  final HomeController _homeController = GetIt.I.get<ServiceManager>().homeController;
-  final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
-  final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
+  late final PageController _pageController;
+  late final SignInStore _signInStore;
+  late final HomeController _homeController;
+
+  //REFATORAR
+  late final OrcamentoController _orcamentoController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _pageController = context.read();
+    _signInStore = context.read();
+    _homeController = context.read();
+    _orcamentoController = context.read();
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return ValueListenableBuilder(
-            valueListenable: _accountController.signInState,
+            valueListenable: _signInStore,
             builder: (context, tokenInfoState, child) {
               return _buildPageView(tokenInfoState);
             });
@@ -49,7 +54,7 @@ class _MainPageState extends State<MainPage> {
         valueListenable: _homeController.indexPageState,
         builder: (context, index, child) {
           return ValueListenableBuilder(
-              valueListenable: _accountController.signInState,
+              valueListenable: _signInStore,
               builder: (context, tokenInfoState, child) {
                 return _buildConvexAppBar(context, index, tokenInfoState);
               });

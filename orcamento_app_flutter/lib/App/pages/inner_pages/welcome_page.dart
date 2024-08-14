@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orcamento_app_flutter/App/models/token_model.dart';
-
+import 'package:provider/provider.dart';
 import '../../controllers/account/account_controller.dart';
-import '../../services/service_manager.dart';
+import '../../models/token_model.dart';
 
 class WelcomePage extends StatelessWidget {
   final TokenModel jwtTokenInfo;
-  final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
+  late final AccountController _accountController;
 
   WelcomePage({super.key, required this.jwtTokenInfo});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    _accountController = context.read();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       height: size.height / 2.5,
