@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
     // TODO: implement initState
     super.initState();
 
-    _pageController = context.read();
+    _pageController = context.read<PageController>();
     _signInStore = context.read();
     _bottomBar = context.read();
     _orcamentoController = context.read();

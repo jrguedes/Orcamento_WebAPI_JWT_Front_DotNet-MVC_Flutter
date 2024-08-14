@@ -20,36 +20,38 @@ class OrcApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        Provider<ServiceManager>(create: (context) => ServiceManager(context.read())),
-        Provider<AccountApiService>(create: (_) => AccountApiService()),
-        Provider<OrcamentoApiService>(create: (_) => OrcamentoApiService()),
-        Provider<ItemOrcamentoApiService>(create: (_) => ItemOrcamentoApiService()),
-        ChangeNotifierProvider(create: (context) => SignInStore(context.read())),
-        ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
-        Provider<AccountController>(create: (context) => AccountController(context.read(), context.read())),
-        Provider<PageController>(create: (_) => PageController(initialPage: 0)),
-        Provider<HomeController>(create: (_) => HomeController()),
-        Provider<BottomBarController>(create: (context) => BottomBarController(context.read().animateToPage)),
-        Provider<OrcamentoController>(create: (context) => OrcamentoController(context.read())),
-        Provider<ItemOrcamentoController>(create: (context) => ItemOrcamentoController(context.read())),
-      ],
-      child: FutureBuilder(
-          future: context.read<ServiceManager>().initializeServices(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const SplashPage();
-            }
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'OrçApp',
-              theme: ThemeService.getTheme(ThemeType.defaultTheme),
-              initialRoute: '/',
-              routes: {
-                '/': (_) => MainPage(title: 'OrçApp'),
-              },
-            );
-          }),
-    );
+        providers: [
+          Provider<AccountApiService>(create: (_) => AccountApiService()),
+          Provider<OrcamentoApiService>(create: (_) => OrcamentoApiService()),
+          Provider<ItemOrcamentoApiService>(create: (_) => ItemOrcamentoApiService()),
+          ChangeNotifierProvider<PageController>(create: (_) => PageController(initialPage: 0)),
+          Provider<HomeController>(create: (_) => HomeController()),
+          Provider<BottomBarController>(
+              create: (context) => BottomBarController(context.read<PageController>().animateToPage)),
+          ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
+          ChangeNotifierProvider(create: (context) => SignInStore(context.read())),
+          Provider<OrcamentoController>(create: (context) => OrcamentoController(context.read())),
+          Provider<AccountController>(create: (context) => AccountController(context.read(), context.read())),
+          Provider<ItemOrcamentoController>(create: (context) => ItemOrcamentoController(context.read())),
+          Provider<ServiceManager>(create: (context) => ServiceManager(context.read())),
+        ],
+        builder: (context, child) {
+          return FutureBuilder(
+              future: context.read<ServiceManager>().initializeServices(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const SplashPage();
+                }
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'OrçApp',
+                  theme: ThemeService.getTheme(ThemeType.defaultTheme),
+                  initialRoute: '/',
+                  routes: {
+                    '/': (_) => MainPage(title: 'OrçApp'),
+                  },
+                );
+              });
+        });
   }
 }

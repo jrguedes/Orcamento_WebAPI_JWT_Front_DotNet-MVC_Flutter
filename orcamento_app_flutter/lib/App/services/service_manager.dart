@@ -5,8 +5,9 @@ class ServiceManager {
   final AccountController accountController;
   ServiceManager(this.accountController);
 
-  Future<void> initializeServices() async {
+  Future<bool> initializeServices() async {
     await CertificateService().initService();
     await accountController.signIn();
+    return true;
   }
 }
