@@ -1,19 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:orcamento_app_flutter/App/models/item_orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/orcamento_api_service.dart';
 import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
 
 import '../../services/api/item_orcamento_api_service.dart';
-import '../../states/generic_states/object_state.dart';
 
 class OrcamentoController {
-  final OrcamentosStore orcamentosState = OrcamentosStore();
-  final OrcamentoAPIService _service = OrcamentoAPIService();
+  final OrcamentoAPIService _service;
   final ItemOrcamentoApiService _itemService = ItemOrcamentoApiService();
+  OrcamentoModel? orcamentoModel;
+
+/*
   final ValueNotifier<ObjectState<OrcamentoModel?>> orcamentoState =
       ValueNotifier<ObjectState<OrcamentoModel?>>(InitialObjectState(null));
-  OrcamentoModel? orcamentoModel;
+*/
 
   Future<void> getOrcamentos() async {
     var orcamentos = await _service.getOrcamentos();

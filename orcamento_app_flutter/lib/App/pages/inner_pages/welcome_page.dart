@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 
 import '../../controllers/account/account_controller.dart';

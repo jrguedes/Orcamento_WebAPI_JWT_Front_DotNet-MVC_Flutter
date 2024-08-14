@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
-import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
+import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
+import 'package:provider/provider.dart';
 import '../../services/service_manager.dart';
 import '../../states/generic_states/list_state.dart';
 import '../widgets/custom_cupertino_activity_indicator.dart';
@@ -17,89 +17,88 @@ class OrcamentosPage extends StatefulWidget {
 }
 
 class _OrcamentosPageState extends State<OrcamentosPage> {
-  late final OrcamentoController _orcamentoController = GetIt.I.get<ServiceManager>().orcamentoController;
-  late final AccountController _accountController = GetIt.I.get<ServiceManager>().accountController;
+  late final OrcamentosStore _orcamentosStore;
 
   @override
   void initState() {
     super.initState();
-
-    _orcamentoController.orcamentosState.loadOrcamentos();
+    _orcamentosStore = context.read<OrcamentosStore>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _orcamentosStore.loadOrcamentos();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 100,
-                  child: TextButton(
-                    onPressed: () => {}, //_showYearBottomSheet,
-                    child: const Text(
-                      'BT',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black38),
-                    ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 100,
+                child: TextButton(
+                  onPressed: () => {}, //_showYearBottomSheet,
+                  child: const Text(
+                    'BT',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black38),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 4),
-                    color: Theme.of(context).primaryColor,
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      onPressed: () => {print('Pressed')}, //_showMonthBottomSheet,
-                      child: Text(
-                        'Mes',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Theme.of(context).dialogBackgroundColor /*backgroundColor*/),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                child: ValueListenableBuilder(
-                    valueListenable: _orcamentoController.orcamentosState,
-                    builder: (context, value, child) {
-                      if (value is LoadingListState) {
-                        return const Center(
-                            child: CustomCupertinoActivityIndicator(
-                          color: CupertinoColors.activeOrange,
-                          radius: 20,
-                        ));
-                      }
-
-                      if (value is ErrorListState) {
-                        return const Center(
-                          child: Text(
-                            'Erro', //value.message,
-                            //style: TextStyle(color: Theme.of(context).errorColor),
-                          ),
-                        );
-                      }
-
-                      if (value is SuccessListState<OrcamentoModel>) {
-                        if (value.list.isEmpty) {
-                          return _emptyMessage();
-                        }
-                        return _buildExpansionPanelList(value);
-                      }
-
-                      return Container();
-                    }),
               ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(left: 4),
+                  color: Theme.of(context).primaryColor,
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () => {print('Pressed')}, //_showMonthBottomSheet,
+                    child: Text(
+                      'Mes',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Theme.of(context).dialogBackgroundColor /*backgroundColor*/),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: SingleChildScrollView(
+              child: ValueListenableBuilder(
+                  valueListenable: _orcamentosStore,
+                  builder: (context, value, child) {
+                    if (value is LoadingListState) {
+                      return const Center(
+                          child: CustomCupertinoActivityIndicator(
+                        color: CupertinoColors.activeOrange,
+                        radius: 20,
+                      ));
+                    }
+
+                    if (value is ErrorListState) {
+                      return const Center(
+                        child: Text(
+                          'Erro', //value.message,
+                          //style: TextStyle(color: Theme.of(context).errorColor),
+                        ),
+                      );
+                    }
+
+                    if (value is SuccessListState<OrcamentoModel>) {
+                      if (value.list.isEmpty) {
+                        return _emptyMessage();
+                      }
+                      return _buildExpansionPanelList(value);
+                    }
+
+                    return Container();
+                  }),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

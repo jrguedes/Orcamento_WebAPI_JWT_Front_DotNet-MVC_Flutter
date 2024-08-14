@@ -7,9 +7,11 @@ import 'package:orcamento_app_flutter/App/states/generic_states/value_state.dart
 import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
 
 class AccountController {
-  final AccountAPIService _service = AccountAPIService();
+  final AccountAPIService service;
   final ValueState<bool> buttonTappedState = ValueState(false);
-  final SignInStore signInState = SignInStore();
+  final SignInStore signInStore;
+
+  AccountController(this.service, this.signInStore);
 
   Future<void> signIn({String? email, String? password}) async {
     buttonTappedState.value = true;
@@ -22,7 +24,7 @@ class AccountController {
     //PROVISORIO
     //depois verificar se o token é valido
     if (jwtTokenInfo != null) {
-      signInState.value = SuccessObjectState<TokenModel>(jwtTokenInfo);
+      signInStore.value = SuccessObjectState<TokenModel>(jwtTokenInfo);
       return;
     }
 
@@ -31,16 +33,16 @@ class AccountController {
       userPassword = password;
     }
 
-    await signInState.signIn(LoginModel(email: userEmail, password: userPassword));
+    await signInStore.signIn(LoginModel(email: userEmail, password: userPassword));
 
-    if (signInState.value is ErrorObjectState) {
+    if (signInStore.value is ErrorObjectState) {
       buttonTappedState.value = false;
     }
   }
 
   Future<void> logout() async {
-    await _service.logout();
+    await service.logout();
     buttonTappedState.value = false;
-    signInState.value = InitialObjectState(null);
+    signInStore.value = InitialObjectState(null);
   }
 }

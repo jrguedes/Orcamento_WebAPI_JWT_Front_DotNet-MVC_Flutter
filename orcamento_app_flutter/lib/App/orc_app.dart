@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
+import 'package:orcamento_app_flutter/App/controllers/home/home_controller.dart';
 import 'services/api/orcamento_api_service.dart';
 import 'services/service_manager.dart';
 import 'services/themes/theme_service.dart';
@@ -22,6 +24,8 @@ class OrcApp extends StatelessWidget {
         Provider<ItemOrcamentoApiService>(create: (_) => ItemOrcamentoApiService()),
         ChangeNotifierProvider(create: (context) => SignInStore(context.read())),
         ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
+        Provider<AccountController>(create: (context) => AccountController(context.read(), context.read())),
+        Provider<HomeController>(create: (context) => HomeController(PageController(initialPage: 0).animateToPage)),
       ],
       child: FutureBuilder(
           future: context.read<ServiceManager>().initializeServices(),
