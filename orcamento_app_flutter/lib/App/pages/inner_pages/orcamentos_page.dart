@@ -117,24 +117,24 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
       children: value.list
           .map(
             (item) => ExpansionPanel(
-                canTapOnHeader: true,
-                backgroundColor: Theme.of(context)
-                    .dialogBackgroundColor, //item.isExpanded ? Theme.of(context).dialogBackgroundColor : Colors.white,
-                headerBuilder: (_, isExpanded) => Column(
-                      children: [
-                        Container(
-                            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                            child: Text(item.descricao,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600, //item.isExpanded ? FontWeight.w900 : FontWeight.w600,
-                                  color: Colors.black87, //item.isExpanded ? Colors.black87 : Colors.black87),
-                                ))),
-                      ],
-                    ),
-                body: _buildCardBody(item),
-                isExpanded: true //item.isExpanded,
-                ),
+              canTapOnHeader: true,
+              backgroundColor: item.isExpanded ? Theme.of(context).dialogBackgroundColor : Colors.white,
+              headerBuilder: (_, isExpanded) => Column(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                      child: Text(
+                        item.descricao,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: item.isExpanded ? FontWeight.w900 : FontWeight.w600,
+                            color: item.isExpanded ? Colors.black87 : Colors.black87),
+                      )),
+                ],
+              ),
+              body: _buildCardBody(item),
+              isExpanded: item.isExpanded,
+            ),
           )
           .toList(),
     );
