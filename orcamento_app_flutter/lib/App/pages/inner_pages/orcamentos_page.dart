@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:orcamento_app_flutter/App/controllers/account/account_controller.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
@@ -133,7 +134,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                 ],
               ),
               body: _buildCardBody(item),
-              isExpanded: item.isExpanded,
+              isExpanded: true, //item.isExpanded,
             ),
           )
           .toList(),
@@ -142,30 +143,52 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
 
   Widget _buildCardBody(OrcamentoModel item) {
     return Card(
+      color: Colors.blue[100],
       elevation: 0,
       child: Container(
-          /*
-        height: item.lancamentos.length * 60,
+        height: 150,
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: item.lancamentos.length,
-          itemBuilder: (context, index) => Container(
-            height: 50,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.lancamentos[index].descricao,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(item.lancamentos[index].pessoa),
-              ],
-            ),
+        child: Container(
+          height: 50,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.descricao,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '${DateFormat.yMMMMEEEEd('pt_BR').format(item.data)} às ${DateFormat.Hm('pt_BR').format(item.data)}',
+              ),
+              const SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.edit, color: Colors.black87),
+                  CupertinoButton(
+                    onPressed: () {},
+                    child: const Text('Editar'),
+                  ),
+                  const SizedBox(width: 5),
+                  const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
+                  CupertinoButton(
+                    onPressed: () {},
+                    child: const Text('Excluir'),
+                  ),
+                  const SizedBox(width: 5),
+                  const Icon(Icons.newspaper, color: Colors.deepPurpleAccent),
+                  CupertinoButton(
+                    onPressed: () {},
+                    child: const Text('Detalhes'),
+                  ),
+                ],
+              )
+            ],
           ),
-        ),*/
-          ),
+        ),
+      ),
     );
   }
 
