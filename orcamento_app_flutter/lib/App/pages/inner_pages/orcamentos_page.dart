@@ -108,11 +108,9 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
     return ExpansionPanelList(
       elevation: 3,
       expansionCallback: (index, isExpanded) {
-        /*
         setState(() {
-          value.list[index].isExpanded = !isExpanded;
+          value.list[index].isExpanded = isExpanded;
         });
-        */
       },
       animationDuration: const Duration(milliseconds: 600),
       children: value.list
@@ -134,7 +132,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                 ],
               ),
               body: _buildCardBody(item),
-              isExpanded: true, //item.isExpanded,
+              isExpanded: item.isExpanded,
             ),
           )
           .toList(),

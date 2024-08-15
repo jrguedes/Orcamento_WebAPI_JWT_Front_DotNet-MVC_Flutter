@@ -26,7 +26,7 @@ class ThemeService {
           primarySwatch: customColor, //Colors.blue,
           //backgroundColor: const Color.fromARGB(255, 221, 221, 238),
           scaffoldBackgroundColor: Colors.white,
-          dialogBackgroundColor: const Color.fromARGB(255, 192, 192, 208),
+          dialogBackgroundColor: Color.fromARGB(255, 255, 255, 255),
           secondaryHeaderColor: const Color.fromRGBO(15, 3, 34, .7),
           //errorColor: Colors.red[300],
           //cardColor: const Color.fromARGB(255, 221, 221, 238),

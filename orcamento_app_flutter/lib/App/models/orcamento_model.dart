@@ -4,7 +4,7 @@ class OrcamentoModel {
   final int id;
   final String descricao;
   final DateTime data;
-  bool isExpanded = false;
+  bool isExpanded = true;
 
   OrcamentoModel({required this.id, required this.descricao, required this.data});
 
