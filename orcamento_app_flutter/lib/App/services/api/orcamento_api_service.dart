@@ -35,6 +35,34 @@ class OrcamentoApiService extends APIService {
     return orcamentoModel;
   }
 
+  Future<bool> deleteOrcamento(OrcamentoModel orcamento) async {
+    bool deleted = false;
+    try {
+      var tokenInfo = await CacheService.getJWTTokenInfo();
+
+      if (tokenInfo == null) {
+        return false;
+      }
+      //fazer a verificação do token no ok do AccountController na API
+
+      var response = await dio.delete(
+        '${baseResourcePath}${orcamento.id}',
+        options: Options(
+          headers: putTokenInAuthorizationHeader(tokenInfo.accessToken),
+        ),
+      );
+
+      if (response.data != null) {
+        deleted = response.data as bool;
+      }
+    } on DioException catch (e) {
+      print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
+    } catch (e) {
+      rethrow;
+    }
+    return deleted;
+  }
+
   Future<List<OrcamentoModel>> getOrcamentos() async {
     List<OrcamentoModel> orcamentos = [];
     try {

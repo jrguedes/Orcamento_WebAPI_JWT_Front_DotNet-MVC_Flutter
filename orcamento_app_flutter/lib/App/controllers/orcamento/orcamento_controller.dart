@@ -17,6 +17,11 @@ class OrcamentoController {
     return;
   }
 
+  Future<void> deleteOrcamento(OrcamentoModel orcamento) async {
+    var deleted = await service.deleteOrcamento(orcamento);
+    return;
+  }
+
 /*
   Future<void> saveOrcamento(String descricaoOrcamento) async {
     var orcamento = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());

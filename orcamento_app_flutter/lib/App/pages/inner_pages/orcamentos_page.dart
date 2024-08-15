@@ -19,6 +19,7 @@ class OrcamentosPage extends StatefulWidget {
 
 class _OrcamentosPageState extends State<OrcamentosPage> {
   late final OrcamentosStore _orcamentosStore;
+  late final OrcamentoController _controller;
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
     _orcamentosStore = context.read<OrcamentosStore>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _orcamentosStore.loadOrcamentos();
+      _controller = context.read();
     });
   }
 
@@ -172,7 +174,10 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                   const SizedBox(width: 5),
                   const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
                   CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await _controller.deleteOrcamento(item);
+                      await _orcamentosStore.loadOrcamentos();
+                    },
                     child: const Text('Excluir'),
                   ),
                   const SizedBox(width: 5),
