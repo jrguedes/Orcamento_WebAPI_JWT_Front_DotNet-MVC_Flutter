@@ -45,4 +45,10 @@ class OrcamentoController {
     var orcamento = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
     orcamentoModel = await service.postOrcamento(orcamento);
   }
+
+  Future<void> updateOrcamento(OrcamentoModel orcamento, String descricao) async {
+    orcamento = orcamento.copyWith(descricao: descricao);
+
+    await service.updateOrcamento(orcamento);
+  }
 }

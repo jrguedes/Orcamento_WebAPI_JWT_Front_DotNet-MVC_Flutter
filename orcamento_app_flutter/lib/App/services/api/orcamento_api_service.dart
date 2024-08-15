@@ -91,4 +91,33 @@ class OrcamentoApiService extends APIService {
     }
     return orcamentos;
   }
+
+  Future<OrcamentoModel?> updateOrcamento(OrcamentoModel orcamento) async {
+    OrcamentoModel? orcamentoModel;
+    try {
+      var tokenInfo = await CacheService.getJWTTokenInfo();
+
+      if (tokenInfo == null) {
+        return null;
+      }
+      //fazer a verificação do token no ok do AccountController na API
+
+      var response = await dio.put(
+        '${baseResourcePath}',
+        data: orcamento.toJson(),
+        options: Options(
+          headers: putTokenInAuthorizationHeader(tokenInfo.accessToken),
+        ),
+      );
+
+      if (response.data != null) {
+        orcamentoModel = OrcamentoModel.fromMap(response.data);
+      }
+    } on DioException catch (e) {
+      print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
+    } catch (e) {
+      rethrow;
+    }
+    return orcamentoModel;
+  }
 }
