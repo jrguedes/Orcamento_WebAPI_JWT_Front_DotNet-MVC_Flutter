@@ -5,7 +5,7 @@ class ModalDialog {
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              insetPadding: EdgeInsets.zero,
+              insetPadding: const EdgeInsets.symmetric(horizontal: 15),
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
               title: Center(
                 child: Text(

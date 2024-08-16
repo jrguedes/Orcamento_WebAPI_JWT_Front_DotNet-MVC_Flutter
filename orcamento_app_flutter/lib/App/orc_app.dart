@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
-import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
-import 'package:orcamento_app_flutter/App/stores/orcamento_store.dart';
+import 'package:provider/provider.dart';
 import 'controllers/account/account_controller.dart';
 import 'controllers/home/home_controller.dart';
 import 'controllers/item_orcamento/item_orcamento_controller.dart';
 import 'controllers/orcamento/orcamento_controller.dart';
-import 'services/api/orcamento_api_service.dart';
-import 'services/service_manager.dart';
-import 'services/themes/theme_service.dart';
-import 'services/api/account_api_service.dart';
-import 'services/api/item_orcamento_api_service.dart';
-import 'package:provider/provider.dart';
 import 'data/enums/theme_type.dart';
 import 'pages/main_page.dart';
 import 'pages/splash/splash_page.dart';
+import 'services/api/account_api_service.dart';
+import 'services/api/item_orcamento_api_service.dart';
+import 'services/api/orcamento_api_service.dart';
+import 'services/service_manager.dart';
+import 'services/themes/theme_service.dart';
 import 'stores/orcamentos_store.dart';
 import 'stores/signin_store.dart';
 
@@ -27,7 +25,6 @@ class OrcApp extends StatelessWidget {
           Provider<OrcamentoApiService>(create: (_) => OrcamentoApiService()),
           Provider<ItemOrcamentoApiService>(create: (_) => ItemOrcamentoApiService()),
           ChangeNotifierProvider<PageController>(create: (_) => PageController(initialPage: 0)),
-          ChangeNotifierProvider<OrcamentoStore>(create: (_) => OrcamentoStore(null)),
           Provider<HomeController>(create: (_) => HomeController()),
           Provider<BottomBarController>(
               create: (context) => BottomBarController(context.read<PageController>().animateToPage)),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -125,8 +126,11 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                 children: [
                   Container(
                       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                      child: Text(
+                      child: AutoSizeText(
                         item.descricao,
+                        minFontSize: 17,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: item.isExpanded ? FontWeight.w900 : FontWeight.w600,
@@ -147,7 +151,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
       color: Colors.blue[100],
       elevation: 0,
       child: Container(
-        height: 150,
+        height: 170,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Container(
@@ -156,9 +160,12 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              AutoSizeText(
                 item.descricao,
+                minFontSize: 14,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontWeight: FontWeight.bold),
+                maxLines: 2,
               ),
               Text(
                 '${DateFormat.yMMMMEEEEd('pt_BR').format(item.data)} às ${DateFormat.Hm('pt_BR').format(item.data)}',
@@ -169,11 +176,14 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                 children: [
                   const Icon(Icons.edit, color: Colors.black87),
                   CupertinoButton(
-                    onPressed: () => ModalDialog.show(
-                      context: context,
-                      title: item.descricao,
-                      content: UpdateOrcamentoModal(orcamento: item),
-                    ),
+                    onPressed: () async {
+                      await ModalDialog.show(
+                        context: context,
+                        title: 'Editar',
+                        content: UpdateOrcamentoModal(orcamento: item),
+                      );
+                      await _orcamentosStore.loadOrcamentos();
+                    },
                     child: const Text('Editar'),
                   ),
                   const SizedBox(width: 5),

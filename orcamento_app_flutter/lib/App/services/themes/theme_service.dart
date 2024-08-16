@@ -30,7 +30,8 @@ class ThemeService {
           secondaryHeaderColor: const Color.fromRGBO(15, 3, 34, .7),
           //errorColor: Colors.red[300],
           //cardColor: const Color.fromARGB(255, 221, 221, 238),
-          cardColor: const Color.fromARGB(255, 240, 239, 242),
+          //cardColor: const Color.fromARGB(255, 240, 239, 242),
+          cardColor: Color.fromARGB(255, 255, 255, 255),
         );
 
       case ThemeType.darkTheme:
