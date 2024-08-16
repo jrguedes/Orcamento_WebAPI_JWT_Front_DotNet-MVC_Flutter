@@ -1,10 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/bottom_bar/bottom_bar_controller.dart';
 import '../../controllers/orcamento/orcamento_controller.dart';
+import '../../models/orcamento_model.dart';
 import '../widgets/custom_text_form_field.dart';
+import 'modals/add_item_orcamento_modal.dart';
+import 'modals/modal_dialog.dart';
 
 class CadastroOrcamento extends StatefulWidget {
   const CadastroOrcamento({super.key});
@@ -45,16 +50,36 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
               icon: const Icon(Icons.attach_money_outlined),
             ),
             const SizedBox(height: 30),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CupertinoButton.filled(
                   onPressed: () async {
-                    await _orcamentoController.saveOrcamento(_orcamentoEdtController.text);
-                    _bottomBar.convexAppBarTap(4);
+                    var orcamento = await _orcamentoController.saveOrcamento(_orcamentoEdtController.text);
+                    if (orcamento != null) {
+                      await ModalDialog.show(
+                        context: context,
+                        title: 'Adicionar Item ao orçamento',
+                        content: AddItemOrcamentoModal(orcamento: orcamento),
+                      );
+                    }
                   },
                   child: const Text('Salvar'),
                 ),
+                /*
+                const SizedBox(height: 20),
+                CupertinoButton(
+                  child: const Text('Item Orçamento'),
+                  onPressed: () async {
+                    var orcamento = OrcamentoModel(id: 10, descricao: 'Orçamento de Teste', data: DateTime.now());
+                    await ModalDialog.show(
+                      context: context,
+                      title: 'Adicionar Item ao orçamento',
+                      content: AddItemOrcamentoModal(orcamento: orcamento),
+                    );
+                  },
+                )
+                */
               ],
             )
           ],

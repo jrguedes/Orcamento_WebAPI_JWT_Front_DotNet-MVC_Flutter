@@ -7,11 +7,6 @@ class OrcamentoController {
 
   OrcamentoController(this.service);
 
-/*
-  final ValueNotifier<ObjectState<OrcamentoModel?>> orcamentoState =
-      ValueNotifier<ObjectState<OrcamentoModel?>>(InitialObjectState(null));
-*/
-
   Future<void> getOrcamentos() async {
     var orcamentos = await service.getOrcamentos();
     return;
@@ -22,28 +17,11 @@ class OrcamentoController {
     return;
   }
 
-/*
-  Future<void> saveOrcamento(String descricaoOrcamento) async {
-    var orcamento = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
-
-    orcamentoState.value = LoadingObjectState();
-    try {
-      var orcamentoResult = await _service.postOrcamento(orcamento);
-      if (orcamentoResult == null) {
-        orcamentoState.value = ErrorObjectState('Usuário ou senha inválidos!');
-      } else {
-        orcamentoState.value = SuccessObjectState<OrcamentoModel?>(orcamentoResult);
-      }
-    } catch (e) {
-      orcamentoState.value = ErrorObjectState('Há um problema de conexão com a API');
-    }
-  }
-  */
-
-  Future<void> saveOrcamento(String descricaoOrcamento) async {
+  Future<OrcamentoModel?> saveOrcamento(String descricaoOrcamento) async {
     orcamentoModel = null;
     var orcamento = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
     orcamentoModel = await service.postOrcamento(orcamento);
+    return orcamentoModel;
   }
 
   Future<void> updateOrcamento(OrcamentoModel orcamento, String descricao) async {

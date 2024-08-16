@@ -23,7 +23,7 @@ class UpdateOrcamentoModal extends StatelessWidget {
       height: 250,
       width: double.infinity,
       child: Card(
-        margin: EdgeInsets.zero, //only(left: 1, right: 1),
+        margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
           padding: const EdgeInsets.only(left: 7, right: 7, top: 7),
