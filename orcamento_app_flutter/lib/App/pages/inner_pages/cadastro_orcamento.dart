@@ -4,10 +4,12 @@ import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/bottom_bar/bottom_bar_controller.dart';
 import '../../controllers/orcamento/orcamento_controller.dart';
+import '../../stores/orcamento_store.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class CadastroOrcamento extends StatefulWidget {
   final OrcamentoModel? orcamento;
+
   const CadastroOrcamento({super.key, this.orcamento});
 
   @override
@@ -19,6 +21,7 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
 
   late final OrcamentoController _orcamentoController;
   late final BottomBarController _bottomBar;
+  late final OrcamentoStore _orcamentoStore;
 
   @override
   void initState() {
@@ -26,6 +29,9 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
     super.initState();
     _orcamentoController = context.read();
     _bottomBar = context.read();
+
+    _orcamentoStore = context.read();
+
     if (widget.orcamento != null) {
       _orcamentoEdtController.text = widget.orcamento!.descricao;
     }
