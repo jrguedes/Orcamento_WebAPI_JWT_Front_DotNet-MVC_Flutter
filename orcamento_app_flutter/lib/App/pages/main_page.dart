@@ -9,7 +9,6 @@ import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/orcamento/orcamento_controller.dart';
-import 'inner_pages/cadastro_item_orcamento.dart';
 import 'inner_pages/home_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -76,7 +75,6 @@ class _MainPageState extends State<MainPage> {
           const Center(child: Text('Tela 2')),
           const OrcamentosPage(),
           const CadastroOrcamento(),
-          CadastroItemOrcamento(orcamentoModel: _orcamentoController.orcamentoModel),
         ],
       );
     }

@@ -3,8 +3,6 @@ import 'package:orcamento_app_flutter/App/services/api/orcamento_api_service.dar
 
 class OrcamentoController {
   final OrcamentoApiService service;
-  OrcamentoModel? orcamentoModel;
-
   OrcamentoController(this.service);
 
   Future<void> getOrcamentos() async {
@@ -18,10 +16,9 @@ class OrcamentoController {
   }
 
   Future<OrcamentoModel?> saveOrcamento(String descricaoOrcamento) async {
-    orcamentoModel = null;
-    var orcamento = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
-    orcamentoModel = await service.postOrcamento(orcamento);
-    return orcamentoModel;
+    var orcamentoSave = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
+    var orcamentoResponse = await service.postOrcamento(orcamentoSave);
+    return orcamentoResponse;
   }
 
   Future<void> updateOrcamento(OrcamentoModel orcamento, String descricao) async {

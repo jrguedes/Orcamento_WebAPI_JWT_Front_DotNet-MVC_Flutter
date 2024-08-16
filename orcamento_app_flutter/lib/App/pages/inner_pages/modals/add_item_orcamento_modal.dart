@@ -79,6 +79,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
                     child: const Text('Adicionar'),
                     onPressed: () async {
                       await _controller.saveItemOrcamento(
+                          orcamento.id,
                           _estabelecimentoEdtController.text,
                           _telefoneEdtController.text,
                           _responsavelEdtController.text,
