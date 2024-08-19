@@ -22,4 +22,9 @@ class ItemOrcamentoController {
 
     await service.postItemOrcamento(itemOrcamento);
   }
+
+  Future<bool> deleteOrcamento(ItemOrcamentoModel itemOrcamento) async {
+    var deleted = await service.deleteOrcamento(itemOrcamento);
+    return deleted;
+  }
 }

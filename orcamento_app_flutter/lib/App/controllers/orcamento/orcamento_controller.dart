@@ -10,9 +10,9 @@ class OrcamentoController {
     return;
   }
 
-  Future<void> deleteOrcamento(OrcamentoModel orcamento) async {
+  Future<bool> deleteOrcamento(OrcamentoModel orcamento) async {
     var deleted = await service.deleteOrcamento(orcamento);
-    return;
+    return deleted;
   }
 
   Future<OrcamentoModel?> saveOrcamento(String descricaoOrcamento) async {

@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:orcamento_app_flutter/App/controllers/item_orcamento/item_orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/item_orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/pages/widgets/custom_cupertino_activity_indicator.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/list_state.dart';
@@ -23,12 +24,14 @@ class OrcamentoDetailsModal extends StatefulWidget {
 
 class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
   late final ItensOrcamentoStore _store;
+  late final ItemOrcamentoController _controller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _store = context.read();
+    _controller = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _store.loadItensOrcamento(widget.orcamento.id);
     });
@@ -50,6 +53,10 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             child: Container(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
               child: Column(children: [
+                CupertinoButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Voltar'),
+                ),
                 //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
                 AutoSizeText(
                   widget.orcamento.descricao,
@@ -73,6 +80,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                 ),
                 const SizedBox(height: 15),
                 _buildListItensOrcamento(),
+                const SizedBox(height: 15),
               ]),
             ),
           ),
@@ -162,7 +170,10 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                   const SizedBox(width: 5),
                   const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
                   CupertinoButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      await _controller.deleteOrcamento(itens[index]);
+                      await _store.loadItensOrcamento(widget.orcamento.id);
+                    },
                     child: const Text('Excluir'),
                   ),
                   const SizedBox(width: 5),
