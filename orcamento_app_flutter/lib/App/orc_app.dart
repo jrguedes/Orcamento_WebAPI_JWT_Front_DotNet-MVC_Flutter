@@ -13,6 +13,7 @@ import 'services/api/item_orcamento_api_service.dart';
 import 'services/api/orcamento_api_service.dart';
 import 'services/service_manager.dart';
 import 'services/themes/theme_service.dart';
+import 'stores/itens_orcamento_store.dart';
 import 'stores/orcamentos_store.dart';
 import 'stores/signin_store.dart';
 
@@ -29,6 +30,7 @@ class OrcApp extends StatelessWidget {
           Provider<BottomBarController>(
               create: (context) => BottomBarController(context.read<PageController>().animateToPage)),
           ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
+          ChangeNotifierProvider(create: (context) => ItensOrcamentoStore(context.read())),
           ChangeNotifierProvider(create: (context) => SignInStore(context.read())),
           Provider<OrcamentoController>(create: (context) => OrcamentoController(context.read())),
           Provider<AccountController>(create: (context) => AccountController(context.read(), context.read())),

@@ -3,16 +3,39 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:orcamento_app_flutter/App/models/item_orcamento_model.dart';
+import 'package:orcamento_app_flutter/App/pages/widgets/custom_cupertino_activity_indicator.dart';
+import 'package:orcamento_app_flutter/App/states/generic_states/list_state.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/orcamento_model.dart';
+import '../../../stores/itens_orcamento_store.dart';
 
-class OrcamentoDetailsModal extends StatelessWidget {
+class OrcamentoDetailsModal extends StatefulWidget {
   final OrcamentoModel orcamento;
+
   OrcamentoDetailsModal({Key? key, required this.orcamento}) : super(key: key);
+
+  @override
+  State<OrcamentoDetailsModal> createState() => _OrcamentoDetailsModalState();
+}
+
+class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
+  late final ItensOrcamentoStore _store;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _store = context.read();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _store.loadItensOrcamento(widget.orcamento.id);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Container(
         padding: EdgeInsets.zero,
         height: size.height - 330,
@@ -27,7 +50,7 @@ class OrcamentoDetailsModal extends StatelessWidget {
               child: Column(children: [
                 //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
                 AutoSizeText(
-                  orcamento.descricao,
+                  widget.orcamento.descricao,
                   style: Theme.of(context).textTheme.headlineSmall,
                   minFontSize: 23,
                   overflow: TextOverflow.ellipsis,
@@ -51,22 +74,26 @@ class OrcamentoDetailsModal extends StatelessWidget {
   }
 
   Widget _buildListItensOrcamento() {
-    var itens = List.generate(10, (index) {
-      return ItemOrcamentoModel(
-        id: index,
-        estabelecimento: 'estabelecimento $index',
-        telefone: '11321',
-        responsavel: 'responsavel $index',
-        valor: 500,
-        descricao: 'descricao $index',
-        orcamentoId: 0,
-      );
-    });
     return Expanded(
-      child: ListView.builder(
-          itemCount: itens.length,
-          itemBuilder: (context, index) {
-            return _buildItemOrcamento(itens, index);
+      child: ValueListenableBuilder(
+          valueListenable: _store,
+          builder: (context, value, child) {
+            if (value is LoadingListState) {
+              return const CustomCupertinoActivityIndicator();
+            }
+
+            if (value is SuccessListState<ItemOrcamentoModel>) {
+              return ListView.builder(
+                  itemCount: value.list.length,
+                  itemBuilder: (context, index) {
+                    return _buildItemOrcamento(value.list, index);
+                  });
+            }
+
+            if (value is ErrorListState<ItemOrcamentoModel>) {
+              return _errorMessage(value.message);
+            }
+            return Container();
           }),
     );
   }
@@ -76,7 +103,7 @@ class OrcamentoDetailsModal extends StatelessWidget {
       color: Colors.blue[100],
       elevation: 0,
       child: Container(
-        height: 210,
+        height: 230,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Container(
@@ -92,6 +119,7 @@ class OrcamentoDetailsModal extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold),
                 maxLines: 2,
               ),
+              const SizedBox(height: 8),
               AutoSizeText(
                 itens[index].estabelecimento,
                 minFontSize: 14,
@@ -99,6 +127,7 @@ class OrcamentoDetailsModal extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold),
                 maxLines: 2,
               ),
+              const SizedBox(height: 8),
               AutoSizeText(
                 itens[index].responsavel,
                 minFontSize: 14,
@@ -134,6 +163,44 @@ class OrcamentoDetailsModal extends StatelessWidget {
                 ],
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _emptyMessage() {
+    return Center(
+      child: Container(
+        alignment: Alignment.center,
+        height: 350,
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: const Text(
+          'Que pena! \n\n Não há itens cadastrados',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _errorMessage(String message) {
+    return Center(
+      child: Container(
+        alignment: Alignment.center,
+        height: 350,
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Color.fromARGB(221, 236, 82, 82),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),
