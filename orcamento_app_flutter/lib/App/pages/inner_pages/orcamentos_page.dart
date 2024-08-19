@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/modals/modal_dialog.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/modals/orcamento_details_modal.dart';
 import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
 import 'package:provider/provider.dart';
 
@@ -198,7 +199,13 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                   const SizedBox(width: 5),
                   const Icon(Icons.newspaper, color: Colors.deepPurpleAccent),
                   CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await ModalDialog.show(
+                        context: context,
+                        title: 'Detalhes do orçamento',
+                        content: OrcamentoDetailsModal(orcamento: item),
+                      );
+                    },
                     child: const Text('Detalhes'),
                   ),
                 ],
