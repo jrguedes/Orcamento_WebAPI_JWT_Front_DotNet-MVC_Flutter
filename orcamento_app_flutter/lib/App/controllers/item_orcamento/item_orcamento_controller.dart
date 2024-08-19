@@ -6,7 +6,7 @@ class ItemOrcamentoController {
 
   ItemOrcamentoController(this.service);
 
-  Future<void> saveItemOrcamento(int orcamentoId, String estabelecimento, String telefone, String responsavel,
+  Future<void> saveItemOrcamento(int orcamentoId, String estabelecimento, String telefone, String responsavelOrcamento,
       double valor, String descricao) async {
     ItemOrcamentoModel? itemOrcamento;
 
@@ -14,7 +14,7 @@ class ItemOrcamentoController {
       id: 0,
       estabelecimento: estabelecimento,
       telefone: telefone,
-      responsavel: responsavel,
+      responsavelOrcamento: responsavelOrcamento,
       valor: valor,
       descricao: descricao,
       orcamentoId: orcamentoId,

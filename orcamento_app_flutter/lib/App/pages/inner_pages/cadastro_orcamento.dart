@@ -66,20 +66,6 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
                   },
                   child: const Text('Salvar'),
                 ),
-                /*
-                const SizedBox(height: 20),
-                CupertinoButton(
-                  child: const Text('Item Orçamento'),
-                  onPressed: () async {
-                    var orcamento = OrcamentoModel(id: 10, descricao: 'Orçamento de Teste', data: DateTime.now());
-                    await ModalDialog.show(
-                      context: context,
-                      title: 'Adicionar Item ao orçamento',
-                      content: AddItemOrcamentoModal(orcamento: orcamento),
-                    );
-                  },
-                )
-                */
               ],
             )
           ],

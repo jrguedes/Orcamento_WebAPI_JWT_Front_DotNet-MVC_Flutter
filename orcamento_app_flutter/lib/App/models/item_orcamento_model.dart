@@ -4,7 +4,7 @@ class ItemOrcamentoModel {
   final int id;
   final String estabelecimento;
   final String telefone;
-  final String responsavel;
+  final String responsavelOrcamento;
   final double valor;
   final String descricao;
   final int orcamentoId;
@@ -13,7 +13,7 @@ class ItemOrcamentoModel {
     required this.id,
     required this.estabelecimento,
     required this.telefone,
-    required this.responsavel,
+    required this.responsavelOrcamento,
     required this.valor,
     required this.descricao,
     required this.orcamentoId,
@@ -32,7 +32,7 @@ class ItemOrcamentoModel {
       id: id ?? this.id,
       estabelecimento: estabelecimento ?? this.estabelecimento,
       telefone: telefone ?? this.telefone,
-      responsavel: responsavel ?? this.responsavel,
+      responsavelOrcamento: responsavel ?? this.responsavelOrcamento,
       valor: valor ?? this.valor,
       descricao: descricao ?? this.descricao,
       orcamentoId: orcamentoId ?? this.orcamentoId,
@@ -45,7 +45,7 @@ class ItemOrcamentoModel {
     result.addAll({'id': id});
     result.addAll({'estabelecimento': estabelecimento});
     result.addAll({'telefone': telefone});
-    result.addAll({'responsavel': responsavel});
+    result.addAll({'responsavelOrcamento': responsavelOrcamento});
     result.addAll({'valor': valor});
     result.addAll({'descricao': descricao});
     result.addAll({'orcamentoId': orcamentoId});
@@ -58,7 +58,7 @@ class ItemOrcamentoModel {
       id: map['id']?.toInt() ?? 0,
       estabelecimento: map['estabelecimento'] ?? '',
       telefone: map['telefone'] ?? '',
-      responsavel: map['responsavel'] ?? '',
+      responsavelOrcamento: map['responsavelOrcamento'] ?? '',
       valor: map['valor']?.toDouble() ?? 0.0,
       descricao: map['descricao'] ?? '',
       orcamentoId: map['orcamentoId']?.toInt() ?? 0,

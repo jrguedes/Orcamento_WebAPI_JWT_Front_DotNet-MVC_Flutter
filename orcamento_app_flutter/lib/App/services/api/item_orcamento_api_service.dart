@@ -48,7 +48,7 @@ class ItemOrcamentoApiService extends APIService {
       //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.get<List>(
-        '${baseResourcePath}/orcamento/$orcamentoId',
+        '${baseResourcePath}orcamento/$orcamentoId',
         options: Options(
           headers: putTokenInAuthorizationHeader(tokenInfo.accessToken),
         ),

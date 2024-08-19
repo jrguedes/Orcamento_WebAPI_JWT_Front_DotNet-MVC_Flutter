@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 
 import '../../../models/orcamento_model.dart';
 import '../../../stores/itens_orcamento_store.dart';
+import 'add_item_orcamento_modal.dart';
+import 'modal_dialog.dart';
 
 class OrcamentoDetailsModal extends StatefulWidget {
   final OrcamentoModel orcamento;
@@ -60,8 +62,12 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
 
                 CupertinoButton.filled(
                   onPressed: () async {
-                    //await _orcamentoController.updateOrcamento(orcamento, _orcamentoEdtController.text);
-                    Navigator.of(context).pop();
+                    await ModalDialog.show(
+                      context: context,
+                      title: 'Adicionar Item ao orçamento',
+                      content: AddItemOrcamentoModal(orcamento: widget.orcamento),
+                    );
+                    await _store.loadItensOrcamento(widget.orcamento.id);
                   },
                   child: const Text('Adicionar item ao orçamento'),
                 ),
@@ -129,7 +135,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
               ),
               const SizedBox(height: 8),
               AutoSizeText(
-                itens[index].responsavel,
+                itens[index].responsavelOrcamento,
                 minFontSize: 14,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontWeight: FontWeight.bold),

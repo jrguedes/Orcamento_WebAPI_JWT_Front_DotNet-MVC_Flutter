@@ -85,7 +85,8 @@ class AddItemOrcamentoModal extends StatelessWidget {
                           _responsavelEdtController.text,
                           double.parse(_valorEdtController.text),
                           _descricaoEdtController.text);
-                      _bottomBar.convexAppBarTap(2);
+                      //_bottomBar.convexAppBarTap(2);
+                      Navigator.of(context).pop();
                     },
                   ),
                 ),
