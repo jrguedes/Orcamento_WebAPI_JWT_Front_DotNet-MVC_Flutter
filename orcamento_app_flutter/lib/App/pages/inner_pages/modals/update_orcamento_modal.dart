@@ -18,26 +18,26 @@ class UpdateOrcamentoModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _orcamentoController = context.read();
+    var _size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.zero,
-      height: 250,
-      width: double.infinity,
+      height: 170,
+      width: _size.width - 30,
       child: Card(
+        color: Colors.white,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
-          padding: const EdgeInsets.only(left: 7, right: 7, top: 7),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 7),
           child: Column(
             children: [
-              Text('Orçamento', style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: 30),
               CustomTextFormField(
                 labelText: 'O que você gostaria de orçar?',
                 hintText: 'O que você gostaria de orçar?',
                 controller: _orcamentoEdtController,
                 icon: const Icon(Icons.attach_money_outlined),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 25),
               CupertinoButton.filled(
                 onPressed: () async {
                   await _orcamentoController.updateOrcamento(orcamento, _orcamentoEdtController.text);
