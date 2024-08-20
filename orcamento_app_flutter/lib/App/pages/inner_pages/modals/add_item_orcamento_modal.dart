@@ -24,14 +24,15 @@ class AddItemOrcamentoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     _bottomBar = context.read();
     _controller = context.read();
+    var size = MediaQuery.of(context).size;
 
     return Container(
       padding: EdgeInsets.zero,
       height: 550,
-      width: double.infinity,
+      width: size.width - 20,
       child: Card(
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: Colors.white,
         child: Container(
           padding: const EdgeInsets.only(left: 7, right: 7, top: 7),
           child: Container(
@@ -72,11 +73,10 @@ class AddItemOrcamentoModal extends StatelessWidget {
                   icon: const Icon(Icons.description_outlined),
                 ),
                 const SizedBox(height: 30),
-
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    child: const Text('Adicionar'),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                     onPressed: () async {
                       await _controller.saveItemOrcamento(
                           orcamento.id,
@@ -88,6 +88,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
                       //_bottomBar.convexAppBarTap(2);
                       Navigator.of(context).pop();
                     },
+                    child: const Text('Adicionar'),
                   ),
                 ),
               ],
