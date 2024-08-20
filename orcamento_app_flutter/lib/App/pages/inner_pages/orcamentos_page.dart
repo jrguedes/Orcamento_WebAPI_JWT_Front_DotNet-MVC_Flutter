@@ -72,36 +72,39 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: SingleChildScrollView(
-              child: ValueListenableBuilder(
-                  valueListenable: _orcamentosStore,
-                  builder: (context, value, child) {
-                    if (value is LoadingListState) {
-                      return const Center(
-                          child: CustomCupertinoActivityIndicator(
-                        color: CupertinoColors.activeOrange,
-                        radius: 20,
-                      ));
-                    }
-
-                    if (value is ErrorListState) {
-                      return const Center(
-                        child: Text(
-                          'Erro', //value.message,
-                          //style: TextStyle(color: Theme.of(context).errorColor),
-                        ),
-                      );
-                    }
-
-                    if (value is SuccessListState<OrcamentoModel>) {
-                      if (value.list.isEmpty) {
-                        return _emptyMessage();
+            child: Container(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: SingleChildScrollView(
+                child: ValueListenableBuilder(
+                    valueListenable: _orcamentosStore,
+                    builder: (context, value, child) {
+                      if (value is LoadingListState) {
+                        return const Center(
+                            child: CustomCupertinoActivityIndicator(
+                          color: CupertinoColors.activeOrange,
+                          radius: 20,
+                        ));
                       }
-                      return _buildExpansionPanelList(value);
-                    }
 
-                    return Container();
-                  }),
+                      if (value is ErrorListState) {
+                        return const Center(
+                          child: Text(
+                            'Erro', //value.message,
+                            //style: TextStyle(color: Theme.of(context).errorColor),
+                          ),
+                        );
+                      }
+
+                      if (value is SuccessListState<OrcamentoModel>) {
+                        if (value.list.isEmpty) {
+                          return _emptyMessage();
+                        }
+                        return _buildExpansionPanelList(value);
+                      }
+
+                      return Container();
+                    }),
+              ),
             ),
           ),
         ],
@@ -111,7 +114,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
 
   ExpansionPanelList _buildExpansionPanelList(SuccessListState<OrcamentoModel> value) {
     return ExpansionPanelList(
-      elevation: 3,
+      elevation: 0,
       expansionCallback: (index, isExpanded) {
         setState(() {
           value.list[index].isExpanded = isExpanded;
@@ -139,7 +142,12 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                       )),
                 ],
               ),
-              body: _buildCardBody(item),
+              body: Column(
+                children: [
+                  _buildCardBody(item),
+                  const SizedBox(height: 10),
+                ],
+              ),
               isExpanded: item.isExpanded,
             ),
           )
@@ -149,8 +157,9 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
 
   Widget _buildCardBody(OrcamentoModel item) {
     return Card(
-      color: Colors.blue[100],
-      elevation: 0,
+      color: const Color(0xFF9cc5d3),
+      elevation: 5,
+      shadowColor: const Color(0xFF3b889a),
       child: Container(
         height: 170,
         width: double.infinity,
@@ -209,7 +218,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     child: const Text('Detalhes'),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

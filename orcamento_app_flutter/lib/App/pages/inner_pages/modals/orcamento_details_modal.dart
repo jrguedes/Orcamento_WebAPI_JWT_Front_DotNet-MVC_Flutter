@@ -42,7 +42,6 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
     var size = MediaQuery.of(context).size;
 
     return Container(
-        //color: Color(0xFFf0f8ff),
         padding: EdgeInsets.zero,
         height: size.height - 330,
         width: size.width - 30,
@@ -113,7 +112,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
           ),
           color: const Color(0xFF9cc5d3),
           elevation: 5,
-          shadowColor: Colors.blue,
+          shadowColor: Color(0xFF3b889a),
           child: Container(
             height: 250,
             width: double.infinity,
