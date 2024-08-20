@@ -9,15 +9,21 @@ class ModalDialog {
               insetPadding: const EdgeInsets.symmetric(horizontal: 15),
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
               title: Center(
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                child: Column(
+                  children: [
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 10),
+                    const Divider(thickness: 0, indent: 30, endIndent: 30),
+                  ],
                 ),
               ),
-              contentPadding: EdgeInsets.only(top: 30),
+              contentPadding: const EdgeInsets.only(top: 30),
               content: content,
             ));
   }

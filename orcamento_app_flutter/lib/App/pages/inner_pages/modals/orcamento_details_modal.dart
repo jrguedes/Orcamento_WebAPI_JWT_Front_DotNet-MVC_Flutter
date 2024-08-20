@@ -45,42 +45,38 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
         padding: EdgeInsets.zero,
         height: size.height - 330,
         width: size.width - 30,
-        child: Card(
-          color: Colors.white,
-          margin: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Container(
-            padding: const EdgeInsets.only(left: 7, right: 7, top: 7),
-            child: Container(
-              padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
-              child: Column(children: [
-                Container(
-                  width: double.infinity,
-                  alignment: Alignment.topLeft,
-                  child: CupertinoButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Voltar'),
-                  ),
-                ),
-                //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
-
-                CupertinoButton.filled(
-                  onPressed: () async {
-                    await ModalDialog.show(
-                      context: context,
-                      title: 'Adicionar Item ao orçamento',
-                      content: AddItemOrcamentoModal(orcamento: widget.orcamento),
-                    );
-                    await _store.loadItensOrcamento(widget.orcamento.id);
-                  },
-                  child: const Text('Adicionar item ao orçamento'),
-                ),
-                const SizedBox(height: 15),
-                _buildListItensOrcamento(),
-                const SizedBox(height: 15),
-              ]),
+        child: Container(
+          padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
+          child: Column(children: [
+            Container(
+              width: double.infinity,
+              alignment: Alignment.topLeft,
+              child: CupertinoButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Voltar'),
+              ),
             ),
-          ),
+            //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
+
+            CupertinoButton.filled(
+              onPressed: () async {
+                await ModalDialog.show(
+                  context: context,
+                  title: 'Adicionar Item ao orçamento',
+                  content: AddItemOrcamentoModal(orcamento: widget.orcamento),
+                );
+                await _store.loadItensOrcamento(widget.orcamento.id);
+              },
+              child: const Text('Adicionar item ao orçamento'),
+            ),
+            const SizedBox(height: 10),
+            const Divider(
+              thickness: 0,
+            ),
+
+            _buildListItensOrcamento(),
+            const SizedBox(height: 15),
+          ]),
         ));
   }
 
@@ -110,81 +106,90 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
   }
 
   Widget _buildItemOrcamento(List<ItemOrcamentoModel> itens, int index) {
-    return Card(
-      color: Colors.blue[100],
-      elevation: 0,
-      child: Container(
-        height: 250,
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              height: 55,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                //border: BorderRadius.circular(5),
-              ),
-              child: AutoSizeText(
-                itens[index].descricao,
-                minFontSize: 14,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                maxLines: 2,
-              ),
-            ),
-            AutoSizeText(
-              itens[index].estabelecimento,
-              minFontSize: 14,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              maxLines: 2,
-            ),
-            const SizedBox(height: 8),
-            AutoSizeText(
-              itens[index].responsavelOrcamento,
-              minFontSize: 14,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              maxLines: 1,
-            ),
-            AutoSizeText(
-              itens[index].telefone,
-              minFontSize: 14,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              maxLines: 1,
-            ),
-            AutoSizeText(
-              NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
-              minFontSize: 14,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              maxLines: 1,
-            ),
-            const SizedBox(height: 25),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      children: [
+        Card(
+          margin: const EdgeInsets.only(bottom: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          color: Colors.blue[100],
+          elevation: 5,
+          shadowColor: Colors.blue,
+          child: Container(
+            height: 250,
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(width: 5),
-                const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
-                CupertinoButton(
-                  onPressed: () async {
-                    await _controller.deleteOrcamento(itens[index]);
-                    await _store.loadItensOrcamento(widget.orcamento.id);
-                  },
-                  child: const Text('Excluir'),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  height: 55,
+                  width: double.infinity,
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                  child: AutoSizeText(
+                    itens[index].descricao,
+                    minFontSize: 14,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    maxLines: 2,
+                  ),
                 ),
-                const SizedBox(width: 5),
+                AutoSizeText(
+                  itens[index].estabelecimento,
+                  minFontSize: 14,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 8),
+                AutoSizeText(
+                  itens[index].responsavelOrcamento,
+                  minFontSize: 14,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                ),
+                AutoSizeText(
+                  itens[index].telefone,
+                  minFontSize: 14,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                ),
+                AutoSizeText(
+                  NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
+                  minFontSize: 14,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                ),
+                const SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 5),
+                    const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
+                    CupertinoButton(
+                      onPressed: () async {
+                        await _controller.deleteOrcamento(itens[index]);
+                        await _store.loadItensOrcamento(widget.orcamento.id);
+                      },
+                      child: const Text('Excluir'),
+                    ),
+                    const SizedBox(width: 5),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
-      ),
+        const SizedBox(height: 3),
+        const Divider(thickness: 0, indent: 50, endIndent: 50),
+        const SizedBox(height: 3),
+      ],
     );
   }
 
