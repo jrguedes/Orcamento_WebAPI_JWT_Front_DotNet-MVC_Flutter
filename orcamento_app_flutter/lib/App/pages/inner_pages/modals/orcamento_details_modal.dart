@@ -42,6 +42,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
     var size = MediaQuery.of(context).size;
 
     return Container(
+        //color: Color(0xFFf0f8ff),
         padding: EdgeInsets.zero,
         height: size.height - 330,
         width: size.width - 30,
@@ -56,9 +57,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                 child: const Text('Voltar'),
               ),
             ),
-            //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
-
-            CupertinoButton.filled(
+            ElevatedButton(
               onPressed: () async {
                 await ModalDialog.show(
                   context: context,
@@ -73,7 +72,6 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             const Divider(
               thickness: 0,
             ),
-
             _buildListItensOrcamento(),
             const SizedBox(height: 15),
           ]),
@@ -113,7 +111,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          color: Colors.blue[100],
+          color: const Color(0xFF9cc5d3),
           elevation: 5,
           shadowColor: Colors.blue,
           child: Container(

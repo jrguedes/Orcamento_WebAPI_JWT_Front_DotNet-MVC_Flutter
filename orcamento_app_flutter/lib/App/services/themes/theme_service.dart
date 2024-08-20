@@ -32,6 +32,7 @@ class ThemeService {
           //cardColor: const Color.fromARGB(255, 221, 221, 238),
           //cardColor: const Color.fromARGB(255, 240, 239, 242),
           cardColor: Color.fromARGB(255, 255, 255, 255),
+          elevatedButtonTheme: _getElevatedButtonThemeData(),
         );
 
       case ThemeType.darkTheme:
@@ -48,5 +49,15 @@ class ThemeService {
           primarySwatch: Colors.blue,
         );
     }
+  }
+
+  static ElevatedButtonThemeData _getElevatedButtonThemeData() {
+    return ElevatedButtonThemeData(
+      style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith<Color>((states) => const Color(0xFF3b889a)),
+          textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+              (states) => const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+          foregroundColor: WidgetStateColor.resolveWith((states) => Colors.white)),
+    );
   }
 }

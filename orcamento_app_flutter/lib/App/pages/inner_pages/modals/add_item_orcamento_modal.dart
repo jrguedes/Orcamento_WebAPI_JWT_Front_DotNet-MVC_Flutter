@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +75,6 @@ class AddItemOrcamentoModal extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                     onPressed: () async {
                       await _controller.saveItemOrcamento(
                           orcamento.id,
