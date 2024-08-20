@@ -46,26 +46,23 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
         height: size.height - 330,
         width: size.width - 30,
         child: Card(
+          color: Colors.white,
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Container(
             padding: const EdgeInsets.only(left: 7, right: 7, top: 7),
             child: Container(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
               child: Column(children: [
-                CupertinoButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Voltar'),
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.topLeft,
+                  child: CupertinoButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Voltar'),
+                  ),
                 ),
                 //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
-                AutoSizeText(
-                  widget.orcamento.descricao,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  minFontSize: 23,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-                const SizedBox(height: 30),
 
                 CupertinoButton.filled(
                   onPressed: () async {
@@ -117,70 +114,75 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
       color: Colors.blue[100],
       elevation: 0,
       child: Container(
-        height: 230,
+        height: 250,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-        child: Container(
-          height: 50,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AutoSizeText(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(5),
+              height: 55,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                //border: BorderRadius.circular(5),
+              ),
+              child: AutoSizeText(
                 itens[index].descricao,
                 minFontSize: 14,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontWeight: FontWeight.bold),
                 maxLines: 2,
               ),
-              const SizedBox(height: 8),
-              AutoSizeText(
-                itens[index].estabelecimento,
-                minFontSize: 14,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 8),
-              AutoSizeText(
-                itens[index].responsavelOrcamento,
-                minFontSize: 14,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                maxLines: 1,
-              ),
-              AutoSizeText(
-                itens[index].telefone,
-                minFontSize: 14,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                maxLines: 1,
-              ),
-              AutoSizeText(
-                NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
-                minFontSize: 14,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                maxLines: 1,
-              ),
-              const SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(width: 5),
-                  const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
-                  CupertinoButton(
-                    onPressed: () async {
-                      await _controller.deleteOrcamento(itens[index]);
-                      await _store.loadItensOrcamento(widget.orcamento.id);
-                    },
-                    child: const Text('Excluir'),
-                  ),
-                  const SizedBox(width: 5),
-                ],
-              )
-            ],
-          ),
+            ),
+            AutoSizeText(
+              itens[index].estabelecimento,
+              minFontSize: 14,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 2,
+            ),
+            const SizedBox(height: 8),
+            AutoSizeText(
+              itens[index].responsavelOrcamento,
+              minFontSize: 14,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 1,
+            ),
+            AutoSizeText(
+              itens[index].telefone,
+              minFontSize: 14,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 1,
+            ),
+            AutoSizeText(
+              NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
+              minFontSize: 14,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 1,
+            ),
+            const SizedBox(height: 25),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(width: 5),
+                const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
+                CupertinoButton(
+                  onPressed: () async {
+                    await _controller.deleteOrcamento(itens[index]);
+                    await _store.loadItensOrcamento(widget.orcamento.id);
+                  },
+                  child: const Text('Excluir'),
+                ),
+                const SizedBox(width: 5),
+              ],
+            )
+          ],
         ),
       ),
     );
