@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../data/enums/theme_type.dart';
 
@@ -22,6 +23,7 @@ class ThemeService {
       case ThemeType.defaultTheme:
         return ThemeData(
           primarySwatch: customColor,
+          primaryColor: customColor,
           scaffoldBackgroundColor: Colors.white,
           dialogBackgroundColor: Colors.white,
           secondaryHeaderColor: customColor[700],
@@ -33,15 +35,18 @@ class ThemeService {
       case ThemeType.darkTheme:
         return ThemeData(
           primarySwatch: customColor,
+          primaryColor: customColor,
         );
 
       case ThemeType.lightTheme:
         return ThemeData(
           primarySwatch: customColor,
+          primaryColor: customColor,
         );
       default:
         return ThemeData(
           primarySwatch: customColor,
+          primaryColor: customColor,
         );
     }
   }
