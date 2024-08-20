@@ -1,52 +1,47 @@
 import 'package:flutter/material.dart';
 import '../../data/enums/theme_type.dart';
 
+//https://coolors.co/3c899b-49111c-f2f4f3-a9927d-5e503f
 class ThemeService {
-  // Color.fromARGB(162, 15, 3, 34),
-  //var a = const Color.fromARGB(162, 15, 3, 34);
-  //var b = const Color.fromRGBO(15, 3, 34, .7);
   static ThemeData getTheme(ThemeType themeType) {
     Map<int, Color> color = {
-      50: const Color.fromRGBO(15, 3, 34, .1),
-      100: const Color.fromRGBO(15, 3, 34, .2),
-      200: const Color.fromRGBO(15, 3, 34, .3),
-      300: const Color.fromRGBO(15, 3, 34, .4),
-      400: const Color.fromRGBO(15, 3, 34, .5),
-      500: const Color.fromRGBO(15, 3, 34, .6),
-      600: const Color.fromRGBO(15, 3, 34, .7),
-      700: const Color.fromRGBO(15, 3, 34, .8),
-      800: const Color.fromRGBO(15, 3, 34, .9),
-      900: const Color.fromRGBO(15, 3, 34, 1),
+      50: const Color.fromRGBO(60, 137, 155, .1),
+      100: const Color.fromRGBO(60, 137, 155, .2),
+      200: const Color.fromRGBO(60, 137, 155, .3),
+      300: const Color.fromRGBO(60, 137, 155, .4),
+      400: const Color.fromRGBO(60, 137, 155, .5),
+      500: const Color.fromRGBO(60, 137, 155, .6),
+      600: const Color.fromRGBO(60, 137, 155, .7),
+      700: const Color.fromRGBO(60, 137, 155, .8),
+      800: const Color.fromRGBO(60, 137, 155, .9),
+      900: const Color.fromRGBO(60, 137, 155, 1),
     };
 
-    MaterialColor customColor = MaterialColor(0xFF61586F, color);
+    MaterialColor customColor = MaterialColor(0xFF3c899b, color);
     switch (themeType) {
       case ThemeType.defaultTheme:
         return ThemeData(
-          primarySwatch: customColor, //Colors.blue,
-          //backgroundColor: const Color.fromARGB(255, 221, 221, 238),
+          primarySwatch: customColor,
           scaffoldBackgroundColor: Colors.white,
-          dialogBackgroundColor: Color.fromARGB(255, 255, 255, 255),
-          secondaryHeaderColor: const Color.fromRGBO(15, 3, 34, .7),
-          //errorColor: Colors.red[300],
-          //cardColor: const Color.fromARGB(255, 221, 221, 238),
-          //cardColor: const Color.fromARGB(255, 240, 239, 242),
-          cardColor: Color.fromARGB(255, 255, 255, 255),
+          dialogBackgroundColor: Colors.white,
+          secondaryHeaderColor: customColor[700],
+          cardColor: Colors.white,
+          cardTheme: _getCardTheme(),
           elevatedButtonTheme: _getElevatedButtonThemeData(),
         );
 
       case ThemeType.darkTheme:
         return ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: customColor,
         );
 
       case ThemeType.lightTheme:
         return ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: customColor,
         );
       default:
         return ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: customColor,
         );
     }
   }
@@ -54,10 +49,19 @@ class ThemeService {
   static ElevatedButtonThemeData _getElevatedButtonThemeData() {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith<Color>((states) => const Color(0xFF3b889a)),
-          textStyle: WidgetStateProperty.resolveWith<TextStyle>(
-              (states) => const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
-          foregroundColor: WidgetStateColor.resolveWith((states) => Colors.white)),
+        backgroundColor: WidgetStateProperty.resolveWith<Color>((states) => const Color(0xFF3b889a)),
+        textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+            (states) => const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+        foregroundColor: WidgetStateColor.resolveWith((states) => Colors.white),
+      ),
+    );
+  }
+
+  static CardTheme _getCardTheme() {
+    return const CardTheme(
+      color: Color(0xFF9cc5d3),
+      elevation: 5,
+      shadowColor: Color(0xFF3b889a),
     );
   }
 }

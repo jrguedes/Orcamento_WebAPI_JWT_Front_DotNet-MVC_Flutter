@@ -157,9 +157,6 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
 
   Widget _buildCardBody(OrcamentoModel item) {
     return Card(
-      color: const Color(0xFF9cc5d3),
-      elevation: 5,
-      shadowColor: const Color(0xFF3b889a),
       child: Container(
         height: 170,
         width: double.infinity,

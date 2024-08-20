@@ -110,9 +110,6 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          color: const Color(0xFF9cc5d3),
-          elevation: 5,
-          shadowColor: Color(0xFF3b889a),
           child: Container(
             height: 250,
             width: double.infinity,

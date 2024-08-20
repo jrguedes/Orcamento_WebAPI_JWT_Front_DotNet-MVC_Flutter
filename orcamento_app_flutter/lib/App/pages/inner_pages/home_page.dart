@@ -30,10 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       decoration: const BoxDecoration(
           gradient: RadialGradient(
-        colors: [
-          Colors.white,
-          Color.fromARGB(163, 34, 13, 69),
-        ],
+        colors: [Color(0xFF80d0c7), Color(0xFF3c899b)],
         radius: .7,
       )),
       child: Column(
