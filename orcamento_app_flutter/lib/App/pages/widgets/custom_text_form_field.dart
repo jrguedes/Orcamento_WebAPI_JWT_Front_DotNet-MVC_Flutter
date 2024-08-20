@@ -11,7 +11,6 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color borderColor = const Color.fromARGB(255, 91, 45, 114);
     return Container(
       padding: const EdgeInsets.only(bottom: 12),
       child: TextFormField(
@@ -19,19 +18,23 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: icon,
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromARGB(255, 91, 45, 114)),
+            borderSide: BorderSide(
+              color: Theme.of(context).hintColor,
+            ),
             borderRadius: BorderRadius.circular(15),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromARGB(255, 91, 45, 114)),
+            borderSide: BorderSide(color: Theme.of(context).focusColor),
             borderRadius: BorderRadius.circular(15),
           ),
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromARGB(255, 91, 45, 114)),
+            borderSide: BorderSide(color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(15),
           ),
           labelText: labelText,
           hintText: hintText,
+          hintStyle: TextStyle(color: Theme.of(context).hintColor),
+          labelStyle: TextStyle(color: Theme.of(context).hintColor),
           errorText: errorText,
           errorStyle: const TextStyle(
             height: 0.4,

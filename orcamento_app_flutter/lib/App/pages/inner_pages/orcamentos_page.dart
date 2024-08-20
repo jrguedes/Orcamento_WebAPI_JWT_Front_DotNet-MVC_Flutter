@@ -54,7 +54,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.only(left: 4),
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).hintColor,
                   alignment: Alignment.centerLeft,
                   child: TextButton(
                     onPressed: () => {print('Pressed')},

@@ -29,6 +29,10 @@ class ThemeService {
           secondaryHeaderColor: customColor[700],
           cardColor: Colors.white,
           cardTheme: _getCardTheme(),
+          hintColor: customColor[700],
+          focusColor: customColor[900],
+          disabledColor: customColor[200],
+          highlightColor: customColor[900],
           elevatedButtonTheme: _getElevatedButtonThemeData(),
         );
 

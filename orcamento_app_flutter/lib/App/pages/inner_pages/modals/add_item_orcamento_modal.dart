@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,38 +39,43 @@ class AddItemOrcamentoModal extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: Column(
               children: [
-                //Text('Adicionar Item de Orçamento', style: Theme.of(context).textTheme.headlineMedium),
-                Text(orcamento.descricao, style: Theme.of(context).textTheme.headlineSmall),
+                AutoSizeText(
+                  orcamento.descricao,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  minFontSize: 23,
+                ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
                   labelText: 'Estabelecimento',
                   hintText: 'Estabelecimento',
                   controller: _estabelecimentoEdtController,
-                  icon: const Icon(Icons.store),
+                  icon: Icon(Icons.store, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Telefone',
                   hintText: 'Telefone',
                   controller: _telefoneEdtController,
-                  icon: const Icon(Icons.phone),
+                  icon: Icon(Icons.phone, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Responsável',
                   hintText: 'Responsável',
                   controller: _responsavelEdtController,
-                  icon: const Icon(Icons.co_present_rounded),
+                  icon: Icon(Icons.co_present_rounded, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Valor',
                   hintText: 'Valor',
                   controller: _valorEdtController,
-                  icon: const Icon(Icons.attach_money_outlined),
+                  icon: Icon(Icons.attach_money_outlined, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Descrição',
                   hintText: 'Descrição',
                   controller: _descricaoEdtController,
-                  icon: const Icon(Icons.description_outlined),
+                  icon: Icon(Icons.description_outlined, color: Theme.of(context).hintColor),
                 ),
                 const SizedBox(height: 30),
                 Container(

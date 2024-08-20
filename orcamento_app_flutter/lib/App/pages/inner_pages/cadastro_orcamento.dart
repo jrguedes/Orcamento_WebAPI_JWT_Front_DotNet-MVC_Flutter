@@ -53,7 +53,8 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CupertinoButton.filled(
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: const Size(200, 40)),
                   onPressed: () async {
                     var orcamento = await _orcamentoController.saveOrcamento(_orcamentoEdtController.text);
                     if (orcamento != null) {
