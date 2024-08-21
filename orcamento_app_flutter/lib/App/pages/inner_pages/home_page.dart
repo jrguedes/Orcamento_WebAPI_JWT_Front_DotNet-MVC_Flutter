@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
   final bool userLogged;
   final TokenModel? jwtTokenInfo;
   final String? erroMessage;
+  final String title;
   HomePage({
     Key? key,
     this.jwtTokenInfo,
@@ -16,8 +17,6 @@ class HomePage extends StatefulWidget {
     required this.title,
     required this.userLogged,
   }) : super(key: key);
-
-  final String title;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -42,6 +41,18 @@ class _HomePageState extends State<HomePage> {
             color: Colors.amber,
             size: 140,
           ),
+          Title(
+            color: Colors.amber,
+            title: widget.title,
+            child: Text(
+              widget.title,
+              style: const TextStyle(
+                color: Colors.amber,
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
           const SizedBox(height: 40),
           Container(
             padding: const EdgeInsets.only(top: 10),
@@ -57,15 +68,6 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const SizedBox(height: 40),
-                const Text(
-                  'Log In',
-                  style: const TextStyle(
-                    color: Color(0xFF416a6d),
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
                 widget.userLogged ? WelcomePage(jwtTokenInfo: widget.jwtTokenInfo!) : const LoginForm(),
                 widget.erroMessage != null
                     ? Container(

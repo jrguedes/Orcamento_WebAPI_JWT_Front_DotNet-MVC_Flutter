@@ -34,6 +34,15 @@ class _LoginFormState extends State<LoginForm> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Text(
+                'Log In',
+                style: TextStyle(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  fontSize: 40,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 30),
               CustomTextField(
                 keyboardType: TextInputType.emailAddress,
                 icon: Icons.person_outline,

@@ -71,7 +71,7 @@ class _MainPageState extends State<MainPage> {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomePage(title: 'Home', userLogged: true, jwtTokenInfo: jwtTokenInfo),
+          HomePage(title: 'OrçApp', userLogged: true, jwtTokenInfo: jwtTokenInfo),
           const Center(child: Text('Tela 2')),
           const OrcamentosPage(),
           const CadastroOrcamento(),
@@ -85,7 +85,7 @@ class _MainPageState extends State<MainPage> {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomePage(title: 'Home', userLogged: false, erroMessage: (state as ErrorObjectState).message),
+          HomePage(title: 'OrçApp', userLogged: false, erroMessage: (state as ErrorObjectState).message),
         ],
       );
     }
@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        HomePage(title: 'Home', userLogged: false),
+        HomePage(title: 'OrçApp', userLogged: false),
       ],
     );
   }
