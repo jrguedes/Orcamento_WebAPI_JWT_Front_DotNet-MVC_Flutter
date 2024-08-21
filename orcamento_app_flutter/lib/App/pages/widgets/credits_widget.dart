@@ -10,13 +10,19 @@ class CreditsWidget extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 10),
         alignment: Alignment.bottomCenter,
         width: double.infinity,
-        child: const Text(
-          textAlign: TextAlign.left,
-          'Developed by: Júnior Guedes',
-          style: const TextStyle(
-            color: Colors.black87,
-            fontSize: 10,
-          ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              textAlign: TextAlign.left,
+              'Developed by: Júnior Guedes',
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 10,
+              ),
+            ),
+            SizedBox(width: 10),
+          ],
         ),
       ),
     );
