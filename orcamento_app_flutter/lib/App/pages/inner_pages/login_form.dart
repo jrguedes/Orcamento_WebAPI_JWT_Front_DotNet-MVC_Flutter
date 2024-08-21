@@ -34,7 +34,6 @@ class _LoginFormState extends State<LoginForm> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Login Form'),
               CustomTextField(
                 keyboardType: TextInputType.emailAddress,
                 icon: Icons.person_outline,

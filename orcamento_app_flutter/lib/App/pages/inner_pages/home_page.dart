@@ -57,9 +57,14 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  widget.title,
-                  //style:  Theme.of(context).textTheme.headline4,
+                const SizedBox(height: 40),
+                const Text(
+                  'Log In',
+                  style: const TextStyle(
+                    color: Color(0xFF416a6d),
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 widget.userLogged ? WelcomePage(jwtTokenInfo: widget.jwtTokenInfo!) : const LoginForm(),
                 widget.erroMessage != null
