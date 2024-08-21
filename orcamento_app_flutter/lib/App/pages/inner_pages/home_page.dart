@@ -30,7 +30,10 @@ class _HomePageState extends State<HomePage> {
     return Container(
       decoration: const BoxDecoration(
           gradient: RadialGradient(
-        colors: [Color(0xFF80d0c7), Color(0xFF3c899b)],
+        colors: [
+          Color(0xFF80d0c7),
+          Color(0xFF3c899b),
+        ],
         radius: .7,
       )),
       child: Column(
@@ -48,7 +51,7 @@ class _HomePageState extends State<HomePage> {
               widget.title,
               style: const TextStyle(
                 color: Colors.amber,
-                fontSize: 30,
+                fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -59,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,
             height: size.height * 0.60,
             decoration: BoxDecoration(
-              color: Theme.of(context).dialogBackgroundColor, //Theme.of(context).backgroundColor,
+              color: Theme.of(context).dialogBackgroundColor,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(100),
                 topRight: Radius.circular(0),
@@ -68,7 +71,9 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                widget.userLogged ? WelcomePage(jwtTokenInfo: widget.jwtTokenInfo!) : const LoginForm(),
+                widget.userLogged
+                    ? WelcomePage(jwtTokenInfo: widget.jwtTokenInfo!, title: widget.title)
+                    : const LoginForm(),
                 widget.erroMessage != null
                     ? Container(
                         child: Text(

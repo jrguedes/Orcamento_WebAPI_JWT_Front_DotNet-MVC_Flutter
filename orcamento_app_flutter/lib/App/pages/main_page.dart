@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_orcamento.dart';
@@ -72,7 +73,7 @@ class _MainPageState extends State<MainPage> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           HomePage(title: 'OrçApp', userLogged: true, jwtTokenInfo: jwtTokenInfo),
-          const Center(child: Text('Tela 2')),
+          _buildTela2(),
           const OrcamentosPage(),
           const CadastroOrcamento(),
         ],
@@ -96,6 +97,32 @@ class _MainPageState extends State<MainPage> {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         HomePage(title: 'OrçApp', userLogged: false),
+      ],
+    );
+  }
+
+  Widget _buildTela2() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const FaIcon(
+          FontAwesomeIcons.circleDollarToSlot,
+          color: Colors.amber,
+          size: 350,
+        ),
+        Title(
+          color: Colors.amber,
+          title: widget.title,
+          child: Text(
+            widget.title,
+            style: const TextStyle(
+              color: Colors.amber,
+              fontSize: 80,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
       ],
     );
   }
