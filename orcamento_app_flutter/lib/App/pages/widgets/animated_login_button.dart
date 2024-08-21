@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/widgets/custom_cupertino_activity_indicator.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/value_state.dart';
@@ -22,11 +23,6 @@ class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        /*
-        setState(() {
-          selected = !selected;
-        });
-        */
         widget.buttonTappedState.value = true;
         widget.onTap();
       },
@@ -37,7 +33,7 @@ class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
               width: widget.buttonTappedState.value ? 50 : 350,
               height: 50,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 123, 86, 196),
+                color: const Color(0xFF3b889a),
                 borderRadius: BorderRadius.circular(widget.buttonTappedState.value ? 25 : 10),
               ),
               alignment: Alignment.center,
@@ -45,7 +41,11 @@ class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
               curve: Curves.fastOutSlowIn,
               child: widget.buttonTappedState.value
                   ? const CustomCupertinoActivityIndicator(color: CupertinoColors.activeOrange, radius: 20)
-                  : const FlutterLogo(size: 30),
+                  : const FaIcon(
+                      FontAwesomeIcons.sackDollar,
+                      color: Colors.amber,
+                      size: 30,
+                    ), //const FlutterLogo(size: 30),
             );
           }),
     );

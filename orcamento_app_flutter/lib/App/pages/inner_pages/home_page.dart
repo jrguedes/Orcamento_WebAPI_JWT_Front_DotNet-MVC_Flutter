@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/login_form.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/welcome_page.dart';
@@ -36,14 +37,12 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Image(
-              height: 130,
-              width: 120,
-              fit: BoxFit.cover,
-              image: AssetImage(
-                'lib/app/assets/images/2606581_5917_ouro.png',
-              )),
-          const SizedBox(height: 15),
+          const FaIcon(
+            FontAwesomeIcons.circleDollarToSlot,
+            color: Colors.amber,
+            size: 140,
+          ),
+          const SizedBox(height: 40),
           Container(
             padding: const EdgeInsets.only(top: 10),
             width: double.infinity,

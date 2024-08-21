@@ -22,19 +22,19 @@ class ThemeService {
     switch (themeType) {
       case ThemeType.defaultTheme:
         return ThemeData(
-          primarySwatch: customColor,
-          primaryColor: customColor,
-          scaffoldBackgroundColor: Colors.white,
-          dialogBackgroundColor: Colors.white,
-          secondaryHeaderColor: customColor[700],
-          cardColor: Colors.white,
-          cardTheme: _getCardTheme(),
-          hintColor: customColor[700],
-          focusColor: customColor[900],
-          disabledColor: customColor[200],
-          highlightColor: customColor[900],
-          elevatedButtonTheme: _getElevatedButtonThemeData(),
-        );
+            primarySwatch: customColor,
+            primaryColor: customColor,
+            scaffoldBackgroundColor: Colors.white,
+            dialogBackgroundColor: Colors.white,
+            secondaryHeaderColor: customColor[700],
+            cardColor: Colors.white,
+            cardTheme: _getCardTheme(),
+            hintColor: customColor[700],
+            focusColor: customColor[900],
+            disabledColor: customColor[200],
+            highlightColor: customColor[900],
+            elevatedButtonTheme: _getElevatedButtonThemeData(),
+            buttonTheme: _buildButtonData());
 
       case ThemeType.darkTheme:
         return ThemeData(
@@ -72,5 +72,9 @@ class ThemeService {
       elevation: 5,
       shadowColor: Color(0xFF3b889a),
     );
+  }
+
+  static ButtonThemeData _buildButtonData() {
+    return const ButtonThemeData(buttonColor: Color(0xFF3b889a));
   }
 }

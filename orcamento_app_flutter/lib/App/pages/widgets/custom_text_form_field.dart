@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(bottom: 12),
       child: TextFormField(
+        style: TextStyle(color: Colors.black54),
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: icon,

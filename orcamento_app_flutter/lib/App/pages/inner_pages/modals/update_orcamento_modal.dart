@@ -35,7 +35,7 @@ class UpdateOrcamentoModal extends StatelessWidget {
                 labelText: 'O que você gostaria de orçar?',
                 hintText: 'O que você gostaria de orçar?',
                 controller: _orcamentoEdtController,
-                icon: const Icon(Icons.attach_money_outlined),
+                icon: Icon(Icons.attach_money_outlined, color: Theme.of(context).hintColor),
               ),
               const SizedBox(height: 25),
               CupertinoButton.filled(

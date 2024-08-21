@@ -41,13 +41,13 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Orçamento', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Orçamento', style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.black54)),
             const SizedBox(height: 30),
             CustomTextFormField(
               labelText: 'O que você gostaria de orçar?',
               hintText: 'O que você gostaria de orçar?',
               controller: _orcamentoEdtController,
-              icon: const Icon(Icons.attach_money_outlined),
+              icon: Icon(Icons.attach_money_outlined, color: Theme.of(context).hintColor),
             ),
             const SizedBox(height: 30),
             Column(

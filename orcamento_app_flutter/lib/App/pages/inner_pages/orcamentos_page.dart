@@ -136,9 +136,10 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: item.isExpanded ? FontWeight.w900 : FontWeight.w600,
-                            color: item.isExpanded ? Colors.black87 : Colors.black87),
+                          fontSize: 20,
+                          fontWeight: item.isExpanded ? FontWeight.w900 : FontWeight.w600,
+                          color: item.isExpanded ? Colors.black54 : Colors.black54,
+                        ),
                       )),
                 ],
               ),
@@ -171,7 +172,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                 item.descricao,
                 minFontSize: 14,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
                 maxLines: 2,
               ),
               Text(
