@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ModalDialog {
@@ -14,7 +13,10 @@ class ModalDialog {
                     Text(
                       title,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(color: Theme.of(context).secondaryHeaderColor),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

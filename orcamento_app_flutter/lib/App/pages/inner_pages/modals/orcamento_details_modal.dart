@@ -122,12 +122,17 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                   padding: const EdgeInsets.all(5),
                   height: 55,
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        width: 0,
+                        color: Colors.white,
+                      )),
                   child: AutoSizeText(
                     itens[index].descricao,
                     minFontSize: 14,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
                     maxLines: 2,
                   ),
                 ),

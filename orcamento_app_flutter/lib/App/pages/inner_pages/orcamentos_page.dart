@@ -137,8 +137,8 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 20,
-                          fontWeight: item.isExpanded ? FontWeight.w900 : FontWeight.w600,
-                          color: item.isExpanded ? Colors.black54 : Colors.black54,
+                          fontWeight: item.isExpanded ? FontWeight.w600 : FontWeight.w900,
+                          color: Theme.of(context).secondaryHeaderColor,
                         ),
                       )),
                 ],
