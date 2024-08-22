@@ -25,7 +25,7 @@ class ModalDialog {
                   ],
                 ),
               ),
-              contentPadding: const EdgeInsets.only(top: 30),
+              contentPadding: const EdgeInsets.only(top: 0),
               content: content,
             ));
   }

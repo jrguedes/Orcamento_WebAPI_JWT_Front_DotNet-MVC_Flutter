@@ -19,8 +19,8 @@ class UpdateOrcamentoModal extends StatelessWidget {
     _orcamentoController = context.read();
     var _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.zero,
-      height: 170,
+      padding: const EdgeInsets.only(top: 30),
+      height: 200,
       width: _size.width - 30,
       child: Card(
         color: Colors.white,

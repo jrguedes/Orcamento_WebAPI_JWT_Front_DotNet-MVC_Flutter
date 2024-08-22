@@ -50,13 +50,17 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
           padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
           child: Column(children: [
             Container(
-              width: double.infinity,
+              padding: EdgeInsets.zero,
               alignment: Alignment.topLeft,
+              height: 20,
+              width: double.infinity,
               child: CupertinoButton(
+                padding: EdgeInsets.zero,
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Text('Voltar'),
               ),
             ),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
                 await ModalDialog.show(

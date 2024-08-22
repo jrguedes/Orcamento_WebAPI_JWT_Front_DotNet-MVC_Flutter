@@ -41,7 +41,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
               children: [
                 AutoSizeText(
                   orcamento.descricao,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black54),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   minFontSize: 23,
