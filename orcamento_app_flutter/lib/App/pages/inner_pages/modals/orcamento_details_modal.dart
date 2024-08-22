@@ -112,7 +112,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             borderRadius: BorderRadius.circular(14),
           ),
           child: Container(
-            height: 255,
+            height: 325,
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: Column(
@@ -120,6 +120,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  alignment: Alignment.center,
                   padding: const EdgeInsets.all(7),
                   height: 55,
                   width: double.infinity,
@@ -128,6 +129,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                     itens[index].descricao,
                     minFontSize: 14,
                     overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
                     maxLines: 2,
                   ),
@@ -141,39 +143,17 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutoSizeText(
-                        itens[index].local,
-                        minFontSize: 14,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
-                        maxLines: 2,
-                      ),
-                      const SizedBox(height: 8),
-                      AutoSizeText(
-                        itens[index].responsavelOrcamento,
-                        minFontSize: 14,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
-                        maxLines: 1,
-                      ),
-                      AutoSizeText(
-                        itens[index].telefone,
-                        minFontSize: 14,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
-                        maxLines: 1,
-                      ),
-                      AutoSizeText(
-                        NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
-                        minFontSize: 14,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
-                        maxLines: 1,
-                      ),
+                      _buildText(label: 'Estabelecimento', description: itens[index].local),
+                      const SizedBox(height: 5),
+                      _buildText(label: 'Responsável', description: itens[index].responsavelOrcamento),
+                      const SizedBox(height: 5),
+                      _buildText(label: 'Telefone', description: itens[index].telefone),
+                      const SizedBox(height: 5),
+                      _buildText(
+                          label: 'Valor', description: NumberFormat('###.0#', 'pt_BR').format(itens[index].valor)),
                     ],
                   ),
                 ),
-                //const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -195,6 +175,23 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
         const SizedBox(height: 3),
         const Divider(thickness: 0, indent: 50, endIndent: 50),
         const SizedBox(height: 3),
+      ],
+    );
+  }
+
+  Widget _buildText({required String label, required String description, int maxLines = 1}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: const TextStyle(fontSize: 11, color: Colors.black54)),
+        AutoSizeText(
+          description,
+          minFontSize: 14,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+          maxLines: maxLines,
+        ),
       ],
     );
   }
