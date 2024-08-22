@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +37,8 @@ class UpdateOrcamentoModal extends StatelessWidget {
                 icon: Icon(Icons.attach_money_outlined, color: Theme.of(context).hintColor),
               ),
               const SizedBox(height: 25),
-              CupertinoButton.filled(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(minimumSize: const Size(200, 40)),
                 onPressed: () async {
                   await _orcamentoController.updateOrcamento(orcamento, _orcamentoEdtController.text);
                   Navigator.of(context).pop();
