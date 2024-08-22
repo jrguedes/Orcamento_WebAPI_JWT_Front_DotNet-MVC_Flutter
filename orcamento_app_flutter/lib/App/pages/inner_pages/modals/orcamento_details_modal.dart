@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:orcamento_app_flutter/App/controllers/item_orcamento/item_orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/item_orcamento_model.dart';
@@ -111,23 +112,18 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             borderRadius: BorderRadius.circular(14),
           ),
           child: Container(
-            height: 250,
+            height: 255,
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(7),
                   height: 55,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                        width: 0,
-                        color: Colors.white,
-                      )),
+                  decoration: _buildInsideContainerBorderDecoration(),
                   child: AutoSizeText(
                     itens[index].descricao,
                     minFontSize: 14,
@@ -136,41 +132,53 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                     maxLines: 2,
                   ),
                 ),
-                AutoSizeText(
-                  itens[index].estabelecimento,
-                  minFontSize: 14,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  maxLines: 2,
+                const SizedBox(height: 15),
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  width: double.infinity,
+                  decoration: _buildInsideContainerBorderDecoration(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeText(
+                        itens[index].local,
+                        minFontSize: 14,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+                        maxLines: 2,
+                      ),
+                      const SizedBox(height: 8),
+                      AutoSizeText(
+                        itens[index].responsavelOrcamento,
+                        minFontSize: 14,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+                        maxLines: 1,
+                      ),
+                      AutoSizeText(
+                        itens[index].telefone,
+                        minFontSize: 14,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+                        maxLines: 1,
+                      ),
+                      AutoSizeText(
+                        NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
+                        minFontSize: 14,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                AutoSizeText(
-                  itens[index].responsavelOrcamento,
-                  minFontSize: 14,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                ),
-                AutoSizeText(
-                  itens[index].telefone,
-                  minFontSize: 14,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                ),
-                AutoSizeText(
-                  NumberFormat('###.0#', 'pt_BR').format(itens[index].valor),
-                  minFontSize: 14,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                ),
-                const SizedBox(height: 25),
+                //const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(width: 5),
-                    const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
+                    const FaIcon(FontAwesomeIcons.trash, color: Color.fromARGB(209, 156, 8, 8)),
                     CupertinoButton(
                       onPressed: () async {
                         await _controller.deleteOrcamento(itens[index]);
@@ -178,7 +186,6 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                       },
                       child: const Text('Excluir'),
                     ),
-                    const SizedBox(width: 5),
                   ],
                 )
               ],
@@ -190,6 +197,15 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
         const SizedBox(height: 3),
       ],
     );
+  }
+
+  BoxDecoration _buildInsideContainerBorderDecoration() {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          width: 0,
+          color: Colors.white,
+        ));
   }
 
   Widget _emptyMessage() {
