@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
@@ -182,7 +183,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.edit, color: Colors.black87),
+                  const FaIcon(FontAwesomeIcons.pen, color: Colors.black87),
                   CupertinoButton(
                     onPressed: () async {
                       await ModalDialog.show(
@@ -195,7 +196,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     child: const Text('Editar'),
                   ),
                   const SizedBox(width: 5),
-                  const Icon(Icons.delete_outline_outlined, color: Colors.redAccent),
+                  const FaIcon(FontAwesomeIcons.trash, color: Color.fromARGB(209, 156, 8, 8)),
                   CupertinoButton(
                     onPressed: () async {
                       await _controller.deleteOrcamento(item);
@@ -204,7 +205,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     child: const Text('Excluir'),
                   ),
                   const SizedBox(width: 5),
-                  const Icon(Icons.newspaper, color: Colors.deepPurpleAccent),
+                  const FaIcon(FontAwesomeIcons.newspaper, color: Colors.deepPurpleAccent),
                   CupertinoButton(
                     onPressed: () async {
                       await ModalDialog.show(
