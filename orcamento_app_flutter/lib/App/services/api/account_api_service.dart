@@ -23,7 +23,12 @@ class AccountApiService extends APIService {
   Future<bool> _validateToken(String token) async {
     bool tokenIsValid = false;
     try {
-      var response = await dio.get<bool>('${baseResourcePath}Token/');
+      var response = await dio.get<bool>(
+        '${baseResourcePath}Token/',
+        options: Options(
+          headers: putTokenInAuthorizationHeader(token),
+        ),
+      );
 
       if (response.data != null) {
         tokenIsValid = response.data as bool;
