@@ -62,9 +62,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     child: Text(
                       'Mes',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Theme.of(context).dialogBackgroundColor /*backgroundColor*/),
+                          fontWeight: FontWeight.bold, fontSize: 30, color: Theme.of(context).dialogBackgroundColor),
                     ),
                   ),
                 ),
@@ -158,9 +156,11 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
   }
 
   Widget _buildCardBody(OrcamentoModel item) {
+    var size = MediaQuery.sizeOf(context);
+    double iconSize = size.width < 430 ? 15 : 24;
     return Card(
       child: Container(
-        height: 170,
+        height: 155,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Container(
@@ -183,7 +183,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const FaIcon(FontAwesomeIcons.pen, color: Colors.black87),
+                  FaIcon(FontAwesomeIcons.pen, color: Colors.black87, size: iconSize),
                   CupertinoButton(
                     onPressed: () async {
                       await ModalDialog.show(
@@ -195,8 +195,8 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     },
                     child: const Text('Editar'),
                   ),
-                  const SizedBox(width: 5),
-                  const FaIcon(FontAwesomeIcons.trash, color: Color.fromARGB(209, 156, 8, 8)),
+                  //const SizedBox(width: 5),
+                  FaIcon(FontAwesomeIcons.trash, color: Color.fromARGB(209, 156, 8, 8), size: iconSize),
                   CupertinoButton(
                     onPressed: () async {
                       await _controller.deleteOrcamento(item);
@@ -204,8 +204,8 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     },
                     child: const Text('Excluir'),
                   ),
-                  const SizedBox(width: 5),
-                  const FaIcon(FontAwesomeIcons.newspaper, color: Colors.deepPurpleAccent),
+                  //const SizedBox(width: 5),
+                  FaIcon(FontAwesomeIcons.newspaper, color: Colors.deepPurpleAccent, size: iconSize),
                   CupertinoButton(
                     onPressed: () async {
                       await ModalDialog.show(

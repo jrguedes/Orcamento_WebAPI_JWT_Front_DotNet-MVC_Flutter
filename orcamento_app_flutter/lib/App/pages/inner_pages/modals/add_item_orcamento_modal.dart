@@ -24,7 +24,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     _bottomBar = context.read();
     _controller = context.read();
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery.sizeOf(context);
 
     return Container(
       padding: EdgeInsets.zero,

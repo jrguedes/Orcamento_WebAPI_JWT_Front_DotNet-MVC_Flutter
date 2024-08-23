@@ -10,15 +10,30 @@ class ModalDialog {
               title: Center(
                 child: Column(
                   children: [
-                    Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(color: Theme.of(context).secondaryHeaderColor),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    Container(
+                      width: double.infinity,
+                      //color: Colors.amber,
+                      child: Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            //color: Colors.amber,
+                            child: const BackButton(),
+                          ),
+                          Expanded(
+                            child: Text(
+                              title,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(color: Theme.of(context).secondaryHeaderColor),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 0, indent: 30, endIndent: 30),
