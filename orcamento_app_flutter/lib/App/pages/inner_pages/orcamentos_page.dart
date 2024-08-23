@@ -44,32 +44,15 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
         children: [
           Row(
             children: [
-              Container(
-                width: 100,
-                child: TextButton(
-                  onPressed: () => {
-                    ConfirmationDialog.show(
-                      context: context,
-                      title: 'Confirmação',
-                      description: 'Tem certeza que deseja excluir?',
-                      okPress: () => {},
-                    )
-                  },
-                  child: const Text(
-                    'BT',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black38),
-                  ),
-                ),
-              ),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.only(left: 4),
                   color: Theme.of(context).hintColor,
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () => {print('Pressed')},
                     child: Text(
-                      'Mes',
+                      'Orçamentos',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 30, color: Theme.of(context).dialogBackgroundColor),
                     ),
