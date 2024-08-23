@@ -13,20 +13,22 @@ class AccountController {
 
   AccountController(this.service, this.signInStore);
 
-  Future<void> signIn({String? email, String? password}) async {
-    buttonTappedState.value = true;
+  Future<void> signIn({String? email, String? password, verifyCachedLogin = false}) async {
+    buttonTappedState.value = !verifyCachedLogin;
 
     String userEmail = '';
     String userPassword = '';
 
-    var jwtTokenInfo = await CacheService.getJWTTokenInfo();
+    //var jwtTokenInfo = await CacheService.getJWTTokenInfo();
 
+    /*
     //PROVISORIO
     //depois verificar se o token é valido
     if (jwtTokenInfo != null) {
       signInStore.value = SuccessObjectState<TokenModel>(jwtTokenInfo);
       return;
     }
+    */
 
     if (email != null && password != null) {
       userEmail = email;

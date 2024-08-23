@@ -80,6 +80,17 @@ class _MainPageState extends State<MainPage> {
       );
     }
 
+    if (state is InitialObjectState) {
+      return PageView(
+        pageSnapping: false,
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          HomePage(title: 'OrçApp', userLogged: false),
+        ],
+      );
+    }
+
     if (state is ErrorObjectState) {
       return PageView(
         pageSnapping: false,

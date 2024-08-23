@@ -18,7 +18,6 @@ class AnimatedLoginButton extends StatefulWidget {
 }
 
 class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
-  //bool selected = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

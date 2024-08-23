@@ -9,7 +9,7 @@ class ServiceManager {
   Future<bool> initializeServices() async {
     await CertificateService().initService();
     await initializeDateFormatting('pt_BR', null);
-    await accountController.signIn();
+    await accountController.signIn(verifyCachedLogin: true);
     return true;
   }
 }

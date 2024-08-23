@@ -11,11 +11,17 @@ class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
   SignInStore(this.service) : super(InitialObjectState<TokenModel?>(null));
 
   Future<void> signIn(LoginModel login) async {
-    value = LoadingObjectState();
     try {
+      if (login.email == '' && login.password == '') {
+        value = InitialObjectState(null);
+        //return;
+      }
+
+      value = LoadingObjectState();
+
       final jwtTokenInfo = await service.signIn(login);
       if (jwtTokenInfo == null) {
-        value = ErrorObjectState('Usuário ou senha inválidos!');
+        value = InitialObjectState(null);
       } else {
         value = SuccessObjectState<TokenModel?>(jwtTokenInfo);
       }
