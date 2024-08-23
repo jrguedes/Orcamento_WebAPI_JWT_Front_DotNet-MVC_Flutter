@@ -78,7 +78,9 @@ class _HomePageState extends State<HomePage> {
                     ? Container(
                         child: Text(
                           widget.erroMessage!,
-                          style: TextStyle(color: Colors.red[300]),
+                          style: const TextStyle(
+                            color: Color.fromARGB(209, 156, 8, 8),
+                          ),
                         ),
                       )
                     : Container(),

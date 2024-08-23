@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:orcamento_app_flutter/App/services/api/api_service.dart';
+import 'package:orcamento_app_flutter/App/services/exceptions/not_found_exception.dart';
 
 import '../../models/login_model.dart';
 import '../../models/token_model.dart';
@@ -18,6 +19,9 @@ class AccountApiService extends APIService {
         await CacheService.setJWTTokenInfo(tokenModel);
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        throw NotFoundException("Usuário ou senha inválidos!");
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;

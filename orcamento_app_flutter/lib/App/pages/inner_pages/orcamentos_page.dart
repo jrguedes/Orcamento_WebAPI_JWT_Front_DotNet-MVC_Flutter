@@ -77,13 +77,8 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                         ));
                       }
 
-                      if (value is ErrorListState) {
-                        return const Center(
-                          child: Text(
-                            'Erro', //value.message,
-                            //style: TextStyle(color: Theme.of(context).errorColor),
-                          ),
-                        );
+                      if (value is ErrorListState<OrcamentoModel>) {
+                        return _errorMessage(value.message);
                       }
 
                       if (value is SuccessListState<OrcamentoModel>) {
@@ -203,7 +198,6 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     },
                     child: const Text('Excluir'),
                   ),
-                  //const SizedBox(width: 5),
                   FaIcon(FontAwesomeIcons.newspaper, color: Colors.deepPurpleAccent, size: iconSize),
                   CupertinoButton(
                     onPressed: () async {
@@ -218,6 +212,25 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                 ],
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _errorMessage(String message) {
+    return Center(
+      child: Container(
+        alignment: Alignment.center,
+        height: 350,
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.black87,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

@@ -3,6 +3,8 @@ import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/api_service.dart';
 import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 
+import '../exceptions/not_found_exception.dart';
+
 class OrcamentoApiService extends APIService {
   OrcamentoApiService() : super(baseResourcePath: 'Orcamentos/');
 
@@ -85,6 +87,9 @@ class OrcamentoApiService extends APIService {
         orcamentos = response.data!.map((e) => OrcamentoModel.fromMap(e)).toList();
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        throw NotFoundException('Que pena! \n\n Não há orçamentos cadastrados');
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
