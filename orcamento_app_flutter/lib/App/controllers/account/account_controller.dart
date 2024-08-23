@@ -19,23 +19,12 @@ class AccountController {
     String userEmail = '';
     String userPassword = '';
 
-    //var jwtTokenInfo = await CacheService.getJWTTokenInfo();
-
-    /*
-    //PROVISORIO
-    //depois verificar se o token é valido
-    if (jwtTokenInfo != null) {
-      signInStore.value = SuccessObjectState<TokenModel>(jwtTokenInfo);
-      return;
-    }
-    */
-
     if (email != null && password != null) {
       userEmail = email;
       userPassword = password;
     }
 
-    await signInStore.signIn(LoginModel(email: userEmail, password: userPassword));
+    await signInStore.signIn(LoginModel(email: userEmail, password: userPassword), verifyCachedLogin);
 
     if (signInStore.value is ErrorObjectState) {
       buttonTappedState.value = false;

@@ -10,13 +10,8 @@ class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
   final AccountApiService service;
   SignInStore(this.service) : super(InitialObjectState<TokenModel?>(null));
 
-  Future<void> signIn(LoginModel login) async {
+  Future<void> signIn(LoginModel login, bool verifyCachedLogin) async {
     try {
-      if (login.email == '' && login.password == '') {
-        value = InitialObjectState(null);
-        //return;
-      }
-
       value = LoadingObjectState();
 
       final jwtTokenInfo = await service.signIn(login);
@@ -26,7 +21,11 @@ class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
         value = SuccessObjectState<TokenModel?>(jwtTokenInfo);
       }
     } on NotFoundException catch (e) {
-      value = ErrorObjectState(e.message);
+      if (verifyCachedLogin) {
+        value = InitialObjectState(null);
+      } else {
+        value = ErrorObjectState(e.message);
+      }
     } catch (e) {
       value = ErrorObjectState('Há um problema de conexão com a API');
     }
