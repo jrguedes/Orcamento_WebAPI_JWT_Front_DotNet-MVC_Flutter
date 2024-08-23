@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/orcamento_model.dart';
 import '../../../stores/itens_orcamento_store.dart';
+import '../../widgets/confirmation_dialog.dart';
 import 'add_item_orcamento_modal.dart';
 import 'modal_dialog.dart';
 
@@ -154,8 +155,16 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
                     const FaIcon(FontAwesomeIcons.trash, color: Color.fromARGB(209, 156, 8, 8)),
                     CupertinoButton(
                       onPressed: () async {
-                        await _controller.deleteOrcamento(itens[index]);
-                        await _store.loadItensOrcamento(widget.orcamento.id);
+                        await ConfirmationDialog.show(
+                          context: context,
+                          title: 'Confirmação',
+                          description: 'Tem certeza que deseja excluir?',
+                          okPress: () async {
+                            await _controller.deleteOrcamento(itens[index]);
+                            await _store.loadItensOrcamento(widget.orcamento.id);
+                          },
+                          cancelPress: () {},
+                        );
                       },
                       child: const Text('Excluir'),
                     ),

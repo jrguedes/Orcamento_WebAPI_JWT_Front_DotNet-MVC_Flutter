@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,6 +12,7 @@ import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
 import 'package:provider/provider.dart';
 
 import '../../states/generic_states/list_state.dart';
+import '../widgets/confirmation_dialog.dart';
 import '../widgets/custom_cupertino_activity_indicator.dart';
 import 'modals/update_orcamento_modal.dart';
 
@@ -45,7 +47,14 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
               Container(
                 width: 100,
                 child: TextButton(
-                  onPressed: () => {}, //_showYearBottomSheet,
+                  onPressed: () => {
+                    ConfirmationDialog.show(
+                      context: context,
+                      title: 'Confirmação',
+                      description: 'Tem certeza que deseja excluir?',
+                      okPress: () => {},
+                    )
+                  },
                   child: const Text(
                     'BT',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black38),
@@ -160,7 +169,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
     double iconSize = size.width < 430 ? 15 : 24;
     return Card(
       child: Container(
-        height: 155,
+        height: 170,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Container(
@@ -195,12 +204,19 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     },
                     child: const Text('Editar'),
                   ),
-                  //const SizedBox(width: 5),
-                  FaIcon(FontAwesomeIcons.trash, color: Color.fromARGB(209, 156, 8, 8), size: iconSize),
+                  FaIcon(FontAwesomeIcons.trash, color: const Color.fromARGB(209, 156, 8, 8), size: iconSize),
                   CupertinoButton(
                     onPressed: () async {
-                      await _controller.deleteOrcamento(item);
-                      await _orcamentosStore.loadOrcamentos();
+                      await ConfirmationDialog.show(
+                        context: context,
+                        title: 'Confirmação',
+                        description: 'Tem certeza que deseja excluir?',
+                        okPress: () async {
+                          await _controller.deleteOrcamento(item);
+                          await _orcamentosStore.loadOrcamentos();
+                        },
+                        cancelPress: () {},
+                      );
                     },
                     child: const Text('Excluir'),
                   ),
