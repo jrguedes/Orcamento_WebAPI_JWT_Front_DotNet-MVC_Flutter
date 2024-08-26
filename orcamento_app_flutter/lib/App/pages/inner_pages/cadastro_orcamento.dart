@@ -49,6 +49,7 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
               labelText: 'O que você gostaria de orçar?',
               hintText: 'O que você gostaria de orçar?',
               controller: _orcamentoEdtController,
+              keyboardType: TextInputType.text,
               icon: Icon(Icons.attach_money_outlined, color: Theme.of(context).hintColor),
             ),
             const SizedBox(height: 30),

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({Key? key, this.labelText, this.hintText, this.errorText, this.controller, this.icon})
+  const CustomTextFormField(
+      {Key? key, this.labelText, this.hintText, this.errorText, this.controller, this.icon, this.keyboardType})
       : super(key: key);
   final String? labelText;
   final String? hintText;
   final String? errorText;
   final Widget? icon;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: 12),
       child: TextFormField(
+        keyboardType: keyboardType,
         style: TextStyle(color: Colors.black54),
         controller: controller,
         decoration: InputDecoration(

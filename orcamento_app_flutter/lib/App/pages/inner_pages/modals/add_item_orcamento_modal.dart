@@ -50,30 +50,37 @@ class AddItemOrcamentoModal extends StatelessWidget {
                 CustomTextFormField(
                   labelText: 'Estabelecimento',
                   hintText: 'Estabelecimento',
+                  keyboardType: TextInputType.name,
                   controller: _estabelecimentoEdtController,
                   icon: Icon(Icons.store, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Telefone',
                   hintText: 'Telefone',
+                  keyboardType: TextInputType.phone,
                   controller: _telefoneEdtController,
                   icon: Icon(Icons.phone, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Responsável',
                   hintText: 'Responsável',
+                  keyboardType: TextInputType.name,
                   controller: _responsavelEdtController,
                   icon: Icon(Icons.co_present_rounded, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Valor',
                   hintText: 'Valor',
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
                   controller: _valorEdtController,
                   icon: Icon(Icons.attach_money_outlined, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
                   labelText: 'Descrição',
                   hintText: 'Descrição',
+                  keyboardType: TextInputType.text,
                   controller: _descricaoEdtController,
                   icon: Icon(Icons.description_outlined, color: Theme.of(context).hintColor),
                 ),
