@@ -2,14 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controllers/bottom_bar/bottom_bar_controller.dart';
 import '../../../controllers/item_orcamento/item_orcamento_controller.dart';
 import '../../../models/orcamento_model.dart';
 import '../../widgets/custom_text_form_field.dart';
 
 class AddItemOrcamentoModal extends StatelessWidget {
   final OrcamentoModel orcamento;
-  late final BottomBarController _bottomBar;
   late final ItemOrcamentoController _controller;
 
   final TextEditingController _estabelecimentoEdtController = TextEditingController(text: '');
@@ -22,7 +20,6 @@ class AddItemOrcamentoModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _bottomBar = context.read();
     _controller = context.read();
     var size = MediaQuery.sizeOf(context);
 
@@ -98,7 +95,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
                           _estabelecimentoEdtController.text,
                           _telefoneEdtController.text,
                           _responsavelEdtController.text,
-                          double.parse(_valorEdtController.text),
+                          double.parse(_valorEdtController.text.replaceAll(',', '.')),
                           _descricaoEdtController.text);
                       Navigator.of(context).pop();
                     },

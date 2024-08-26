@@ -6,7 +6,7 @@ class OrcamentoController {
   OrcamentoController(this.service);
 
   Future<void> getOrcamentos() async {
-    var orcamentos = await service.getOrcamentos();
+    await service.getOrcamentos();
     return;
   }
 

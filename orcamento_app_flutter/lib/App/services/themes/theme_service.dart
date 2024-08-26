@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../../data/enums/theme_type.dart';
 
 //https://coolors.co/3c899b-49111c-f2f4f3-a9927d-5e503f

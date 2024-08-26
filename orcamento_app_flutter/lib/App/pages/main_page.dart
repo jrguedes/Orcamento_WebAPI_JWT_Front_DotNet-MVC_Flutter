@@ -26,8 +26,6 @@ class _MainPageState extends State<MainPage> {
   late final PageController _pageController;
   late final SignInStore _signInStore;
   late final BottomBarController _bottomBar;
-  //final GlobalKey<ConvexAppBarState> _appBarKey = GlobalKey<ConvexAppBarState>();
-
   late final OrcamentoController _orcamentoController;
 
   @override
