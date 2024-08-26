@@ -20,6 +20,7 @@ class AnimatedLoginButton extends StatefulWidget {
 class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.sizeOf(context);
     return GestureDetector(
       onTap: () {
         widget.buttonTappedState.value = true;
@@ -29,7 +30,7 @@ class _AnimatedLoginButtonState extends State<AnimatedLoginButton> {
           valueListenable: widget.buttonTappedState,
           builder: (context, value, child) {
             return AnimatedContainer(
-              width: widget.buttonTappedState.value ? 50 : 350,
+              width: widget.buttonTappedState.value ? 50 : size.width - 85,
               height: 50,
               decoration: BoxDecoration(
                 color: const Color(0xFF3b889a),
