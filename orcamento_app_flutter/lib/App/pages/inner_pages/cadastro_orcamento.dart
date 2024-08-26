@@ -66,12 +66,6 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
                         content: OrcamentoDetailsModal(orcamento: orcamento),
                       );
 
-                      await ModalDialog.show(
-                        context: context,
-                        title: 'Adicionar ao orçamento',
-                        content: AddItemOrcamentoModal(orcamento: orcamento),
-                      );
-
                       _bottomBar.convexAppBarTap(LISTA_ORCAMENTOS);
                     }
                   },
