@@ -26,6 +26,7 @@ class _MainPageState extends State<MainPage> {
   late final PageController _pageController;
   late final SignInStore _signInStore;
   late final BottomBarController _bottomBar;
+  //final GlobalKey<ConvexAppBarState> _appBarKey = GlobalKey<ConvexAppBarState>();
 
   late final OrcamentoController _orcamentoController;
 
@@ -141,6 +142,7 @@ class _MainPageState extends State<MainPage> {
   ConvexAppBar _buildConvexAppBar(BuildContext context, int index, state) {
     if (state is LoadingObjectState) {
       return ConvexAppBar(
+        key: _bottomBar.appBarKey,
         style: TabStyle.fixedCircle,
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [
@@ -152,6 +154,7 @@ class _MainPageState extends State<MainPage> {
     }
     if (state is SuccessObjectState<TokenModel?> && state.value != null) {
       return ConvexAppBar(
+        key: _bottomBar.appBarKey,
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
@@ -165,6 +168,7 @@ class _MainPageState extends State<MainPage> {
     }
 
     return ConvexAppBar(
+      key: _bottomBar.appBarKey,
       style: TabStyle.fixedCircle,
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       items: const [
