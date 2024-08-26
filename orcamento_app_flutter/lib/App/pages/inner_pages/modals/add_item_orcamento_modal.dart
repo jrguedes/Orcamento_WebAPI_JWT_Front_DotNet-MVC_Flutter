@@ -24,10 +24,11 @@ class AddItemOrcamentoModal extends StatelessWidget {
     _controller = context.read();
     var size = MediaQuery.sizeOf(context);
 
-    var maskFormatter9DigitsPhone = new MaskTextInputFormatter(
-        mask: '(##) # ####-####', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
-    var maskFormatter8DigitsPhone = new MaskTextInputFormatter(
-        mask: '(##) ####-####', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
+    var maskFormatter8DigitsPhone = MaskTextInputFormatter(
+      mask: '(##) ####-####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy,
+    );
 
     return Container(
       padding: EdgeInsets.zero,
@@ -62,9 +63,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
                   icon: Icon(Icons.store, color: Theme.of(context).hintColor),
                 ),
                 CustomTextFormField(
-                  inputFormatters: _telefoneEdtController.text.length <= 10
-                      ? [maskFormatter8DigitsPhone]
-                      : [maskFormatter9DigitsPhone],
+                  inputFormatters: [maskFormatter8DigitsPhone],
                   labelText: 'Telefone',
                   hintText: 'Telefone',
                   keyboardType: TextInputType.phone,
