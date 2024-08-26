@@ -29,7 +29,7 @@ class UpdateOrcamentoModal extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Container(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 7),
-          child: Column(
+          child: ListView(
             children: [
               CustomTextFormField(
                 labelText: 'O que você gostaria de orçar?',

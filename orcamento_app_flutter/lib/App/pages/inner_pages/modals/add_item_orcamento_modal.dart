@@ -39,12 +39,16 @@ class AddItemOrcamentoModal extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: ListView(
               children: [
-                AutoSizeText(
-                  orcamento.descricao,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black54),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  minFontSize: 23,
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  child: AutoSizeText(
+                    orcamento.descricao,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black54),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    minFontSize: 23,
+                  ),
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
