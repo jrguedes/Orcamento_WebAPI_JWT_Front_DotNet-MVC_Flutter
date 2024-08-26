@@ -37,7 +37,7 @@ class AddItemOrcamentoModal extends StatelessWidget {
           padding: const EdgeInsets.only(left: 7, right: 7, top: 7),
           child: Container(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            child: Column(
+            child: ListView(
               children: [
                 AutoSizeText(
                   orcamento.descricao,
