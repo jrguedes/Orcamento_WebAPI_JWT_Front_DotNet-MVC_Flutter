@@ -44,24 +44,18 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-        return ValueListenableBuilder(
-            valueListenable: _signInStore,
-            builder: (context, tokenInfoState, child) {
-              return _buildPageView(tokenInfoState);
-            });
-      }),
-      bottomNavigationBar: ValueListenableBuilder<int>(
-        valueListenable: _bottomBar.indexPageState,
-        builder: (context, index, child) {
+        body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
           return ValueListenableBuilder(
               valueListenable: _signInStore,
               builder: (context, tokenInfoState, child) {
-                return _buildConvexAppBar(context, index, tokenInfoState);
+                return _buildPageView(tokenInfoState);
               });
-        },
-      ),
-    );
+        }),
+        bottomNavigationBar: ValueListenableBuilder(
+            valueListenable: _signInStore,
+            builder: (context, tokenInfoState, child) {
+              return _buildConvexAppBar(context, HOME_PAGE, tokenInfoState);
+            }));
   }
 
   PageView _buildPageView(ObjectState<TokenModel?> state) {
@@ -148,7 +142,7 @@ class _MainPageState extends State<MainPage> {
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
         ],
-        initialActiveIndex: HOME_PAGE,
+        initialActiveIndex: index,
         onTap: _bottomBar.convexAppBarTap,
       );
     }
@@ -174,7 +168,7 @@ class _MainPageState extends State<MainPage> {
       items: const [
         TabItem(icon: Icons.home, title: 'Home'),
       ],
-      initialActiveIndex: HOME_PAGE,
+      initialActiveIndex: index,
       onTap: _bottomBar.convexAppBarTap,
     );
   }

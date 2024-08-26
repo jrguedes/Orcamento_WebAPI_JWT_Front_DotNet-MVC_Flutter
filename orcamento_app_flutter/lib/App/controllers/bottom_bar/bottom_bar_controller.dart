@@ -6,8 +6,8 @@ typedef TAnimateToPage = Function(int page, {required Duration duration, require
 
 class BottomBarController {
   final TAnimateToPage animateToPage;
-  final ValueNotifier<int> _indexPage = ValueNotifier(HOME_PAGE);
-  ValueNotifier<int> get indexPageState => _indexPage;
+  //final ValueNotifier<int> _indexPage = ValueNotifier(HOME_PAGE);
+  //ValueNotifier<int> get indexPageState => _indexPage;
   final GlobalKey<ConvexAppBarState> appBarKey = GlobalKey<ConvexAppBarState>();
 
   BottomBarController(this.animateToPage);
