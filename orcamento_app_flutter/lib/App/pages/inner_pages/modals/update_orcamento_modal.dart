@@ -17,6 +17,7 @@ class UpdateOrcamentoModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _orcamentoController = context.read();
+
     var _size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.only(top: 30),

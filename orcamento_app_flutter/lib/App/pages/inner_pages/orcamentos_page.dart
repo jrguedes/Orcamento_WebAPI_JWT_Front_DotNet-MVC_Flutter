@@ -203,7 +203,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                     onPressed: () async {
                       await ModalDialog.show(
                         context: context,
-                        title: item.descricao,
+                        title: 'Adicionar ao orçamento',
                         content: OrcamentoDetailsModal(orcamento: item),
                       );
                     },

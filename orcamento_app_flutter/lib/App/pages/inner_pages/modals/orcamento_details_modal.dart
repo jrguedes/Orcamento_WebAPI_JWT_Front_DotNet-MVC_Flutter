@@ -55,12 +55,21 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
               onPressed: () async {
                 await ModalDialog.show(
                   context: context,
-                  title: 'Adicionar Item ao orçamento',
+                  title: 'Adicionar ao orçamento',
                   content: AddItemOrcamentoModal(orcamento: widget.orcamento),
                 );
                 await _store.loadItensOrcamento(widget.orcamento.id);
               },
               child: const Text('Adicionar item ao orçamento'),
+            ),
+            const SizedBox(height: 10),
+            AutoSizeText(
+              widget.orcamento.descricao,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              minFontSize: 22,
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black54),
+              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 10),
             const Divider(
