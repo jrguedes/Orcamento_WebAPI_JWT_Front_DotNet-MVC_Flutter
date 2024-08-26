@@ -19,17 +19,15 @@ class ModalDialog {
                           width: double.infinity,
                           child: const BackButton(),
                         ),
-                        Expanded(
-                          child: Text(
-                            title,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall!
-                                .copyWith(color: Theme.of(context).secondaryHeaderColor),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                        Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: Theme.of(context).secondaryHeaderColor),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

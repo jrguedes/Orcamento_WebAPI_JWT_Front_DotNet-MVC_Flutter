@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
+import 'package:orcamento_app_flutter/App/data/constants/pages.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_orcamento.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/orcamentos_page.dart';
@@ -26,7 +27,6 @@ class _MainPageState extends State<MainPage> {
   late final SignInStore _signInStore;
   late final BottomBarController _bottomBar;
 
-  //REFATORAR
   late final OrcamentoController _orcamentoController;
 
   @override
@@ -146,7 +146,7 @@ class _MainPageState extends State<MainPage> {
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
         ],
-        initialActiveIndex: 0,
+        initialActiveIndex: HOME_PAGE,
         onTap: _bottomBar.convexAppBarTap,
       );
     }
@@ -170,7 +170,7 @@ class _MainPageState extends State<MainPage> {
       items: const [
         TabItem(icon: Icons.home, title: 'Home'),
       ],
-      initialActiveIndex: 0,
+      initialActiveIndex: HOME_PAGE,
       onTap: _bottomBar.convexAppBarTap,
     );
   }

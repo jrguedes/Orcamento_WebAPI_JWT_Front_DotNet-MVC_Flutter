@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/data/constants/pages.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/bottom_bar/bottom_bar_controller.dart';
@@ -10,6 +11,7 @@ import '../../models/orcamento_model.dart';
 import '../widgets/custom_text_form_field.dart';
 import 'modals/add_item_orcamento_modal.dart';
 import 'modals/modal_dialog.dart';
+import 'modals/orcamento_details_modal.dart';
 
 class CadastroOrcamento extends StatefulWidget {
   const CadastroOrcamento({super.key});
@@ -60,9 +62,17 @@ class _CadastroOrcamentoState extends State<CadastroOrcamento> {
                     if (orcamento != null) {
                       await ModalDialog.show(
                         context: context,
-                        title: 'Adicionar Item ao orçamento',
+                        title: 'Adicionar ao orçamento',
+                        content: OrcamentoDetailsModal(orcamento: orcamento),
+                      );
+
+                      await ModalDialog.show(
+                        context: context,
+                        title: 'Adicionar ao orçamento',
                         content: AddItemOrcamentoModal(orcamento: orcamento),
                       );
+
+                      _bottomBar.convexAppBarTap(LISTA_ORCAMENTOS);
                     }
                   },
                   child: const Text('Salvar'),

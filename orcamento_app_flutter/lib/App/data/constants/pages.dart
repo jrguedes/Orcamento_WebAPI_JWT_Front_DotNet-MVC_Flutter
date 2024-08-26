@@ -1,0 +1,4 @@
+const HOME_PAGE = 0;
+const TELA_2 = 1;
+const LISTA_ORCAMENTOS = 2;
+const CADASTRO_ORCAMENTO = 3;
