@@ -102,6 +102,11 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             if (value is ErrorListState<ItemOrcamentoModel>) {
               return _errorMessage(value.message);
             }
+
+            if (value is UnauthorizedListState<ItemOrcamentoModel>) {
+              return _errorMessage(value.message);
+            }
+
             return Container();
           }),
     );

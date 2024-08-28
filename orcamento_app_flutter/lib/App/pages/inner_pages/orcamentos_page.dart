@@ -80,6 +80,10 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                         return _errorMessage(value.message);
                       }
 
+                      if (value is UnauthorizedListState<OrcamentoModel>) {
+                        return _errorMessage(value.message);
+                      }
+
                       if (value is SuccessListState<OrcamentoModel>) {
                         if (value.list.isEmpty) {
                           return _emptyMessage();
