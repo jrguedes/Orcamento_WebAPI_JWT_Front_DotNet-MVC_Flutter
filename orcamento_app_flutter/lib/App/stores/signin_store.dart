@@ -10,11 +10,17 @@ class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
   final AccountApiService service;
   SignInStore(this.service) : super(InitialObjectState<TokenModel?>(null));
 
+  Future<void> logout(String cause) async {
+    value = UnauthorizedObjectState<TokenModel?>(cause);
+  }
+
   Future<void> signIn(LoginModel login, bool verifyCachedLogin) async {
+    TokenModel? jwtTokenInfo;
     try {
       value = LoadingObjectState();
 
-      final jwtTokenInfo = await service.signIn(login);
+      jwtTokenInfo = await service.signIn(login);
+
       if (jwtTokenInfo == null) {
         value = InitialObjectState(null);
       } else {

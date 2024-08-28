@@ -10,7 +10,6 @@ import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dar
 import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/orcamento/orcamento_controller.dart';
 import 'inner_pages/home_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -83,13 +82,24 @@ class _MainPageState extends State<MainPage> {
       );
     }
 
-    if (state is ErrorObjectState) {
+    if (state is UnauthorizedObjectState<TokenModel?>) {
       return PageView(
         pageSnapping: false,
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomePage(title: 'OrçApp', userLogged: false, erroMessage: (state as ErrorObjectState).message),
+          HomePage(title: 'OrçApp', userLogged: false, erroMessage: state.message),
+        ],
+      );
+    }
+
+    if (state is ErrorObjectState<TokenModel?>) {
+      return PageView(
+        pageSnapping: false,
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          HomePage(title: 'OrçApp', userLogged: false, erroMessage: state.message),
         ],
       );
     }

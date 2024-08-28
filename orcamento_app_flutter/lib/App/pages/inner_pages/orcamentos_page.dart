@@ -8,6 +8,7 @@ import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/modals/modal_dialog.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/modals/orcamento_details_modal.dart';
 import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
+import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
 import 'package:provider/provider.dart';
 
 import '../../states/generic_states/list_state.dart';
@@ -24,12 +25,14 @@ class OrcamentosPage extends StatefulWidget {
 
 class _OrcamentosPageState extends State<OrcamentosPage> {
   late final OrcamentosStore _orcamentosStore;
+  late final SignInStore _signInStore;
   late final OrcamentoController _controller;
 
   @override
   void initState() {
     super.initState();
-    _orcamentosStore = context.read<OrcamentosStore>();
+    _signInStore = context.read();
+    _orcamentosStore = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _orcamentosStore.loadOrcamentos();
       _controller = context.read();
@@ -81,7 +84,9 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                       }
 
                       if (value is UnauthorizedListState<OrcamentoModel>) {
-                        return _errorMessage(value.message);
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          _signInStore.logout(value.message);
+                        });
                       }
 
                       if (value is SuccessListState<OrcamentoModel>) {

@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/orcamento_model.dart';
 import '../../../stores/itens_orcamento_store.dart';
+import '../../../stores/signin_store.dart';
 import '../../widgets/confirmation_dialog.dart';
 import 'add_item_orcamento_modal.dart';
 import 'modal_dialog.dart';
@@ -25,6 +26,7 @@ class OrcamentoDetailsModal extends StatefulWidget {
 }
 
 class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
+  late final SignInStore _signInStore;
   late final ItensOrcamentoStore _store;
   late final ItemOrcamentoController _controller;
 
@@ -33,6 +35,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
     // TODO: implement initState
     super.initState();
     _store = context.read();
+    _signInStore = context.read();
     _controller = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _store.loadItensOrcamento(widget.orcamento.id);
@@ -104,7 +107,9 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             }
 
             if (value is UnauthorizedListState<ItemOrcamentoModel>) {
-              return _errorMessage(value.message);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _signInStore.logout(value.message);
+              });
             }
 
             return Container();
@@ -251,7 +256,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
           message,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            color: Color.fromARGB(221, 236, 82, 82),
+            color: Colors.black87,
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
