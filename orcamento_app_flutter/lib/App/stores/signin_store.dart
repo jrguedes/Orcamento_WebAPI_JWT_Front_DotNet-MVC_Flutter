@@ -11,7 +11,11 @@ class SignInStore extends ValueNotifier<ObjectState<TokenModel?>> {
   SignInStore(this.service) : super(InitialObjectState<TokenModel?>(null));
 
   Future<void> logout(String cause) async {
-    value = UnauthorizedObjectState<TokenModel?>(cause);
+    //value = UnauthorizedObjectState<TokenModel?>(cause);
+
+    await service.logout();
+    //buttonTappedState.value = false;
+    value = InitialObjectState(null);
   }
 
   Future<void> signIn(LoginModel login, bool verifyCachedLogin) async {

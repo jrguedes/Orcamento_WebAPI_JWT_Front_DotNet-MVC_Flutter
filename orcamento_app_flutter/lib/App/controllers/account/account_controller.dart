@@ -23,10 +23,7 @@ class AccountController {
     }
 
     await signInStore.signIn(LoginModel(email: userEmail, password: userPassword), verifyCachedLogin);
-
-    if (signInStore.value is ErrorObjectState) {
-      buttonTappedState.value = false;
-    }
+    buttonTappedState.value = false;
   }
 
   Future<void> logout() async {

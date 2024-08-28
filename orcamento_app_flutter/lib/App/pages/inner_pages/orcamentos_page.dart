@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:orcamento_app_flutter/App/controllers/orcamento/orcamento_controller.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/expired_login_page.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/modals/modal_dialog.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/modals/orcamento_details_modal.dart';
 import 'package:orcamento_app_flutter/App/stores/orcamentos_store.dart';
@@ -84,9 +85,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
                       }
 
                       if (value is UnauthorizedListState<OrcamentoModel>) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          _signInStore.logout(value.message);
-                        });
+                        return ExpiredLoginPage();
                       }
 
                       if (value is SuccessListState<OrcamentoModel>) {

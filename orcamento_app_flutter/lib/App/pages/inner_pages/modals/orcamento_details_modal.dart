@@ -13,6 +13,7 @@ import '../../../models/orcamento_model.dart';
 import '../../../stores/itens_orcamento_store.dart';
 import '../../../stores/signin_store.dart';
 import '../../widgets/confirmation_dialog.dart';
+import '../expired_login_page.dart';
 import 'add_item_orcamento_modal.dart';
 import 'modal_dialog.dart';
 
@@ -107,9 +108,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             }
 
             if (value is UnauthorizedListState<ItemOrcamentoModel>) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _signInStore.logout(value.message);
-              });
+              return ExpiredLoginPage();
             }
 
             return Container();
