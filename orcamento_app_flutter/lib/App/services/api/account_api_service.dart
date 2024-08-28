@@ -6,42 +6,18 @@ import '../../models/login_model.dart';
 import '../../models/token_model.dart';
 import '../cache/cache_service.dart';
 
-class AccountApiService extends APIService {
+class AccountApiService extends ApiService {
   AccountApiService() : super(baseResourcePath: 'Account/');
 
   Future<TokenModel?> _cachedSignIn() async {
     var jwtTokenInfo = await CacheService.getJWTTokenInfo();
     if (jwtTokenInfo != null && jwtTokenInfo.accessToken != '') {
-      if (await _validateToken(jwtTokenInfo.accessToken)) {
+      if (await validateToken(jwtTokenInfo.accessToken)) {
         return jwtTokenInfo;
       }
     }
     await logout();
     return null;
-  }
-
-  Future<bool> _validateToken(String token) async {
-    bool tokenIsValid = false;
-    try {
-      var response = await dio.get<bool>(
-        '${baseResourcePath}Token/',
-        options: Options(
-          headers: putTokenInAuthorizationHeader(token),
-        ),
-      );
-
-      if (response.data != null) {
-        tokenIsValid = response.data as bool;
-        return tokenIsValid;
-      }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
-        tokenIsValid = false;
-      }
-    } catch (e) {
-      tokenIsValid = false;
-    }
-    return tokenIsValid;
   }
 
   Future<TokenModel?> _signIn(LoginModel login) async {

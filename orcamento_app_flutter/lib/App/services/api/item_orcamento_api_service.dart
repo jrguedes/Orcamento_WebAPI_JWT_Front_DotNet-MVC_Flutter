@@ -1,21 +1,27 @@
 import 'package:dio/dio.dart';
 
 import '../../models/item_orcamento_model.dart';
+import '../../models/token_model.dart';
 import '../cache/cache_service.dart';
+import '../data/api_service_response.dart';
 import 'api_service.dart';
 
-class ItemOrcamentoApiService extends APIService {
+class ItemOrcamentoApiService extends ApiService {
   ItemOrcamentoApiService() : super(baseResourcePath: 'ItensOrcamento/');
 
-  Future<ItemOrcamentoModel?> postItemOrcamento(ItemOrcamentoModel itemOrcamento) async {
+  Future<ApiServiceResponse<ItemOrcamentoModel?>> postItemOrcamento(ItemOrcamentoModel itemOrcamento) async {
     ItemOrcamentoModel? itemModel;
+
+    TokenModel? tokenInfo;
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: null, statusCode: 401, isSuccessStatusCode: false, validToken: false);
+
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return null;
+        return response401WithInvalidToken;
       }
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.post(
         '${baseResourcePath}',
@@ -29,23 +35,31 @@ class ItemOrcamentoApiService extends APIService {
         itemModel = ItemOrcamentoModel.fromMap(response.data);
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
     }
-    return itemModel;
+    return ApiServiceResponse(response: itemModel, statusCode: 201, isSuccessStatusCode: true, validToken: true);
   }
 
-  Future<List<ItemOrcamentoModel>> getItensOrcamento(int orcamentoId) async {
+  Future<ApiServiceResponse<List<ItemOrcamentoModel>>> getItensOrcamento(int orcamentoId) async {
     List<ItemOrcamentoModel> itens = [];
+    TokenModel? tokenInfo;
+
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: itens, statusCode: 401, isSuccessStatusCode: false, validToken: false);
+
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return itens;
+        return response401WithInvalidToken;
       }
-
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.get<List>(
         '${baseResourcePath}orcamento/$orcamentoId',
@@ -58,22 +72,29 @@ class ItemOrcamentoApiService extends APIService {
         itens = response.data!.map((e) => ItemOrcamentoModel.fromMap(e)).toList();
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
     }
-    return itens;
+    return ApiServiceResponse(response: itens, statusCode: 200, isSuccessStatusCode: true, validToken: true);
   }
 
-  Future<bool> deleteOrcamento(ItemOrcamentoModel itemOrcamento) async {
+  Future<ApiServiceResponse<bool>> deleteOrcamento(ItemOrcamentoModel itemOrcamento) async {
     bool deleted = false;
+    TokenModel? tokenInfo;
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: deleted, statusCode: 401, isSuccessStatusCode: false, validToken: false);
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return false;
+        return response401WithInvalidToken;
       }
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.delete(
         '${baseResourcePath}${itemOrcamento.id}',
@@ -86,10 +107,15 @@ class ItemOrcamentoApiService extends APIService {
         deleted = response.data as bool;
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
     }
-    return deleted;
+    return ApiServiceResponse(response: deleted, statusCode: 200, isSuccessStatusCode: true, validToken: true);
   }
 }

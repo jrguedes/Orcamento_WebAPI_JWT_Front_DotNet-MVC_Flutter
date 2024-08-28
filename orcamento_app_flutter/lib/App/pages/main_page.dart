@@ -26,7 +26,6 @@ class _MainPageState extends State<MainPage> {
   late final PageController _pageController;
   late final SignInStore _signInStore;
   late final BottomBarController _bottomBar;
-  late final OrcamentoController _orcamentoController;
 
   @override
   void initState() {
@@ -36,7 +35,6 @@ class _MainPageState extends State<MainPage> {
     _pageController = context.read<PageController>();
     _signInStore = context.read();
     _bottomBar = context.read();
-    _orcamentoController = context.read();
   }
 
   @override

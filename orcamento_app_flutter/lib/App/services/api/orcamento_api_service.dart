@@ -1,22 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
+import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/api_service.dart';
 import 'package:orcamento_app_flutter/App/services/cache/cache_service.dart';
 
+import '../data/api_service_response.dart';
 import '../exceptions/not_found_exception.dart';
 
-class OrcamentoApiService extends APIService {
+class OrcamentoApiService extends ApiService {
   OrcamentoApiService() : super(baseResourcePath: 'Orcamentos/');
 
-  Future<OrcamentoModel?> postOrcamento(OrcamentoModel orcamento) async {
+  Future<ApiServiceResponse<OrcamentoModel?>> postOrcamento(OrcamentoModel orcamento) async {
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: null, statusCode: 401, isSuccessStatusCode: false, validToken: false);
     OrcamentoModel? orcamentoModel;
+    TokenModel? tokenInfo;
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return null;
+        return response401WithInvalidToken;
       }
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.post(
         '${baseResourcePath}',
@@ -30,22 +34,29 @@ class OrcamentoApiService extends APIService {
         orcamentoModel = OrcamentoModel.fromMap(response.data);
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
     }
-    return orcamentoModel;
+    return ApiServiceResponse(response: orcamentoModel, statusCode: 201, isSuccessStatusCode: true, validToken: true);
   }
 
-  Future<bool> deleteOrcamento(OrcamentoModel orcamento) async {
+  Future<ApiServiceResponse<bool>> deleteOrcamento(OrcamentoModel orcamento) async {
+    TokenModel? tokenInfo;
     bool deleted = false;
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: deleted, statusCode: 401, isSuccessStatusCode: false, validToken: false);
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return false;
+        return response401WithInvalidToken;
       }
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.delete(
         '${baseResourcePath}${orcamento.id}',
@@ -58,23 +69,31 @@ class OrcamentoApiService extends APIService {
         deleted = response.data as bool;
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
     }
-    return deleted;
+    return ApiServiceResponse(response: deleted, statusCode: 200, isSuccessStatusCode: true, validToken: true);
   }
 
-  Future<List<OrcamentoModel>> getOrcamentos() async {
+  Future<ApiServiceResponse<List<OrcamentoModel>>> getOrcamentos() async {
+    TokenModel? tokenInfo;
     List<OrcamentoModel> orcamentos = [];
+
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: orcamentos, statusCode: 401, isSuccessStatusCode: false, validToken: false);
+
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return orcamentos;
+        return response401WithInvalidToken;
       }
-
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.get<List>(
         '${baseResourcePath}',
@@ -87,6 +106,11 @@ class OrcamentoApiService extends APIService {
         orcamentos = response.data!.map((e) => OrcamentoModel.fromMap(e)).toList();
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
       if (e.response?.statusCode == 404) {
         throw NotFoundException('Que pena! \n\n Não há orçamentos cadastrados');
       }
@@ -94,18 +118,20 @@ class OrcamentoApiService extends APIService {
     } catch (e) {
       rethrow;
     }
-    return orcamentos;
+    return ApiServiceResponse(response: orcamentos, statusCode: 200, isSuccessStatusCode: true, validToken: true);
   }
 
-  Future<OrcamentoModel?> updateOrcamento(OrcamentoModel orcamento) async {
+  Future<ApiServiceResponse<OrcamentoModel?>> updateOrcamento(OrcamentoModel orcamento) async {
     OrcamentoModel? orcamentoModel;
+    TokenModel? tokenInfo;
+    var response401WithInvalidToken =
+        ApiServiceResponse(response: null, statusCode: 401, isSuccessStatusCode: false, validToken: false);
     try {
-      var tokenInfo = await CacheService.getJWTTokenInfo();
+      tokenInfo = await CacheService.getJWTTokenInfo();
 
       if (tokenInfo == null) {
-        return null;
+        return response401WithInvalidToken;
       }
-      //fazer a verificação do token no ok do AccountController na API
 
       var response = await dio.put(
         '${baseResourcePath}',
@@ -119,10 +145,16 @@ class OrcamentoApiService extends APIService {
         orcamentoModel = OrcamentoModel.fromMap(response.data);
       }
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (!await validateToken(tokenInfo?.accessToken ?? 'invalidToken')) {
+          return response401WithInvalidToken;
+        }
+      }
+
       print('${e.response?.statusCode} with message ${e.response?.statusMessage}');
     } catch (e) {
       rethrow;
     }
-    return orcamentoModel;
+    return ApiServiceResponse(response: orcamentoModel, statusCode: 200, isSuccessStatusCode: true, validToken: true);
   }
 }

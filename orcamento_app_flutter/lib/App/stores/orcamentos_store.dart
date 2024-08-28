@@ -11,8 +11,13 @@ class OrcamentosStore extends ValueNotifier<ListState<OrcamentoModel>> {
   Future<void> loadOrcamentos() async {
     value = LoadingListState();
     try {
-      final list = await service.getOrcamentos();
-      value = SuccessListState<OrcamentoModel>(list);
+      final listResponse = await service.getOrcamentos();
+
+      if (listResponse.validToken) {
+        value = SuccessListState<OrcamentoModel>(listResponse.response);
+      } else {
+        value = UnauthorizedListState('Tempo de login expirado \n Necessário logar novamente');
+      }
     } on NotFoundException catch (e) {
       value = ErrorListState(e.message);
     } catch (e) {

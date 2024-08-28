@@ -92,6 +92,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
 
             if (value is SuccessListState<ItemOrcamentoModel>) {
               return ListView.builder(
+                  key: const PageStorageKey<String>('detailListKey'),
                   itemCount: value.list.length,
                   itemBuilder: (context, index) {
                     return _buildItemOrcamento(value.list, index);

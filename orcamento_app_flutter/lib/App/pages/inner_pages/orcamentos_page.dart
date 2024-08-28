@@ -99,6 +99,7 @@ class _OrcamentosPageState extends State<OrcamentosPage> {
 
   ExpansionPanelList _buildExpansionPanelList(SuccessListState<OrcamentoModel> value) {
     return ExpansionPanelList(
+      key: const PageStorageKey<String>('orcamentoListKey'),
       elevation: 0,
       expansionCallback: (index, isExpanded) {
         setState(() {

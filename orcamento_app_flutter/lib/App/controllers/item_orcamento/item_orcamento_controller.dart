@@ -20,11 +20,19 @@ class ItemOrcamentoController {
       orcamentoId: orcamentoId,
     );
 
-    await service.postItemOrcamento(itemOrcamento);
+    var saveItemResponse = await service.postItemOrcamento(itemOrcamento);
+
+    if (!saveItemResponse.validToken) {
+      //remover pages privadas e mandar pra tela de login
+    }
   }
 
   Future<bool> deleteOrcamento(ItemOrcamentoModel itemOrcamento) async {
-    var deleted = await service.deleteOrcamento(itemOrcamento);
-    return deleted;
+    var deleteResponse = await service.deleteOrcamento(itemOrcamento);
+
+    if (!deleteResponse.validToken) {
+      //remover pages privadas e mandar pra tela de login
+    }
+    return deleteResponse.response;
   }
 }

@@ -16,3 +16,8 @@ class ErrorObjectState<T> implements ObjectState<T> {
   final String message;
   ErrorObjectState(this.message);
 }
+
+class UnauthorizedObjectState<T> implements ObjectState<T> {
+  final String message;
+  UnauthorizedObjectState(this.message);
+}

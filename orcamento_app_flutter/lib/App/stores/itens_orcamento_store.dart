@@ -11,8 +11,13 @@ class ItensOrcamentoStore extends ValueNotifier<ListState<ItemOrcamentoModel>> {
   Future<void> loadItensOrcamento(int orcamentoId) async {
     value = LoadingListState();
     try {
-      final list = await service.getItensOrcamento(orcamentoId);
-      value = SuccessListState<ItemOrcamentoModel>(list);
+      final listResponse = await service.getItensOrcamento(orcamentoId);
+
+      if (listResponse.validToken) {
+        value = SuccessListState<ItemOrcamentoModel>(listResponse.response);
+      } else {
+        value = UnauthorizedListState('Tempo de login expirado \n Necessário logar novamente');
+      }
     } catch (e) {
       value = ErrorListState('Há um problema de conexão com a API');
     }

@@ -13,3 +13,8 @@ class ErrorListState<T> implements ListState<T> {
   final String message;
   ErrorListState(this.message);
 }
+
+class UnauthorizedListState<T> implements ListState<T> {
+  final String message;
+  UnauthorizedListState(this.message);
+}

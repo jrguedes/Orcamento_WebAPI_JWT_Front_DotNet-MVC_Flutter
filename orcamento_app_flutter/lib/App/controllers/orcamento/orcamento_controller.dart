@@ -11,19 +11,33 @@ class OrcamentoController {
   }
 
   Future<bool> deleteOrcamento(OrcamentoModel orcamento) async {
-    var deleted = await service.deleteOrcamento(orcamento);
-    return deleted;
+    var deleteResponse = await service.deleteOrcamento(orcamento);
+
+    if (!deleteResponse.validToken) {
+      //remover pages privadas e mandar pra tela de login
+    }
+
+    return deleteResponse.response;
   }
 
   Future<OrcamentoModel?> saveOrcamento(String descricaoOrcamento) async {
     var orcamentoSave = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
-    var orcamentoResponse = await service.postOrcamento(orcamentoSave);
-    return orcamentoResponse;
+    var saveResponse = await service.postOrcamento(orcamentoSave);
+
+    if (!saveResponse.validToken) {
+      //remover pages privadas e mandar pra tela de login
+    }
+
+    return saveResponse.response;
   }
 
   Future<void> updateOrcamento(OrcamentoModel orcamento, String descricao) async {
     orcamento = orcamento.copyWith(descricao: descricao);
 
-    await service.updateOrcamento(orcamento);
+    var updateResponse = await service.updateOrcamento(orcamento);
+
+    if (!updateResponse.validToken) {
+      //remover pages privadas e mandar pra tela de login
+    }
   }
 }
