@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:orcamento_app_flutter/App/models/item_orcamento_model.dart';
+import 'package:orcamento_app_flutter/App/stores/istore.dart';
 
 import '../services/api/item_orcamento_api_service.dart';
 import '../states/generic_states/list_state.dart';
 
-class ItensOrcamentoStore extends ValueNotifier<ListState<ItemOrcamentoModel>> {
+class ItensOrcamentoStore extends ValueNotifier<ListState<ItemOrcamentoModel>> implements IStore {
   final ItemOrcamentoApiService service;
   ItensOrcamentoStore(this.service) : super(InitialListState<ItemOrcamentoModel>());
 
@@ -21,5 +22,10 @@ class ItensOrcamentoStore extends ValueNotifier<ListState<ItemOrcamentoModel>> {
     } catch (e) {
       value = ErrorListState('Há um problema de conexão com a API');
     }
+  }
+
+  @override
+  void initState() {
+    value = InitialListState<ItemOrcamentoModel>();
   }
 }

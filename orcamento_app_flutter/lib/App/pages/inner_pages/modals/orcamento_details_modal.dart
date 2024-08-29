@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 
 import '../../../models/orcamento_model.dart';
 import '../../../stores/itens_orcamento_store.dart';
-import '../../../stores/signin_store.dart';
 import '../../widgets/confirmation_dialog.dart';
 import '../expired_login_page.dart';
 import 'add_item_orcamento_modal.dart';
@@ -27,7 +26,6 @@ class OrcamentoDetailsModal extends StatefulWidget {
 }
 
 class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
-  late final SignInStore _signInStore;
   late final ItensOrcamentoStore _store;
   late final ItemOrcamentoController _controller;
 
@@ -36,7 +34,6 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
     // TODO: implement initState
     super.initState();
     _store = context.read();
-    _signInStore = context.read();
     _controller = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _store.loadItensOrcamento(widget.orcamento.id);
@@ -108,7 +105,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             }
 
             if (value is UnauthorizedListState<ItemOrcamentoModel>) {
-              return ExpiredLoginPage();
+              return ExpiredLoginPage(store: _store);
             }
 
             return Container();

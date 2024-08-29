@@ -141,7 +141,9 @@ class _MainPageState extends State<MainPage> {
   }
 
   ConvexAppBar _buildConvexAppBar(BuildContext context, int index, state) {
-    if (state is LoadingObjectState) {
+    if (state is LoadingObjectState<TokenModel?> ||
+        state is InitialObjectState<TokenModel?> ||
+        state is UnauthorizedObjectState<TokenModel?>) {
       return ConvexAppBar(
         key: _bottomBar.appBarKey,
         style: TabStyle.fixedCircle,
