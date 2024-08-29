@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:orcamento_app_flutter/App/pages/main_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/account/account_controller.dart';
@@ -50,7 +51,7 @@ class _ExpiredLoginPageState extends State<ExpiredLoginPage> {
         CupertinoButton(
           onPressed: () async {
             _bottomBar.convexAppBarTap(0);
-            Navigator.pop(context);
+            Navigator.popUntil(context, ModalRoute.withName("/"));
             await _accountController.logout();
             widget.store?.initState();
           },
