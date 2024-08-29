@@ -1,39 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orcamento_app_flutter/App/pages/main_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/account/account_controller.dart';
 import '../../controllers/bottom_bar/bottom_bar_controller.dart';
 import '../../stores/istore.dart';
 
-class ExpiredLoginPage extends StatefulWidget {
+class ExpiredLoginPage extends StatelessWidget {
   final IStore? store;
   ExpiredLoginPage({super.key, this.store});
 
-  @override
-  State<ExpiredLoginPage> createState() => _ExpiredLoginPageState();
-}
-
-class _ExpiredLoginPageState extends State<ExpiredLoginPage> {
   late final AccountController _accountController;
 
   late final BottomBarController _bottomBar;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => Dialog.fullscreen(child: _buildFullScreenExpiredLoginMessage()),
-      );
-    });
-  }
-
-  Widget _buildFullScreenExpiredLoginMessage() {
+  Widget _buildFullScreenExpiredLoginMessage(BuildContext context) {
+    _accountController = context.read();
+    _bottomBar = context.read();
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -51,9 +34,9 @@ class _ExpiredLoginPageState extends State<ExpiredLoginPage> {
         CupertinoButton(
           onPressed: () async {
             _bottomBar.convexAppBarTap(0);
-            Navigator.popUntil(context, ModalRoute.withName("/"));
+            Navigator.popUntil(context, ModalRoute.withName('/'));
             await _accountController.logout();
-            widget.store?.initState();
+            store?.initState();
           },
           child: const Text('Logar'),
         ),
@@ -61,19 +44,17 @@ class _ExpiredLoginPageState extends State<ExpiredLoginPage> {
     );
   }
 
+  void show(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => Dialog.fullscreen(child: _buildFullScreenExpiredLoginMessage(context)),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    _accountController = context.read();
-    _bottomBar = context.read();
-    return Center(
-      child: Container(
-        alignment: Alignment.center,
-        //height: 350,
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          children: [],
-        ),
-      ),
-    );
+    return const Center();
   }
 }

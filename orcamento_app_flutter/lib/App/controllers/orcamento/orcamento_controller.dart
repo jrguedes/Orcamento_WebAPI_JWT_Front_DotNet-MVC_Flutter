@@ -1,6 +1,8 @@
 import 'package:orcamento_app_flutter/App/models/orcamento_model.dart';
 import 'package:orcamento_app_flutter/App/services/api/orcamento_api_service.dart';
 
+import '../../models/response_model.dart';
+
 class OrcamentoController {
   final OrcamentoApiService service;
   OrcamentoController(this.service);
@@ -20,15 +22,16 @@ class OrcamentoController {
     return deleteResponse.response;
   }
 
-  Future<OrcamentoModel?> saveOrcamento(String descricaoOrcamento) async {
+  Future<ResponseModel<OrcamentoModel?>> saveOrcamento(String descricaoOrcamento) async {
     var orcamentoSave = OrcamentoModel(id: 0, descricao: descricaoOrcamento, data: DateTime.now());
     var saveResponse = await service.postOrcamento(orcamentoSave);
+    var response = ResponseModel<OrcamentoModel?>(validToken: false, value: saveResponse.response);
 
-    if (!saveResponse.validToken) {
-      //remover pages privadas e mandar pra tela de login
+    if (saveResponse.validToken) {
+      response = response.copyWith(validToken: true);
     }
 
-    return saveResponse.response;
+    return response;
   }
 
   Future<void> updateOrcamento(OrcamentoModel orcamento, String descricao) async {

@@ -105,7 +105,7 @@ class _OrcamentoDetailsModalState extends State<OrcamentoDetailsModal> {
             }
 
             if (value is UnauthorizedListState<ItemOrcamentoModel>) {
-              return ExpiredLoginPage(store: _store);
+              ExpiredLoginPage(store: _store).show(context);
             }
 
             return Container();
