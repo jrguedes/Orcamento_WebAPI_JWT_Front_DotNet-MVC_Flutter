@@ -34,13 +34,15 @@ class OrcamentoController {
     return response;
   }
 
-  Future<void> updateOrcamento(OrcamentoModel orcamento, String descricao) async {
+  Future<ResponseModel<OrcamentoModel?>> updateOrcamento(OrcamentoModel orcamento, String descricao) async {
     orcamento = orcamento.copyWith(descricao: descricao);
 
     var updateResponse = await service.updateOrcamento(orcamento);
+    var response = ResponseModel<OrcamentoModel?>(validToken: false, value: updateResponse.response);
 
-    if (!updateResponse.validToken) {
-      //remover pages privadas e mandar pra tela de login
+    if (updateResponse.validToken) {
+      response = response.copyWith(validToken: true);
     }
+    return response;
   }
 }

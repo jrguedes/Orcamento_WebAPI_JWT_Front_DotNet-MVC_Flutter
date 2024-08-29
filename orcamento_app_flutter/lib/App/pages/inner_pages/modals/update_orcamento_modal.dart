@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../controllers/orcamento/orcamento_controller.dart';
 import '../../../models/orcamento_model.dart';
 import '../../widgets/custom_text_form_field.dart';
+import '../expired_login_page.dart';
 
 class UpdateOrcamentoModal extends StatelessWidget {
   final OrcamentoModel orcamento;
@@ -41,7 +42,11 @@ class UpdateOrcamentoModal extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(minimumSize: const Size(200, 40)),
                 onPressed: () async {
-                  await _orcamentoController.updateOrcamento(orcamento, _orcamentoEdtController.text);
+                  var orcamentoResponse =
+                      await _orcamentoController.updateOrcamento(orcamento, _orcamentoEdtController.text);
+                  if (!orcamentoResponse.validToken) {
+                    return ExpiredLoginPage().show(context);
+                  }
                   Navigator.of(context).pop();
                 },
                 child: const Text('Salvar'),
