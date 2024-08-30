@@ -1,10 +1,12 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:orcamento_app_flutter/App/controllers/bottom_bar/bottom_bar_controller.dart';
 import 'package:orcamento_app_flutter/App/data/constants/pages.dart';
 import 'package:orcamento_app_flutter/App/models/token_model.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/cadastro_orcamento.dart';
+import 'package:orcamento_app_flutter/App/pages/inner_pages/expired_login_page.dart';
 import 'package:orcamento_app_flutter/App/pages/inner_pages/orcamentos_page.dart';
 import 'package:orcamento_app_flutter/App/states/generic_states/object_state.dart';
 import 'package:orcamento_app_flutter/App/stores/signin_store.dart';
@@ -161,8 +163,8 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.map, title: 'Orçamentos'),
-          TabItem(icon: Icons.message, title: 'Lista'),
+          TabItem(icon: Icons.map, title: 'Hi'),
+          TabItem(icon: Icons.message, title: 'Orçamentos'),
           TabItem(icon: Icons.add, title: 'Add'),
         ],
         initialActiveIndex: index,

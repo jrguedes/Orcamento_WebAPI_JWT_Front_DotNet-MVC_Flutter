@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/account/account_controller.dart';
@@ -21,8 +22,35 @@ class ExpiredLoginPage extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        Expanded(
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            color: Theme.of(context).primaryColor,
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.circleDollarToSlot,
+                  color: Colors.amber,
+                  size: 150,
+                ),
+                Text(
+                  'OrçApp',
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        const Text('😢', textAlign: TextAlign.center, style: TextStyle(fontSize: 40)),
         const Text(
-          'Que pena, O login expirou! \n\n É necessário logar novamente \n clique abaixo para fazê-lo',
+          'Que pena, o login expirou! \n\n Vamos logar novamente?',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.black87,
@@ -30,7 +58,9 @@ class ExpiredLoginPage extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
+        const Text('😁', textAlign: TextAlign.center, style: TextStyle(fontSize: 40)),
+        const SizedBox(height: 15),
         CupertinoButton(
           onPressed: () async {
             _bottomBar.convexAppBarTap(0);
@@ -38,7 +68,10 @@ class ExpiredLoginPage extends StatelessWidget {
             await _accountController.logout();
             store?.initState();
           },
-          child: const Text('Logar'),
+          child: const Text('Logar novamente'),
+        ),
+        Expanded(
+          child: Container(),
         ),
       ],
     );
@@ -47,6 +80,7 @@ class ExpiredLoginPage extends StatelessWidget {
   void show(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog<String>(
+        useSafeArea: false,
         context: context,
         builder: (BuildContext context) => Dialog.fullscreen(child: _buildFullScreenExpiredLoginMessage(context)),
       );

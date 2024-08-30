@@ -34,8 +34,8 @@ var tokenConfiguration = new TokenConfiguration()
 {
     Audience = "audience",
     Issuer = "issuer",
-    //Seconds = 3600
-    Seconds = 10
+    Seconds = 3600
+    //Seconds = 10
 };
 builder.Services.AddSingleton(tokenConfiguration);
 
