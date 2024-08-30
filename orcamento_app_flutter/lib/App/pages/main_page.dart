@@ -151,7 +151,7 @@ class _MainPageState extends State<MainPage> {
         style: TabStyle.fixedCircle,
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [
-          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: FontAwesomeIcons.houseChimney, title: 'Home'),
         ],
         initialActiveIndex: index,
         onTap: _bottomBar.convexAppBarTap,
@@ -162,10 +162,10 @@ class _MainPageState extends State<MainPage> {
         key: _bottomBar.appBarKey,
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         items: const [
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.map, title: 'Hi'),
-          TabItem(icon: Icons.message, title: 'Orçamentos'),
-          TabItem(icon: Icons.add, title: 'Add'),
+          TabItem(icon: FontAwesomeIcons.houseChimney, title: 'Home'),
+          TabItem(icon: FontAwesomeIcons.accusoft, title: 'Hi'),
+          TabItem(icon: FontAwesomeIcons.moneyCheckDollar, title: 'Orçamentos'),
+          TabItem(icon: FontAwesomeIcons.fileCirclePlus, title: 'Add'),
         ],
         initialActiveIndex: index,
         onTap: _bottomBar.convexAppBarTap,
@@ -177,7 +177,7 @@ class _MainPageState extends State<MainPage> {
       style: TabStyle.fixedCircle,
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       items: const [
-        TabItem(icon: Icons.home, title: 'Home'),
+        TabItem(icon: FontAwesomeIcons.houseChimney, title: 'Home'),
       ],
       initialActiveIndex: index,
       onTap: _bottomBar.convexAppBarTap,
