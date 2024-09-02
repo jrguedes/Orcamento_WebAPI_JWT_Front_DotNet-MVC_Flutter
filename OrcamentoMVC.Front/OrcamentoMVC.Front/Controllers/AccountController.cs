@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OrcamentoMVC.Front.Models;
 using OrcamentoMVC.Front.Services;
 
@@ -32,15 +33,21 @@ public class AccountController : Controller
         }
 
         var result = await _authenticationService.AuthenticateUser(userVM);
-
-
-        if (result is null)
+    
+        if (result.Response is null)
         {
-            ModelState.AddModelError(string.Empty, "Login inválido!");
+
+            if (result.StatusCode == HttpStatusCode.NotFound)
+            {
+                ModelState.AddModelError(string.Empty, "Login inválido!");
+            }else
+            {
+                ModelState.AddModelError(string.Empty, "Houve um erro na solicitação!");
+            }            
             return View(userVM);
         }
 
-        _tokenService.AddJwtTokenToCookies(result.AccessToken);
+        _tokenService.AddJwtTokenToCookies(result.Response.AccessToken!);
 
         return Redirect("/");
     }

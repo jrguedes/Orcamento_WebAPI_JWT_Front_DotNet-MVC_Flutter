@@ -9,7 +9,7 @@ public sealed class Authentication : IAuthentication
     private readonly IHttpClientFactory _clientFactory;
     const string authAPIEndpoint = "/api/Account/SignIn/";
     private readonly JsonSerializerOptions _options;
-    private TokenViewModel _userToken;
+    private TokenViewModel? _userToken;
 
 
     public Authentication(IHttpClientFactory clientFactory)
@@ -18,8 +18,11 @@ public sealed class Authentication : IAuthentication
         _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
-    public async Task<TokenViewModel> AuthenticateUser(UserViewModel userVM)
+
+    public async Task<ServiceResponse<TokenViewModel?>> AuthenticateUser(UserViewModel userVM)
     {
+        _userToken = null;
+        ServiceResponse<TokenViewModel?> result;
         var client = _clientFactory.CreateClient("OrcamentoAPI");
         var usuario = JsonSerializer.Serialize(userVM);
         StringContent content = new StringContent(usuario, Encoding.UTF8, "application/json");
@@ -32,12 +35,13 @@ public sealed class Authentication : IAuthentication
                 _userToken = await JsonSerializer
                               .DeserializeAsync<TokenViewModel>
                               (apiResponse, _options);
+                result = new(response: _userToken, statusCode: response.StatusCode, isSuccessStatusCode: true);
             }
             else
             {
-                return null;
+                result = new(response: null, statusCode: response.StatusCode, isSuccessStatusCode: false);                
             }
         }
-        return _userToken;
+        return result;
     }
 }

@@ -22,6 +22,9 @@ public class AccountController : ControllerBase
 
     [HttpPost("SignIn")]
     [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]    
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> SignIn([FromBody] Login login, [FromServices] ILoginService service, CancellationToken cancellation)
     {
         var result = await service.SignIn(login, cancellation);
@@ -36,6 +39,8 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Post([FromBody] User user, CancellationToken cancellation)
     {
         var result = await _repository.InsertAsync(user, cancellation);
@@ -49,6 +54,10 @@ public class AccountController : ControllerBase
 
     [HttpGet("{id}", Name = "GetUserById")]
     [Authorize(Roles = "Gerente,Funcionario")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Get(int id, CancellationToken cancellation)
     {
         var user = await _repository.GetAsync(id, cancellation);
@@ -61,6 +70,10 @@ public class AccountController : ControllerBase
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Gerente")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id, CancellationToken cancellation)
     {
         var deleted = await _repository.DeleteAsync(id, cancellation);
@@ -73,6 +86,10 @@ public class AccountController : ControllerBase
 
     [HttpPut]
     [Authorize(Roles = "Gerente")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Put([FromBody] User user, CancellationToken cancellation)
     {
         var result = await _repository.UpdateAsync(user, cancellation);

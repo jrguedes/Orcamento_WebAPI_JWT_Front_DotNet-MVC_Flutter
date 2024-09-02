@@ -4,5 +4,5 @@ namespace OrcamentoMVC.Front.Services;
 
 public interface IAuthentication
 {
-    Task<TokenViewModel> AuthenticateUser(UserViewModel userVM);
+    Task<ServiceResponse<TokenViewModel?>> AuthenticateUser(UserViewModel userVM);
 }
