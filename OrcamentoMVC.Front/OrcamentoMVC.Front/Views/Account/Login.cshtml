@@ -15,10 +15,8 @@
         <div class="col-md-12">
 
             <form asp-controller="Account" asp-action="Login" method="post" class="custom-form contact-form">
-                <div class="flex-box-center">
-                    <div asp-validation-summary="All" class="text-danger">
-                    </div>
-
+                <div class="flex-box-center">                    
+                    
                     <div class="col-lg-10 col-10 ms-auto">
                         <div class="form-floating">
                             <input asp-for="Email" class="form-control" placeholder="Email" required="" />
@@ -37,6 +35,9 @@
                     <div class="col-lg-10 col-10 ms-auto">
                         <button type="submit" class="btn btn-outline-dark form-control">Log in</button>
                     </div>
+                    <div class="validation-div col-lg-10 col-10 ms-auto">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>                                        
                 </div>
             </form>
         </div>

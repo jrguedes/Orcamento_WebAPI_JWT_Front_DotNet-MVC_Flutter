@@ -106,10 +106,19 @@ p {
   font-weight: var(--font-weight-normal);
 }
 
-ul li {
+ul li:not(.validation-div) {
   color: var(--p-color);
   font-size: var(--p-font-size);
   font-weight: var(--font-weight-normal);
+}
+
+.validation-div ul li {  
+  color: rgba(220, 53, 69, 1)!important; 
+  font-size: var(--p-font-size)!important;
+  font-weight: var(--font-weight-normal)!important;
+  text-align: center !important;
+  margin-top: 20px;
+  list-style-type: none;
 }
 
 a, 
