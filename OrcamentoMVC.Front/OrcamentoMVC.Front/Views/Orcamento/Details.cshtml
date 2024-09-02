@@ -30,31 +30,31 @@
                     </div>
                 </div>
                 <div class="panel-body table-responsive">
-                    <table class="table">
+                    <table id="tb-details" name="tb-details" class="table">
                         <thead>
-                            <tr class="row">
-                                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Código</th>
-                                <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3">Orçado</th>
-                                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Local</th>
-                                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Telefone</th>
-                                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Responsável</th>
-                                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Valor</th>
-                                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Ação</th>
+                            <tr>                                
+                                <th>Código</th>
+                                <th>Orçado</th>
+                                <th>Local</th>
+                                <th>Telefone</th>
+                                <th>Responsável</th>
+                                <th>Valor</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var itemOrcamento in Model.ItensOrcamento)
                             {
-                                <tr class="row">
-                                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">@itemOrcamento.Id</td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">@itemOrcamento.Descricao</td>
-                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">@itemOrcamento.Local</td>
-                                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">@itemOrcamento.Telefone</td>
-                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">@itemOrcamento.ResponsavelOrcamento</td>
-                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <tr>
+                                    <td>@itemOrcamento.Id</td>
+                                    <td>@itemOrcamento.Descricao</td>
+                                    <td>@itemOrcamento.Local</td>
+                                    <td>@itemOrcamento.Telefone</td>
+                                    <td>@itemOrcamento.ResponsavelOrcamento</td>
+                                    <td>
                                         @itemOrcamento.Valor.ToString("C")
                                     </td>
-                                    <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <td>
                                         <a asp-action="Delete"
                                             asp-controller="ItemOrcamento"
                                             asp-route-id="@itemOrcamento.Id" title="Excluir" class="btn btn-danger">
@@ -74,3 +74,5 @@
         </div>
     </div>
 </div>
+
+
