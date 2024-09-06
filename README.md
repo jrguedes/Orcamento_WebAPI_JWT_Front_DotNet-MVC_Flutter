@@ -1,30 +1,29 @@
-# Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI criada em DotNet 8 + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile)
+# Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI em DotNet 8 + AutoMapper + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile)
 
-## Demonstração
+## 🎥 Demonstração
 
 https://github.com/user-attachments/assets/6bd63150-5fcf-4dd7-a629-6f10ca62a6d5
 
 
+### 📝 Descrição
 
-### Descrição
+Este projeto demonstra a construção de um sistema simplificado de controle de orçamentos, integrando Back-end e Front-end Web e Mobile. Utilizando uma API criada em .NET 8 com autenticação JWT e banco de dados SQLite, o projeto também inclui uma versão Web desenvolvida com ASP.NET MVC e HttpClient, além de uma versão Mobile feita em Flutter.
 
-Este projeto demonstra a construção de um sistema simplificado de controle de orçamentos, integrando Back-end e Front-end Web e Mobile. Utilizando uma WebAPI criada em .NET 8 com autenticação JWT e banco de dados SQLite, o projeto também inclui uma versão Web desenvolvida com ASP.NET MVC e HttpClient, além de uma versão Mobile feita em Flutter.
-
-### Objetivo
+### 🎯 Objetivo
 
 O objetivo deste projeto é exemplificar a construção de um sistema completo, desde o Back-end até o Front-end, utilizando tecnologias modernas. Embora não esteja pronto para produção, ele serve como um excelente ponto de partida para entender a integração entre diferentes camadas e tecnologias.
 
-### Funcionalidades
+### ⚙️ Funcionalidades
 
 - **Back-end**: WebAPI em .NET 8 com autenticação JWT e banco de dados SQLite.
 - **Front-end Web**: Desenvolvido com ASP.NET MVC e HttpClient.
 - **Front-end Mobile**: Aplicativo em Flutter, utilizando gerência de estado via Provider para DI + ValueNotifier
 
-### Observações
+### 📌  Observações
 
 Este projeto não visa estar pronto para produção. Para tal, seriam necessários ajustes mais refinados e uma arquitetura mais robusta para escalabilidade. Nem todos os Endpoints fornecidos pela API estão sendo utilizados pelos projetos front-end (Web e Mobile). Foram utilizadas somente algumas funções necessárias para exemplificar as tecnologias e o fluxo básico do sistema.
 
-### Melhorias Futuras
+### 🚀 Melhorias Futuras
 
 Algumas melhorias que poderiam ser aplicadas incluem:
 - Separação das camadas Models, Controllers, Data, Domain, Services, Application em projetos distintos.
@@ -32,22 +31,26 @@ Algumas melhorias que poderiam ser aplicadas incluem:
 - Utilização do padrão Unit of Work e Clean Architecture.
 - Utilização de log.
 - Utilização de testes Unitários, Integração e End-to-end.
+- Funcionalidades de manutenção de usuários, Web e Mobile.
+- Atualização de dados em tela sem alterar aba no mobile (simples).
+- Sugestões?
 
-### Acesso aos Endpoints
+### 🔗 Acesso aos Endpoints
 
 Alguns Endpoints foram deixados desprotegidos para fins didáticos, permitindo acesso via Swagger. Por exemplo, é possível retornar a lista de usuários do sistema via Swagger, obter suas credenciais para autenticação no controller Account, e pegar o token JWT para acessar os Endpoints protegidos. Caso contrário, será retornado um erro 401.
 
 
-## 🚀 Instalação
+### 📚 Como utilizar
 
 Os Projetos Orcamento.API (Backend) e OrcamentoMVC.Front foram feitos em Solutions separadas, assim como o projeto orcamento_app_flutter foi feito em uma pasta separada.
 Isso foi feito com a intenção de separar os projetos frontend do backend. Futuramente caso eu deseje criar uma nova versão do frontend em VueJS ou ReactJS basta criar uma nova pasta para o novo projeto front em uma outra linguagem.
 
 O projeto OrcamentoMVC.Front está configurado para buscar os endpoints via HttpClient no endereço do projeto Orcamento.API (Backend) ["OrcamentoAPI": "https://localhost:7206"].
 Sendo assim, depois de efeturar um restore nos dois projetos, para executar o OrcamentoMVC.Front é necessário estar com o projeto Orcamento.API em execução. A menos que quem for executar deseje publicar a aplicação no IIS deverá fazer as devidas configurações.
+O projeto mobile, oracamento_app_flutter também está utilizando a mesma configuração de endpoint, ["API": "https://localhost:7206"]
 
 
-## Usuários Padrão do Sistema
+### 👥 Usuários do Sistema
 
 - **Gerente**
   - **Login:** gerente@gerente.com
