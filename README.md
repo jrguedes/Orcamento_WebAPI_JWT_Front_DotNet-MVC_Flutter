@@ -1,20 +1,42 @@
-# Construí um Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI criada em DotNet 8 + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile) como Front-end 
+# Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI criada em DotNet 8 + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile) como Front-end 
 
-### Veja o resultado no vídeo abaixo
+## Demonstração
 
 https://github.com/user-attachments/assets/6bd63150-5fcf-4dd7-a629-6f10ca62a6d5
 
 
 
-Este projeto não tem como objetivo estar pronto para uso em produção, pois para tal, seriam necessários ajustes mais refinados e uma arquitetura mais robusta para escalabilidade.
-Nem todos os Endpoints fornecidos pela API estão sendo utilizados pelos projetos front, Web e mobile. Foram utilizadas somente algumas funções fornecidas necessárias para exemplificar as tecnoligias utilizadas e fluxo básico do sistema.
+## Descrição
 
-Este projeto tem o propósito de exemplificar a construção de um sistema simples de controle de orçamento indo desde o Back-end ao Front-end Web e Mobile.
-Algumas melhorias poderiam ter sido aplicadas, como separar as camadas Models, Controllers, Data, Domain, Services, Application em projetos distintos e implementar 
-um padrão Domain-driven Design (DDD) ou quem sabe utilizar o Unit of work e Clean Architecture mas como essa não é a proposta do projeto decidi simplificar as coisas.
+Este projeto demonstra a construção de um sistema simplificado de controle de orçamentos, integrando Back-end e Front-end Web e Mobile. Utilizando uma WebAPI criada em .NET 8 com autenticação JWT e banco de dados SQLite, o projeto também inclui uma versão Web desenvolvida com ASP.NET MVC e HttpClient, além de uma versão Mobile feita em Flutter.
+
+### Objetivo
+
+O objetivo deste projeto é exemplificar a construção de um sistema completo, desde o Back-end até o Front-end, utilizando tecnologias modernas. Embora não esteja pronto para produção, ele serve como um excelente ponto de partida para entender a integração entre diferentes camadas e tecnologias.
+
+### Funcionalidades
+
+- **Back-end**: WebAPI em .NET 8 com autenticação JWT e banco de dados SQLite.
+- **Front-end Web**: Desenvolvido com ASP.NET MVC e HttpClient.
+- **Front-end Mobile**: Aplicativo em Flutter, utilizando gerência de estado via Provider para DI + ValueNotifier
+
+### Observações
+
+Este projeto não visa estar pronto para produção. Para tal, seriam necessários ajustes mais refinados e uma arquitetura mais robusta para escalabilidade. Nem todos os Endpoints fornecidos pela API estão sendo utilizados pelos projetos front-end (Web e Mobile). Foram utilizadas somente algumas funções necessárias para exemplificar as tecnologias e o fluxo básico do sistema.
+
+### Melhorias Futuras
+
+Algumas melhorias que poderiam ser aplicadas incluem:
+- Separação das camadas Models, Controllers, Data, Domain, Services, Application em projetos distintos.
+- Implementação de um padrão Domain-driven Design (DDD).
+- Utilização do padrão Unit of Work e Clean Architecture.
+
+### Acesso aos Endpoints
+
+Alguns Endpoints foram deixados desprotegidos para fins didáticos, permitindo acesso via Swagger. Por exemplo, é possível retornar a lista de usuários do sistema via Swagger, obter suas credenciais para autenticação no controller Account, e pegar o token JWT para acessar os Endpoints protegidos. Caso contrário, será retornado um erro 401.
 
 
-## 🚀 Começando
+## 🚀 Instalação
 
 Os Projetos Orcamento.API (Backend) e OrcamentoMVC.Front foram feitos em Solutions separadas, assim como o projeto orcamento_app_flutter foi feito em uma pasta separada.
 Isso foi feito com a intenção de separar os projetos frontend do backend. Futuramente caso eu deseje criar uma nova versão do frontend em VueJS ou ReactJS basta criar uma nova pasta para o novo projeto front em uma outra linguagem.
@@ -22,9 +44,6 @@ Isso foi feito com a intenção de separar os projetos frontend do backend. Futu
 O projeto OrcamentoMVC.Front está configurado para buscar os endpoints via HttpClient no endereço do projeto Orcamento.API (Backend) ["OrcamentoAPI": "https://localhost:7206"].
 Sendo assim, depois de efeturar um restore nos dois projetos, para executar o OrcamentoMVC.Front é necessário estar com o projeto Orcamento.API em execução. A menos que quem for executar deseje publicar a aplicação no IIS deverá fazer as devidas configurações.
 
-### Observações:
-
-Alguns Endpoints foram deixados desprotegidos para fins didáticos e para que seja possível ter acesso à listagem via Swagger. Como por exemplo, é possível retornar a lista de usuários do sistema via Swagger e pegar suas credencias para fazer um post no método de autenticação no controller Account e pegar o token JWT para inserir a chave de autenticação no próprio Swagger e assim ter acesso aos Endpoints protegidos. Caso contrário será retornado 401.
 
 ### Usuários padrão do sistema:
 ### Login: **gerente@gerente.com**
