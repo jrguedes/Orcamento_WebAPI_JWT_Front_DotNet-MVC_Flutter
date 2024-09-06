@@ -1,6 +1,12 @@
 # Controle Simplificado de Orçamento Utilizando API em Dotnet 8 com autenticação JWT (Back-end), Razor View ASP.Net MVC e Flutter (Mobile) como Front-end e SQLite como Banco de Dados
 # Para consumir a WebAPI a partir do Front Web foi utilizado o HttpClient
 
+### Veja o resultado no vídeo abaixo
+
+https://github.com/user-attachments/assets/6bd63150-5fcf-4dd7-a629-6f10ca62a6d5
+
+
+
 Este projeto não tem como objetivo estar pronto para uso em produção, pois para tal, seriam necessários ajustes mais refinados e uma arquitetura mais robusta para escalabilidade.
 Nem todos os Endpoints fornecidos pela API estão sendo utilizados pelos projetos front, Web e mobile. Foram utilizadas somente algumas funções fornecidas necessárias para exemplificar as tecnoligias utilizadas e fluxo básico do sistema.
 
