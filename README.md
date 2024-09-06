@@ -90,7 +90,7 @@ João Guedes Pereira Júnior - (Júnior Guedes)
 
 ### 📄 Licença
 
-Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) para detalhes.
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE](https://github.com/jrguedes/Orcamento_WebAPI_JWT_Front_DotNet-MVC_Flutter/blob/main/LICENSE) para detalhes.
 
 ### 🎁 Expressões de gratidão
 
