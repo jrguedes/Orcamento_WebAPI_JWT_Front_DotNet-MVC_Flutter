@@ -1,4 +1,4 @@
-# Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI criada em DotNet 8 + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile) como Front-end 
+# Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI criada em DotNet 8 + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile)
 
 ## Demonstração
 
