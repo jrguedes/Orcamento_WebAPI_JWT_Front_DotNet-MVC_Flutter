@@ -47,26 +47,28 @@ O projeto OrcamentoMVC.Front está configurado para buscar os endpoints via Http
 Sendo assim, depois de efeturar um restore nos dois projetos, para executar o OrcamentoMVC.Front é necessário estar com o projeto Orcamento.API em execução. A menos que quem for executar deseje publicar a aplicação no IIS deverá fazer as devidas configurações.
 
 
-### Usuários padrão do sistema:
-### Login: **gerente@gerente.com**
-### senha: **1234**
+## Usuários Padrão do Sistema
 
-### Login: **funcionario@funcionario.com**
-### senha: **1234**
+- **Gerente**
+  - **Login:** gerente@gerente.com
+  - **Senha:** 1234
 
+- **Funcionário**
+  - **Login:** funcionario@funcionario.com
+  - **Senha:** 1234
 
-### 📋 Pré-requisitos
+## 📋 Pré-requisitos
 
-DotNet 8 e Flutter versão 3.22.2
+- **DotNet:** versão 8
+- **Flutter:** versão 3.22.2
 
+## 🛠️ Tecnologias Utilizadas
 
-### 🛠️ Construído com as tecnologias
+- **Sistema Operacional:** MacOS Sonoma versão 14.5
+- **IDE:** VSCode versão 1.91.1
+- **Backend:** WebAPI do DotNet versão 8 com Autenticação JWT, AutoMapper e SQLite para Banco de Dados
+- **Frontend Web:** ASP.NET MVC com HttpClient para consumir os Endpoints
 
-### Sistema Operacional: **MacOS Sonoma versão 14.5**
-### IDE: **VSCode 1.91.1**
-### Backend: **WebAPI do Dotnet na versão 8 + Atenticação JWT, AutoMapper e SQLite para Banco de Dados**
-## Frontend Web: **ASP Net MVC com HttpClient para consumir os Endpoints**
-## Frontend Mobile: **Flutter versão 3.22.2**
 
 * [Dotnet 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - WebAPI do Dotnet na versão 6 + Autenticação JWT
 * [Flutter](https://flutter.dev/) - Flutter - Desenvolvimento Mobile
