@@ -6,7 +6,7 @@ https://github.com/user-attachments/assets/6bd63150-5fcf-4dd7-a629-6f10ca62a6d5
 
 
 
-## Descrição
+### Descrição
 
 Este projeto demonstra a construção de um sistema simplificado de controle de orçamentos, integrando Back-end e Front-end Web e Mobile. Utilizando uma WebAPI criada em .NET 8 com autenticação JWT e banco de dados SQLite, o projeto também inclui uma versão Web desenvolvida com ASP.NET MVC e HttpClient, além de uma versão Mobile feita em Flutter.
 
@@ -30,6 +30,8 @@ Algumas melhorias que poderiam ser aplicadas incluem:
 - Separação das camadas Models, Controllers, Data, Domain, Services, Application em projetos distintos.
 - Implementação de um padrão Domain-driven Design (DDD).
 - Utilização do padrão Unit of Work e Clean Architecture.
+- Utilização de log.
+- Utilização de testes Unitários, Integração e End-to-end.
 
 ### Acesso aos Endpoints
 
@@ -58,18 +60,18 @@ Sendo assim, depois de efeturar um restore nos dois projetos, para executar o Or
 DotNet 8 e Flutter versão 3.22.2
 
 
-## 🛠️ Construído com as tecnologias
+### 🛠️ Construído com as tecnologias
 
 ### Sistema Operacional: **MacOS Sonoma versão 14.5**
 ### IDE: **VSCode 1.91.1**
 ### Backend: **WebAPI do Dotnet na versão 8 + Atenticação JWT, AutoMapper e SQLite para Banco de Dados**
-### Frontend Web: **ASP Net MVC com HttpClient para consumir os Endpoints**
-### Frontend Mobile: **Flutter versão 3.22.2**
+## Frontend Web: **ASP Net MVC com HttpClient para consumir os Endpoints**
+## Frontend Mobile: **Flutter versão 3.22.2**
 
 * [Dotnet 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - WebAPI do Dotnet na versão 6 + Autenticação JWT
 * [Flutter](https://flutter.dev/) - Flutter - Desenvolvimento Mobile
 
-## ✒️ Autor
+### ✒️ Autor
 
 João Guedes Pereira Júnior - (Júnior Guedes)
 
@@ -77,13 +79,13 @@ João Guedes Pereira Júnior - (Júnior Guedes)
 * **Júnior Guedes** - *Documentação* - [LinkedIn](https://www.linkedin.com/in/junior-guedes-pereira/)
 
 
-## 📄 Licença
+### 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) para detalhes.
 
-## 🎁 Expressões de gratidão
+### 🎁 Expressões de gratidão
 
-Não poderia deixar de agradecer a Deus por todas as coisas que Ele tem feito em minha vida.  Também a todas as pessoas que tive a oportunidade de trabalhar nessa constante troca de conhecimento acrescentando tanto a mim quanto a elas mais um degrau no mundo da tecnologia.
+Não posso deixar de expressar minha gratidão a Deus por todas as bênçãos que Ele tem derramado em minha vida. Também gostaria de agradecer a todas as pessoas com quem tive a honra de trabalhar. Essa constante troca de conhecimento tem sido inestimável, elevando tanto a mim quanto a elas a novos patamares no mundo da tecnologia.
 
 
 ---
