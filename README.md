@@ -1,6 +1,8 @@
 # Controle Simplificado de Orçamentos utilizando as tecnologias: WebAPI em DotNet 8 + AutoMapper + Autenticação JWT + Banco de Dados SQLite (Back-end), ASP.Net MVC + HttpClient (Versão Web) e Flutter (Versão Mobile)
 
-## 🎥 Demonstração
+
+### 🎥 Demonstração
+
 
 https://github.com/user-attachments/assets/6bd63150-5fcf-4dd7-a629-6f10ca62a6d5
 
@@ -60,12 +62,12 @@ O projeto mobile, oracamento_app_flutter também está utilizando a mesma config
   - **Login:** funcionario@funcionario.com
   - **Senha:** 1234
 
-## 📋 Pré-requisitos
+### 📋 Pré-requisitos
 
 - **DotNet:** versão 8
 - **Flutter:** versão 3.22.2
 
-## 🛠️ Tecnologias Utilizadas
+### 🛠️ Tecnologias Utilizadas
 
 - **Sistema Operacional:** MacOS Sonoma versão 14.5
 - **IDE:** VSCode versão 1.91.1
