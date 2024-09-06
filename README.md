@@ -29,7 +29,7 @@ Algumas melhorias que poderiam ser aplicadas incluem:
 - Separação das camadas Models, Controllers, Data, Domain, Services, Application em projetos distintos.
 - Implementação de um padrão Domain-driven Design (DDD).
 - Utilização do padrão Unit of Work e Clean Architecture.
-- Utilização de log.
+- Utilização de log (Talvez o Serilog).
 - Utilização de testes Unitários, Integração e End-to-end.
 - Funcionalidades de manutenção de usuários, Web e Mobile.
 - Atualização de dados em tela sem alterar aba no mobile (simples).
@@ -71,6 +71,8 @@ O projeto mobile, oracamento_app_flutter também está utilizando a mesma config
 - **IDE:** VSCode versão 1.91.1
 - **Backend:** WebAPI do DotNet versão 8 com Autenticação JWT, AutoMapper e SQLite para Banco de Dados
 - **Frontend Web:** ASP.NET MVC com HttpClient para consumir os Endpoints
+- Para o front Web usei como base o template https://templatemo.com/tm-590-topic-listing
+- **Frontend Mobile:** Flutter versão 3.22.2 + Provider para DI e gerência de estado nativa com ValueNotifier
 
 
 * [Dotnet 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - WebAPI do Dotnet na versão 6 + Autenticação JWT
