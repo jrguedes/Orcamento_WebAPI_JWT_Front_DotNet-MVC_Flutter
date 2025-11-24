@@ -60,15 +60,14 @@ class ThemeService {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith<Color>((states) => const Color(0xFF3b889a)),
-        textStyle: WidgetStateProperty.resolveWith<TextStyle>(
-            (states) => const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+        textStyle: WidgetStateProperty.resolveWith<TextStyle>((states) => const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
         foregroundColor: WidgetStateColor.resolveWith((states) => Colors.white),
       ),
     );
   }
 
-  static CardTheme _getCardTheme() {
-    return const CardTheme(
+  static CardThemeData _getCardTheme() {
+    return const CardThemeData(
       color: Color(0xFF9cc5d3),
       elevation: 5,
       shadowColor: Color(0xFF3b889a),
