@@ -41,7 +41,7 @@ class OrcApp extends StatelessWidget {
               future: context.read<ServiceManager>().initializeServices(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return const SplashPage(title: 'OrçApp V2');
+                  return const SplashPage(title: 'OrçApp');
                 }
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
