@@ -27,8 +27,7 @@ class OrcApp extends StatelessWidget {
           Provider<ItemOrcamentoApiService>(create: (_) => ItemOrcamentoApiService()),
           ChangeNotifierProvider<PageController>(create: (_) => PageController(initialPage: 0)),
           Provider<HomeController>(create: (_) => HomeController()),
-          Provider<BottomBarController>(
-              create: (context) => BottomBarController(context.read<PageController>().animateToPage)),
+          Provider<BottomBarController>(create: (context) => BottomBarController(context.read<PageController>().animateToPage)),
           ChangeNotifierProvider(create: (context) => OrcamentosStore(context.read())),
           ChangeNotifierProvider(create: (context) => ItensOrcamentoStore(context.read())),
           ChangeNotifierProvider(create: (context) => SignInStore(context.read())),
@@ -42,7 +41,7 @@ class OrcApp extends StatelessWidget {
               future: context.read<ServiceManager>().initializeServices(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return const SplashPage(title: 'OrçApp');
+                  return const SplashPage(title: 'OrçApp V2');
                 }
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
